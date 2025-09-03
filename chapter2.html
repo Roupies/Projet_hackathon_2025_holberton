@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Behind the Scenes: How LLMs Work - Ask The Model</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+            'fira': ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
+  <!-- Header Component -->
+  <ask-the-model-header></ask-the-model-header>
+
+  <div class="flex flex-col lg:flex-row flex-1">
+    <!-- Sidebar Component -->
+    <ask-the-model-sidebar></ask-the-model-sidebar>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
+      <!-- Chapter Header -->
+      <div class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">Behind the Scenes: How LLMs Work</h1>
+        <p class="text-xl text-gray-300">Peek under the hood of these fascinating AI systems</p>
+      </div>
+
+      <!-- Chapter Content -->
+      <div class="space-y-8">
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Transformer Architecture</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+            LLMs use <strong>decoder-only transformer architectures</strong>. Unlike encoder-decoder models, <strong>GPT-style models process input and output as a single sequence</strong>, predicting each token based on all preceding tokens. This <strong>causal modeling</strong> approach uses <strong>masked self-attention</strong> to prevent the model from "seeing" future tokens during training.
+          </p>
+          <div class="bg-gray-700 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-purple-300 mb-2">Key Components:</h3>
+            <ul class="text-gray-300 text-sm space-y-1">
+              <li>• <strong>Input Embeddings:</strong> Convert words to numerical representations</li>
+              <li>• <strong>Positional Encoding:</strong> Give the model information about word order</li>
+              <li>• <strong>Multi-Head Attention:</strong> Allow the model to focus on different parts of the input</li>
+              <li>• <strong>Feed-Forward Networks:</strong> Process the attended information</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Self-Attention Mechanism</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+            <strong>Self-attention computes relationships between all positions in a sequence simultaneously</strong>. For each word, the mechanism asks: "Which other words in this sequence are relevant for understanding this word?". Mathematically, attention weights are computed as:
+          </p>
+          <div class="bg-gray-700 p-4 rounded-lg font-fira text-center">
+            <p class="text-purple-300 font-semibold mb-2">Attention Formula:</p>
+            <p class="text-gray-300 text-sm">Attention(Q,K,V) = softmax(QK^T/√d_k)V</p>
+            <p class="text-gray-400 text-xs mt-2">Where Q (queries), K (keys), and V (values) are learned projections of input embeddings</p>
+          </div>
+        </section>
+
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">The Training Process</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+            LLM training involves <strong>three key phases</strong>:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div class="bg-gray-700 p-4 rounded-lg text-center">
+              <div class="text-2xl font-bold text-purple-400 mb-2">1</div>
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Forward Propagation</h3>
+              <p class="text-gray-300 text-sm">Input tokens flow through transformer layers, producing probability distributions over vocabulary</p>
+            </div>
+            <div class="bg-gray-700 p-4 rounded-lg text-center">
+              <div class="text-2xl font-bold text-purple-400 mb-2">2</div>
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Loss Calculation</h3>
+              <p class="text-gray-300 text-sm"><strong>Cross-entropy loss</strong> measures prediction accuracy against ground truth</p>
+            </div>
+            <div class="bg-gray-700 p-4 rounded-lg text-center">
+              <div class="text-2xl font-bold text-purple-400 mb-2">3</div>
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Backpropagation</h3>
+              <p class="text-gray-300 text-sm"><strong>Gradient descent</strong> updates parameters to minimize loss</p>
+            </div>
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            <strong>Backpropagation efficiently computes gradients by propagating errors backward through network layers</strong>, updating millions of parameters via <strong>chain rule differentiation</strong>. This process allows the model to learn complex patterns from data through iterative optimization.
+          </p>
+        </section>
+
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Attention Mechanisms</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+            The transformer architecture uses multiple attention mechanisms to process information effectively:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-gray-700 p-4 rounded-lg">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Multi-Head Attention</h3>
+              <p class="text-gray-300 text-sm">Multiple attention heads run in parallel, each focusing on different aspects of the input. This allows the model to attend to various relationships simultaneously.</p>
+            </div>
+            <div class="bg-gray-700 p-4 rounded-lg">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Scaled Dot-Product</h3>
+              <p class="text-gray-300 text-sm">Attention scores are computed using scaled dot-product, where the scaling factor prevents gradients from becoming too large during training.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Layer Normalization</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+            <strong>Layer normalization</strong> is crucial for training stability in deep transformer networks. It normalizes the inputs to each layer, helping to:
+          </p>
+          <div class="bg-gray-700 p-4 rounded-lg">
+            <ul class="text-gray-300 text-sm space-y-2">
+              <li>• <strong>Stabilize training:</strong> Prevent gradient explosion or vanishing</li>
+              <li>• <strong>Accelerate convergence:</strong> Allow higher learning rates</li>
+              <li>• <strong>Improve generalization:</strong> Reduce overfitting to training data</li>
+              <li>• <strong>Enable deeper networks:</strong> Train models with more layers</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- Chapter Navigation -->
+      <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
+    </main>
+  </div>
+
+  <!-- Footer Component -->
+  <ask-the-model-footer></ask-the-model-footer>
+
+  <!-- Mobile Navigation Component -->
+  <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
+
+  <!-- Web Components Script -->
+  <script src="web-components.js"></script>
+</body>
+</html>

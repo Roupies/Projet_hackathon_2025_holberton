@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Toolbox: Today's Top Tools - Ask The Model</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+            'fira': ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
+  <!-- Header Component -->
+  <ask-the-model-header></ask-the-model-header>
+
+  <div class="flex flex-col lg:flex-row flex-1">
+    <!-- Sidebar Component -->
+    <ask-the-model-sidebar></ask-the-model-sidebar>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
+      <!-- Chapter Header -->
+      <div class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">LLM Toolbox: Today's Top Tools</h1>
+        <p class="text-xl text-gray-300">A comprehensive guide to available LLM platforms and tools</p>
+      </div>
+
+      <!-- Chapter Content -->
+      <div class="space-y-8">
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Development Platforms</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">OpenAI GPT-4/GPT-3.5</h3>
+                        <p class="text-gray-300 text-sm">Leading proprietary models with state-of-the-art performance, excellent for creative tasks, coding, and general conversation.</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Anthropic's Claude</h3>
+                        <p class="text-gray-300 text-sm">Models known for their safety, helpfulness, and honesty. Particularly good at analysis, writing, and following instructions carefully.</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Google Gemini</h3>
+                        <p class="text-gray-300 text-sm">Multimodal capabilities allowing processing of text, images, and other data types in a unified framework.</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Meta LLaMA 2/3</h3>
+                        <p class="text-gray-300 text-sm">Open-source alternatives that can be run locally or deployed on your own infrastructure for privacy and customization.</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Mistral</h3>
+                        <p class="text-gray-300 text-sm">Efficient European models offering good performance with lower computational requirements.</p>
+                    </div>
+                </div>
+        </section>
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">LLMOps Tools</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+                    <strong>LLMOps platforms manage model deployment, monitoring, and optimization</strong>. These tools help developers and organizations efficiently deploy and maintain LLM applications in production environments.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">LangChain</h3>
+                        <p class="text-gray-300 text-sm">Framework for LLM application development, providing tools for building complex AI applications with multiple components.</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Weights & Biases</h3>
+                        <p class="text-gray-300 text-sm">Experiment tracking and model monitoring platform that helps track performance and manage model versions.</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Helicone</h3>
+                        <p class="text-gray-300 text-sm">LLM observability and analytics platform providing insights into model performance and usage patterns.</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Pinecone</h3>
+                        <p class="text-gray-300 text-sm">Vector database for retrieval-augmented generation, enabling LLMs to access external knowledge sources.</p>
+                    </div>
+                </div>
+        </section>
+        <!-- Chapter Navigation Component -->
+        <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Footer Component -->
+  <ask-the-model-footer></ask-the-model-footer>
+
+  <!-- Mobile Navigation Component -->
+  <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
+
+  <!-- Web Components Script -->
+  <script src="web-components.js"></script>
+</body>
+</html>

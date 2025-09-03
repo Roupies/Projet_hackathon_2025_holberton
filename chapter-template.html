@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHAPTER_TITLE - Ask The Model</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+            'fira': ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-inter">
+  <!-- Header Component -->
+  <ask-the-model-header></ask-the-model-header>
+
+  <div class="flex flex-col lg:flex-row min-h-screen">
+    <!-- Sidebar Component -->
+    <ask-the-model-sidebar></ask-the-model-sidebar>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
+      <!-- Chapter Header -->
+      <div class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">CHAPTER_TITLE</h1>
+        <p class="text-xl text-gray-300">CHAPTER_SUBTITLE</p>
+      </div>
+
+      <!-- Chapter Content -->
+      <div class="space-y-8">
+        <!-- CONTENT_SECTIONS_WILL_GO_HERE -->
+        
+        <!-- Chapter Navigation Component -->
+        <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
+      </div>
+
+      <!-- Footer Component -->
+      <ask-the-model-footer></ask-the-model-footer>
+    </main>
+  </div>
+
+  <!-- Mobile Navigation Component -->
+  <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
+
+  <!-- Web Components Script -->
+  <script src="web-components.js"></script>
+</body>
+</html>

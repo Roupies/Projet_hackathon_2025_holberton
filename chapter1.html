@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLMs 101: A Crash Course - Ask The Model</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+            'fira': ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
+  <!-- Header Component -->
+  <ask-the-model-header></ask-the-model-header>
+
+  <div class="flex flex-col lg:flex-row flex-1">
+    <!-- Sidebar Component -->
+    <ask-the-model-sidebar></ask-the-model-sidebar>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
+      <!-- Chapter Header -->
+      <div class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">LLMs 101: A Crash Course</h1>
+        <p class="text-xl text-gray-300">Your first step into the world of Large Language Models</p>
+      </div>
+
+      <!-- Chapter Content -->
+      <div class="space-y-8">
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">What is an LLM?</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+                    <strong>Large Language Models (LLMs) are deep neural networks trained on massive text corpora to understand and generate human language</strong>. Think of them as <strong>statistical models that predict the next word in a sequence</strong>. Unlike traditional rule-based systems, LLMs learn patterns from data through <strong>transformer architectures</strong>—neural networks that use attention mechanisms to process sequences in parallel rather than sequentially.
+                </p>
+                <p class="text-gray-300 leading-relaxed">
+                    The "large" in LLM refers to both <strong>parameter count</strong> (typically hundreds of millions to trillions) and <strong>dataset size</strong> (often terabytes of text). Modern LLMs like GPT-4 contain billions of parameters—the weights and biases that encode learned patterns. These parameters are <strong>trainable coefficients that determine how input features influence outputs</strong>, similar to synaptic strengths in biological neural networks.
+                </p>
+        </section>
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">How Do They Work?</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+                    At their core, LLMs work by predicting the next word in a sequence. When you give them a prompt like "The weather today is", they analyze the context and predict what word should come next - perhaps "sunny", "rainy", or "cold".
+                </p>
+                <p class="text-gray-300 leading-relaxed">
+                    This prediction is based on patterns they learned during training from massive amounts of text data. The more data they're trained on, and the more parameters they have, the better they become at making these predictions.
+                </p>
+                <div class="bg-gray-700 p-4 rounded-lg mt-4">
+                    <h3 class="text-lg font-semibold text-purple-300 mb-2">Key Components:</h3>
+                    <ul class="text-gray-300 text-sm space-y-1">
+                        <li>• <strong>Input Embeddings:</strong> Convert words to numerical representations</li>
+                        <li>• <strong>Positional Encoding:</strong> Give the model information about word order</li>
+                        <li>• <strong>Multi-Head Attention:</strong> Allow the model to focus on different parts of the input</li>
+                        <li>• <strong>Feed-Forward Networks:</strong> Process the attended information</li>
+                    </ul>
+                </div>
+        </section>
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Common Applications</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Chatbots & Assistants</h3>
+                        <p class="text-gray-300 text-sm">Customer service, virtual assistants, and conversational AI</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Content Generation</h3>
+                        <p class="text-gray-300 text-sm">Writing articles, emails, creative stories, and more</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Code Assistance</h3>
+                        <p class="text-gray-300 text-sm">Helping programmers write and debug code</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Language Translation</h3>
+                        <p class="text-gray-300 text-sm">Translating text between different languages</p>
+                    </div>
+                </div>
+        </section>
+        <!-- Chapter Navigation Component -->
+        <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
+      </div>
+
+    </main>
+  </div>
+  
+  <!-- Footer Component -->
+  <ask-the-model-footer></ask-the-model-footer>
+
+  <!-- Mobile Navigation Component -->
+  <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
+
+  <!-- Web Components Script -->
+  <script src="web-components.js"></script>
+</body>
+</html>

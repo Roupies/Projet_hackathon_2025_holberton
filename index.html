@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask The Model - Your Guide to Large Language Models</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+            'fira': ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
+  <!-- Header Component -->
+  <ask-the-model-header></ask-the-model-header>
+
+  <div class="flex flex-col lg:flex-row flex-1">
+    <!-- Sidebar Component -->
+    <ask-the-model-sidebar></ask-the-model-sidebar>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
+      <!-- Hero Section -->
+      <div class="text-center mb-12">
+        <h1 class="text-5xl md:text-6xl font-bold text-purple-400 mb-6">Ask The Model</h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-8">Your comprehensive guide to Large Language Models</p>
+        <p class="text-lg text-gray-400 max-w-3xl mx-auto">From basic concepts to advanced applications, discover everything you need to know about LLMs, their architecture, and how they're transforming technology.</p>
+      </div>
+
+      <!-- Content Preview -->
+      <div class="space-y-8">
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">What You'll Learn</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-gray-700 p-4 rounded-lg">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Fundamentals</h3>
+              <p class="text-gray-300 text-sm">Understanding what LLMs are, how they work, and their basic architecture</p>
+            </div>
+            <div class="bg-gray-700 p-4 rounded-lg">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Technical Deep Dive</h3>
+              <p class="text-gray-300 text-sm">Tokens, parameters, prompts, and the transformer architecture</p>
+            </div>
+            <div class="bg-gray-700 p-4 rounded-lg">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Practical Applications</h3>
+              <p class="text-gray-300 text-sm">How to use LLMs in development, business, and everyday tasks</p>
+            </div>
+            <div class="bg-gray-700 p-4 rounded-lg">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Industry Insights</h3>
+              <p class="text-gray-300 text-sm">Business models, open source vs proprietary, and future trends</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="bg-purple-600 text-white p-6 rounded-lg text-center">
+          <h3 class="text-xl font-semibold mb-2">Ready to Dive In?</h3>
+          <p class="text-lg">Start with Chapter 1 to learn the basics, or jump to any topic that interests you!</p>
+        </div>
+
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">About This Project</h2>
+          <p class="text-gray-300 mb-4">This comprehensive guide was created as part of the Holberton School hackathon 2025. Our team, ATM Corp., has compiled the most essential information about Large Language Models to help students and developers understand this revolutionary technology.</p>
+          <p class="text-gray-300">Whether you're a complete beginner or an experienced developer looking to expand your knowledge, this guide provides practical insights and technical details to help you navigate the world of LLMs.</p>
+        </section>
+      </div>
+
+    </main>
+  </div>
+  
+  <!-- Footer Component -->
+  <ask-the-model-footer></ask-the-model-footer>
+
+  <!-- Mobile Navigation Component -->
+  <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
+
+  <!-- Web Components Script -->
+  <script src="web-components.js"></script>
+</body>
+</html>
+

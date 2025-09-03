@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Engineering: Your New Superpower - Ask The Model</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+            'fira': ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
+  <!-- Header Component -->
+  <ask-the-model-header></ask-the-model-header>
+
+  <div class="flex flex-col lg:flex-row flex-1">
+    <!-- Sidebar Component -->
+    <ask-the-model-sidebar></ask-the-model-sidebar>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
+      <!-- Chapter Header -->
+      <div class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">Prompt Engineering: Your New Superpower</h1>
+        <p class="text-xl text-gray-300">Mastering the art of communicating with LLMs</p>
+      </div>
+
+      <!-- Chapter Content -->
+      <div class="space-y-8">
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Core Techniques</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+                    <strong>Effective prompting strategies for CS applications</strong>:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-purple-400 mb-2">1</div>
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Chain-of-Thought</h3>
+                        <p class="text-gray-300 text-sm">Break complex problems into reasoning steps</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-purple-400 mb-2">2</div>
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Few-Shot Learning</h3>
+                        <p class="text-gray-300 text-sm">Provide examples of desired input-output patterns</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-purple-400 mb-2">3</div>
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Role-Based Prompting</h3>
+                        <p class="text-gray-300 text-sm">Assign specific personas or expertise domains</p>
+                    </div>
+                </div>
+        </section>
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Advanced Methods</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Constitutional AI</h3>
+                        <p class="text-gray-300 text-sm">Self-correction through principle-based feedback</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Retrieval-Augmented Generation</h3>
+                        <p class="text-gray-300 text-sm">Combine prompts with external knowledge</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Multi-step Reasoning</h3>
+                        <p class="text-gray-300 text-sm">Sequential problem decomposition</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Constraint Specification</h3>
+                        <p class="text-gray-300 text-sm">Explicit output format requirements</p>
+                    </div>
+                </div>
+        </section>
+        <!-- Chapter Navigation Component -->
+        <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Footer Component -->
+  <ask-the-model-footer></ask-the-model-footer>
+
+  <!-- Mobile Navigation Component -->
+  <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
+
+  <!-- Web Components Script -->
+  <script src="web-components.js"></script>
+</body>
+</html>

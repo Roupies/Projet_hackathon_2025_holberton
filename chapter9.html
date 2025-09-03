@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI in Action: LLMs Inside Your IDE - Ask The Model</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+            'fira': ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
+  <!-- Header Component -->
+  <ask-the-model-header></ask-the-model-header>
+
+  <div class="flex flex-col lg:flex-row flex-1">
+    <!-- Sidebar Component -->
+    <ask-the-model-sidebar></ask-the-model-sidebar>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
+      <!-- Chapter Header -->
+      <div class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">AI in Action: LLMs Inside Your IDE</h1>
+        <p class="text-xl text-gray-300">How AI is revolutionizing software development</p>
+      </div>
+
+      <!-- Chapter Content -->
+      <div class="space-y-8">
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">GitHub Copilot</h2>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+                    <strong>The leading AI coding assistant</strong>:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Real-time Code Completion</h3>
+                        <p class="text-gray-300 text-sm">Suggests functions, classes, and algorithms</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Natural Language to Code</h3>
+                        <p class="text-gray-300 text-sm">Convert comments into implementations</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Multi-language Support</h3>
+                        <p class="text-gray-300 text-sm">Trained on public repositories across languages</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Context Awareness</h3>
+                        <p class="text-gray-300 text-sm">Understands project structure and coding patterns</p>
+                    </div>
+                </div>
+        </section>
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">IDE Integrations</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">VS Code</h3>
+                        <p class="text-gray-300 text-sm">Native Copilot integration with chat interface</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">JetBrains IDEs</h3>
+                        <p class="text-gray-300 text-sm">AI Assistant for IntelliJ, PyCharm, etc.</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Neovim</h3>
+                        <p class="text-gray-300 text-sm">Command-line AI coding support</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Terminal Chat</h3>
+                        <p class="text-gray-300 text-sm">Direct LLM interaction in development workflows</p>
+                    </div>
+                </div>
+        </section>
+        <!-- Chapter Navigation Component -->
+        <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Footer Component -->
+  <ask-the-model-footer></ask-the-model-footer>
+
+  <!-- Mobile Navigation Component -->
+  <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
+
+  <!-- Web Components Script -->
+  <script src="web-components.js"></script>
+</body>
+</html>
