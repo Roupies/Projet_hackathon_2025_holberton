@@ -13,121 +13,1188 @@
           fontFamily: {
             'inter': ['Inter', 'sans-serif'],
             'fira': ['Fira Code', 'monospace']
+          },
+          animation: {
+            'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'typewriter': 'typewriter 2s steps(40, end)',
+            'blink': 'blink 1s ease-in-out infinite',
+          },
+          keyframes: {
+            'pulse-glow': {
+              '0%, 100%': { boxShadow: '0 0 10px rgba(168, 85, 247, 0.5)', borderColor: 'rgba(168, 85, 247, 0.7)' },
+              '50%': { boxShadow: '0 0 30px rgba(168, 85, 247, 0.8)', borderColor: 'rgba(168, 85, 247, 1)' },
+            },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            'typewriter': {
+              'from': { width: '0' },
+              'to': { width: '100%' }
+            },
+            'blink': {
+              '0%, 100%': { opacity: 1 },
+              '50%': { opacity: 0 }
+            }
           }
         }
       }
     }
   </script>
+  <style>
+    .gradient-text {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .prompt-glow {
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+    }
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 1s ease-in-out infinite;
+      color: #a855f7;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
-  <!-- Header Component -->
   <ask-the-model-header></ask-the-model-header>
 
   <div class="flex flex-col lg:flex-row flex-1">
-    <!-- Sidebar Component -->
     <ask-the-model-sidebar></ask-the-model-sidebar>
 
-    <!-- Main Content -->
     <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
-      <!-- Chapter Header -->
-      <div class="mb-8">
-        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">Prompt Engineering: Your New Superpower</h1>
-        <p class="text-xl text-gray-300">Mastering the art of communicating with LLMs</p>      <!-- Prompt Engineering Process -->
-      <div class="mb-8 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 p-6 rounded-lg border border-yellow-500/30">
-        <h2 class="text-2xl font-semibold text-purple-400 mb-6 text-center">Prompt Engineering Process</h2>
-        <div class="flex items-center justify-center space-x-4">
-          <div class="text-center">
-            <div class="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center mb-2">
-              <span class="text-lg">💭</span>
+      <!-- Enhanced Chapter Header -->
+      <div class="mb-12 text-center">
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-6 gradient-text bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 animate-pulse-glow">
+          Prompt Engineering: Your New Superpower
+        </h1>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-4">
+          Master the art of communicating with LLMs and unlock their full potential
+        </p>
+        <div class="flex justify-center space-x-2">
+          <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+          <div class="w-2 h-2 bg-orange-400 rounded-full animate-pulse delay-75"></div>
+          <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse delay-150"></div>
+        </div>
+      </div>
+
+      <!-- Interactive Prompt Playground -->
+      <div class="mb-12 bg-gradient-to-br from-yellow-900/20 to-orange-900/20 p-8 rounded-xl border border-yellow-500/30 animate-pulse-glow">
+        <h2 class="text-3xl font-bold text-yellow-400 mb-6 text-center">🎮 Interactive Prompt Playground</h2>
+        
+        <!-- Live Prompt Editor -->
+        <div class="bg-gray-800/70 rounded-lg p-6 mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-yellow-300">Try It Yourself!</h3>
+            <div class="flex space-x-2">
+              <button onclick="loadPromptExample('basic')" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors">Basic</button>
+              <button onclick="loadPromptExample('role')" class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded transition-colors">Role-Based</button>
+              <button onclick="loadPromptExample('cot')" class="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white text-sm rounded transition-colors">Chain-of-Thought</button>
+              <button onclick="loadPromptExample('fewshot')" class="px-3 py-1 bg-orange-600 hover:bg-orange-700 text-white text-sm rounded transition-colors">Few-Shot</button>
             </div>
-            <p class="text-xs text-gray-300">Think</p>
           </div>
-          <div class="text-yellow-400 text-xl">→</div>
-          <div class="text-center">
-            <div class="w-14 h-14 bg-green-600 rounded-full flex items-center justify-center mb-2">
-              <span class="text-lg">✍️</span>
+          
+          <textarea id="prompt-editor" class="w-full h-32 p-4 bg-gray-900 border border-gray-600 rounded-lg text-gray-200 font-fira text-sm focus:outline-none focus:border-yellow-500 transition-colors" placeholder="Enter your prompt here..."></textarea>
+          
+          <div class="mt-4 flex justify-between items-center">
+            <div class="text-sm text-gray-400">
+              <span id="token-count">0</span> tokens (approx.)
             </div>
-            <p class="text-xs text-gray-300">Write</p>
+            <button onclick="analyzePrompt()" class="px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+              Analyze Prompt
+            </button>
           </div>
-          <div class="text-yellow-400 text-xl">→</div>
-          <div class="text-center">
-            <div class="w-14 h-14 bg-purple-600 rounded-full flex items-center justify-center mb-2">
-              <span class="text-lg">🔧</span>
+          
+          <!-- Analysis Results -->
+          <div id="prompt-analysis" class="mt-6 hidden">
+            <h4 class="text-sm font-semibold text-yellow-300 mb-3">Prompt Analysis:</h4>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+              <div class="bg-gray-700/50 p-3 rounded-lg">
+                <div class="text-xs text-gray-400 mb-1">Clarity</div>
+                <div id="clarity-score" class="text-lg font-bold text-yellow-400">-</div>
+              </div>
+              <div class="bg-gray-700/50 p-3 rounded-lg">
+                <div class="text-xs text-gray-400 mb-1">Specificity</div>
+                <div id="specificity-score" class="text-lg font-bold text-green-400">-</div>
+              </div>
+              <div class="bg-gray-700/50 p-3 rounded-lg">
+                <div class="text-xs text-gray-400 mb-1">Structure</div>
+                <div id="structure-score" class="text-lg font-bold text-blue-400">-</div>
+              </div>
+              <div class="bg-gray-700/50 p-3 rounded-lg">
+                <div class="text-xs text-gray-400 mb-1">Effectiveness</div>
+                <div id="effectiveness-score" class="text-lg font-bold text-purple-400">-</div>
+              </div>
             </div>
-            <p class="text-xs text-gray-300">Refine</p>
-          </div>
-          <div class="text-yellow-400 text-xl">→</div>
-          <div class="text-center">
-            <div class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center mb-2">
-              <span class="text-lg">✨</span>
-            </div>
-            <p class="text-xs text-gray-300">Perfect</p>
+            <div id="prompt-suggestions" class="mt-4 p-4 bg-gray-700/30 rounded-lg text-sm text-gray-300"></div>
           </div>
         </div>
       </div>
 
+      <!-- The Science Behind Prompting -->
+      <section class="mb-12 bg-gray-800 p-8 rounded-xl border border-gray-700 hover:shadow-yellow-500/10 transition-shadow duration-300">
+        <h2 class="text-3xl font-bold text-yellow-400 mb-8 text-center">🧬 The Science Behind Effective Prompting</h2>
+        
+        <!-- Interactive Prompt Anatomy -->
+        <div class="mb-8 bg-gradient-to-r from-gray-900/50 to-yellow-900/20 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold text-yellow-300 mb-4 text-center">Anatomy of a Perfect Prompt</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-start space-x-4 group hover:bg-gray-800/50 p-3 rounded-lg transition-all duration-300">
+              <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <span class="text-lg font-bold">1</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="text-lg font-semibold text-blue-300 mb-1">Context Setting</h4>
+                <p class="text-gray-300 text-sm mb-2">Provide background information and frame the task clearly.</p>
+                <div class="bg-gray-900/70 p-2 rounded font-fira text-xs text-blue-200">
+                  "You are analyzing customer feedback for a SaaS product..."
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4 group hover:bg-gray-800/50 p-3 rounded-lg transition-all duration-300">
+              <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <span class="text-lg font-bold">2</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="text-lg font-semibold text-green-300 mb-1">Clear Instructions</h4>
+                <p class="text-gray-300 text-sm mb-2">State exactly what you want the model to do.</p>
+                <div class="bg-gray-900/70 p-2 rounded font-fira text-xs text-green-200">
+                  "Identify the top 3 pain points and suggest solutions for each..."
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4 group hover:bg-gray-800/50 p-3 rounded-lg transition-all duration-300">
+              <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <span class="text-lg font-bold">3</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="text-lg font-semibold text-purple-300 mb-1">Output Format</h4>
+                <p class="text-gray-300 text-sm mb-2">Specify how you want the response structured.</p>
+                <div class="bg-gray-900/70 p-2 rounded font-fira text-xs text-purple-200">
+                  "Format as: Problem | Impact | Proposed Solution | Priority Level"
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4 group hover:bg-gray-800/50 p-3 rounded-lg transition-all duration-300">
+              <div class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <span class="text-lg font-bold">4</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="text-lg font-semibold text-orange-300 mb-1">Constraints & Guidelines</h4>
+                <p class="text-gray-300 text-sm mb-2">Set boundaries and quality expectations.</p>
+                <div class="bg-gray-900/70 p-2 rounded font-fira text-xs text-orange-200">
+                  "Keep solutions practical and implementable within 30 days..."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <!-- Understanding How LLMs Parse Prompts -->
+        <div class="bg-gray-700/30 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold text-yellow-300 mb-4">How LLMs "Read" Your Prompts</h3>
+          <p class="text-gray-300 mb-4">LLMs process prompts through their attention mechanisms, weighing different parts based on learned patterns:</p>
+          
+          <div class="bg-gray-900/70 p-4 rounded-lg font-fira text-sm">
+            <div class="mb-2">
+              <span class="text-gray-400">// What happens inside the model:</span>
+            </div>
+            <div class="space-y-1 text-xs">
+              <div><span class="text-blue-400">1.</span> <span class="text-gray-300">Tokenization</span> → <span class="text-green-300">"Write a poem" → [Write] [a] [poem]</span></div>
+              <div><span class="text-blue-400">2.</span> <span class="text-gray-300">Embedding</span> → <span class="text-green-300">Each token → 768-dimensional vector</span></div>
+              <div><span class="text-blue-400">3.</span> <span class="text-gray-300">Attention</span> → <span class="text-green-300">Model identifies relationships between tokens</span></div>
+              <div><span class="text-blue-400">4.</span> <span class="text-gray-300">Generation</span> → <span class="text-green-300">Predicts next token based on patterns</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Advanced Techniques Gallery -->
+      <section class="mb-12 bg-gray-800 p-8 rounded-xl border border-gray-700">
+        <h2 class="text-3xl font-bold text-orange-400 mb-8 text-center">🚀 Advanced Prompting Techniques</h2>
+        
+        <!-- Technique Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Chain-of-Thought -->
+          <div class="bg-gradient-to-br from-purple-800/30 to-purple-900/30 p-6 rounded-lg border border-purple-500/30 hover:border-purple-400 transition-all duration-300 group">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                <span class="text-2xl">🔗</span>
+              </div>
+              <h3 class="text-xl font-bold text-purple-300">Chain-of-Thought (CoT)</h3>
+            </div>
+            <p class="text-gray-300 text-sm mb-4">Guide the model through step-by-step reasoning for complex problems.</p>
+            
+            <!-- Interactive Example -->
+            <div class="bg-gray-900/50 p-3 rounded-lg">
+              <div class="text-xs font-fira mb-2 text-purple-200">Example:</div>
+              <div class="text-xs font-fira text-gray-300">
+                <div class="mb-1">"Let's solve this step by step:</div>
+                <div class="ml-2">1. First, identify the problem...</div>
+                <div class="ml-2">2. Then, list possible approaches...</div>
+                <div class="ml-2">3. Finally, evaluate and choose..."</div>
+              </div>
+            </div>
+            
+            <button onclick="showCoTDemo()" class="mt-4 w-full px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm rounded transition-colors">
+              Try Interactive Demo →
+            </button>
+          </div>
+
+          <!-- Few-Shot Learning -->
+          <div class="bg-gradient-to-br from-green-800/30 to-green-900/30 p-6 rounded-lg border border-green-500/30 hover:border-green-400 transition-all duration-300 group">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                <span class="text-2xl">📚</span>
+              </div>
+              <h3 class="text-xl font-bold text-green-300">Few-Shot Learning</h3>
+            </div>
+            <p class="text-gray-300 text-sm mb-4">Provide examples to teach the model your desired pattern.</p>
+            
+            <div class="bg-gray-900/50 p-3 rounded-lg">
+              <div class="text-xs font-fira mb-2 text-green-200">Pattern Teaching:</div>
+              <div class="text-xs font-fira text-gray-300">
+                <div>Input: "happy" → Output: "😊"</div>
+                <div>Input: "sad" → Output: "😢"</div>
+                <div>Input: "angry" → Output: ?</div>
+              </div>
+            </div>
+            
+            <button onclick="showFewShotDemo()" class="mt-4 w-full px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-sm rounded transition-colors">
+              Try Interactive Demo →
+            </button>
+          </div>
+
+          <!-- Role-Based Prompting -->
+          <div class="bg-gradient-to-br from-blue-800/30 to-blue-900/30 p-6 rounded-lg border border-blue-500/30 hover:border-blue-400 transition-all duration-300 group">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                <span class="text-2xl">🎭</span>
+              </div>
+              <h3 class="text-xl font-bold text-blue-300">Role-Based Prompting</h3>
+            </div>
+            <p class="text-gray-300 text-sm mb-4">Assign specific expertise or personas to shape responses.</p>
+            
+            <div class="bg-gray-900/50 p-3 rounded-lg">
+              <div class="text-xs font-fira mb-2 text-blue-200">Personas:</div>
+              <div class="text-xs font-fira text-gray-300">
+                <div>• "Act as a senior developer..."</div>
+                <div>• "You are a creative writer..."</div>
+                <div>• "As a data scientist..."</div>
+              </div>
+            </div>
+            
+            <button onclick="showRoleDemo()" class="mt-4 w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors">
+              Try Interactive Demo →
+            </button>
+          </div>
+
+          <!-- Tree of Thoughts -->
+          <div class="bg-gradient-to-br from-red-800/30 to-red-900/30 p-6 rounded-lg border border-red-500/30 hover:border-red-400 transition-all duration-300 group">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                <span class="text-2xl">🌳</span>
+              </div>
+              <h3 class="text-xl font-bold text-red-300">Tree of Thoughts</h3>
+            </div>
+            <p class="text-gray-300 text-sm mb-4">Explore multiple reasoning paths before choosing the best.</p>
+            
+            <div class="bg-gray-900/50 p-3 rounded-lg">
+              <div class="text-xs font-fira mb-2 text-red-200">Branching Logic:</div>
+              <div class="text-xs font-fira text-gray-300">
+                <div>Path A: Technical approach...</div>
+                <div>Path B: Creative approach...</div>
+                <div>Path C: Hybrid solution...</div>
+              </div>
+            </div>
+            
+            <button onclick="showToTDemo()" class="mt-4 w-full px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded transition-colors">
+              Try Interactive Demo →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prompt Patterns Library -->
+      <section class="mb-12 bg-gray-800 p-8 rounded-xl border border-gray-700">
+        <h2 class="text-3xl font-bold text-green-400 mb-8 text-center">📖 Prompt Patterns Library</h2>
+        
+        <!-- Pattern Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
+          <button onclick="showPattern('coding')" class="pattern-tab px-4 py-2 bg-gray-700 hover:bg-green-700 text-white rounded-lg transition-colors">Coding</button>
+          <button onclick="showPattern('analysis')" class="pattern-tab px-4 py-2 bg-gray-700 hover:bg-blue-700 text-white rounded-lg transition-colors">Analysis</button>
+          <button onclick="showPattern('creative')" class="pattern-tab px-4 py-2 bg-gray-700 hover:bg-purple-700 text-white rounded-lg transition-colors">Creative</button>
+          <button onclick="showPattern('data')" class="pattern-tab px-4 py-2 bg-gray-700 hover:bg-orange-700 text-white rounded-lg transition-colors">Data Science</button>
+          <button onclick="showPattern('teaching')" class="pattern-tab px-4 py-2 bg-gray-700 hover:bg-yellow-700 text-white rounded-lg transition-colors">Teaching</button>
+        </div>
+        
+        <!-- Pattern Display Area -->
+        <div id="pattern-display" class="bg-gray-900/50 p-6 rounded-lg">
+          <div class="text-center text-gray-400">
+            <p>Select a category to explore prompt patterns</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Common Pitfalls & Solutions -->
+      <section class="mb-12 bg-gray-800 p-8 rounded-xl border border-gray-700">
+        <h2 class="text-3xl font-bold text-red-400 mb-8 text-center">⚠️ Common Pitfalls & How to Avoid Them</h2>
+        
+        <div class="space-y-6">
+          <!-- Pitfall 1 -->
+          <div class="flex items-start space-x-4">
+            <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="text-lg">❌</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl font-semibold text-red-300 mb-2">Vague Instructions</h3>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-red-900/20 p-4 rounded-lg border border-red-500/30">
+                  <div class="text-sm font-semibold text-red-400 mb-2">❌ Bad:</div>
+                  <div class="font-fira text-xs text-gray-300">"Write something about AI"</div>
+                </div>
+                <div class="bg-green-900/20 p-4 rounded-lg border border-green-500/30">
+                  <div class="text-sm font-semibold text-green-400 mb-2">✅ Good:</div>
+                  <div class="font-fira text-xs text-gray-300">"Write a 200-word introduction to neural networks for beginners, focusing on practical applications"</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pitfall 2 -->
+          <div class="flex items-start space-x-4">
+            <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="text-lg">❌</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl font-semibold text-red-300 mb-2">Information Overload</h3>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-red-900/20 p-4 rounded-lg border border-red-500/30">
+                  <div class="text-sm font-semibold text-red-400 mb-2">❌ Bad:</div>
+                  <div class="font-fira text-xs text-gray-300">"Analyze this data considering all possible factors including but not limited to temporal, spatial, economic, social, political..."</div>
+                </div>
+                <div class="bg-green-900/20 p-4 rounded-lg border border-green-500/30">
+                  <div class="text-sm font-semibold text-green-400 mb-2">✅ Good:</div>
+                  <div class="font-fira text-xs text-gray-300">"Analyze this sales data focusing on: 1) Monthly trends 2) Top products 3) Regional differences"</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pitfall 3 -->
+          <div class="flex items-start space-x-4">
+            <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="text-lg">❌</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl font-semibold text-red-300 mb-2">Missing Context</h3>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-red-900/20 p-4 rounded-lg border border-red-500/30">
+                  <div class="text-sm font-semibold text-red-400 mb-2">❌ Bad:</div>
+                  <div class="font-fira text-xs text-gray-300">"Fix this code"</div>
+                </div>
+                <div class="bg-green-900/20 p-4 rounded-lg border border-green-500/30">
+                  <div class="text-sm font-semibold text-green-400 mb-2">✅ Good:</div>
+                  <div class="font-fira text-xs text-gray-300">"Fix this Python function that should calculate factorial but returns wrong values for inputs > 10"</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Measuring Prompt Effectiveness -->
+      <section class="mb-12 bg-gray-800 p-8 rounded-xl border border-gray-700">
+        <h2 class="text-3xl font-bold text-blue-400 mb-8 text-center">📊 Measuring Prompt Effectiveness</h2>
+        
+        <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-6 rounded-lg mb-6">
+          <h3 class="text-xl font-semibold text-blue-300 mb-4">Key Metrics for Success</h3>
+          
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-blue-600/30 rounded-full flex items-center justify-center mx-auto mb-2 border-2 border-blue-500">
+                <span class="text-2xl">🎯</span>
+              </div>
+              <h4 class="text-sm font-semibold text-blue-300">Accuracy</h4>
+              <p class="text-xs text-gray-400 mt-1">Correct information</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-green-600/30 rounded-full flex items-center justify-center mx-auto mb-2 border-2 border-green-500">
+                <span class="text-2xl">📏</span>
+              </div>
+              <h4 class="text-sm font-semibold text-green-300">Relevance</h4>
+              <p class="text-xs text-gray-400 mt-1">On-topic response</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-purple-600/30 rounded-full flex items-center justify-center mx-auto mb-2 border-2 border-purple-500">
+                <span class="text-2xl">⚡</span>
+              </div>
+              <h4 class="text-sm font-semibold text-purple-300">Speed</h4>
+              <p class="text-xs text-gray-400 mt-1">Quick iteration</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-orange-600/30 rounded-full flex items-center justify-center mx-auto mb-2 border-2 border-orange-500">
+                <span class="text-2xl">🔄</span>
+              </div>
+              <h4 class="text-sm font-semibold text-orange-300">Consistency</h4>
+              <p class="text-xs text-gray-400 mt-1">Reliable results</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- A/B Testing Your Prompts -->
+        <div class="bg-gray-700/30 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold text-blue-300 mb-4">A/B Testing Your Prompts</h3>
+          <p class="text-gray-300 mb-4">Like any product feature, prompts should be tested and optimized:</p>
+          
+          <div class="bg-gray-900/50 p-4 rounded-lg">
+            <h4 class="text-sm font-semibold text-blue-300 mb-3">Testing Framework:</h4>
+            <div class="space-y-2 text-sm text-gray-300">
+              <div class="flex items-center">
+                <span class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">1</span>
+                <span>Create 2-3 prompt variations</span>
+              </div>
+              <div class="flex items-center">
+                <span class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">2</span>
+                <span>Test with 10-20 similar inputs</span>
+              </div>
+              <div class="flex items-center">
+                <span class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">3</span>
+                <span>Score responses on key metrics</span>
+              </div>
+              <div class="flex items-center">
+                <span class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">4</span>
+                <span>Choose the best-performing version</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Future of Prompt Engineering -->
+      <section class="mb-12 bg-gray-800 p-8 rounded-xl border border-gray-700">
+        <h2 class="text-3xl font-bold text-pink-400 mb-8 text-center">🔮 The Future of Prompt Engineering</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Automated Prompt Generation -->
+          <div class="bg-gradient-to-br from-pink-800/30 to-purple-900/30 p-6 rounded-lg border border-pink-500/30">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center mr-4">
+                <span class="text-2xl">🤖</span>
+              </div>
+              <h3 class="text-xl font-bold text-pink-300">Automated Optimization</h3>
+            </div>
+            <p class="text-gray-300 text-sm mb-4">AI systems that automatically generate and optimize prompts for specific tasks.</p>
+            <ul class="text-gray-400 text-xs space-y-1">
+              <li>• DSPy framework for systematic prompt optimization</li>
+              <li>• Genetic algorithms for prompt evolution</li>
+              <li>• Reinforcement learning from human feedback</li>
+            </ul>
+          </div>
+
+          <!-- Multimodal Prompting -->
+          <div class="bg-gradient-to-br from-green-800/30 to-teal-900/30 p-6 rounded-lg border border-green-500/30">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
+                <span class="text-2xl">🎨</span>
+              </div>
+              <h3 class="text-xl font-bold text-green-300">Multimodal Prompting</h3>
+            </div>
+            <p class="text-gray-300 text-sm mb-4">Combining text, images, audio, and video in sophisticated prompt designs.</p>
+            <ul class="text-gray-400 text-xs space-y-1">
+              <li>• Visual prompt engineering with images</li>
+              <li>• Audio-based context setting</li>
+              <li>• Video understanding and generation</li>
+            </ul>
+          </div>
+
+          <!-- Dynamic Context -->
+          <div class="bg-gradient-to-br from-blue-800/30 to-indigo-900/30 p-6 rounded-lg border border-blue-500/30">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                <span class="text-2xl">⚡</span>
+              </div>
+              <h3 class="text-xl font-bold text-blue-300">Dynamic Adaptation</h3>
+            </div>
+            <p class="text-gray-300 text-sm mb-4">Prompts that automatically adjust based on user behavior and context.</p>
+            <ul class="text-gray-400 text-xs space-y-1">
+              <li>• Personalized prompt templates</li>
+              <li>• Context-aware modifications</li>
+              <li>• Real-time prompt refinement</li>
+            </ul>
+          </div>
+
+          <!-- Prompt Security -->
+          <div class="bg-gradient-to-br from-red-800/30 to-orange-900/30 p-6 rounded-lg border border-red-500/30">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mr-4">
+                <span class="text-2xl">🛡️</span>
+              </div>
+              <h3 class="text-xl font-bold text-red-300">Security & Safety</h3>
+            </div>
+            <p class="text-gray-300 text-sm mb-4">Advanced techniques to prevent prompt injection and ensure safe outputs.</p>
+            <ul class="text-gray-400 text-xs space-y-1">
+              <li>• Prompt injection detection</li>
+              <li>• Constitutional AI integration</li>
+              <li>• Adversarial prompt defense</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Demo Modals -->
+      <div id="demo-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-gray-800 rounded-xl p-8 max-w-4xl mx-4 max-h-[90vh] overflow-y-auto">
+          <div class="flex justify-between items-center mb-6">
+            <h3 id="modal-title" class="text-2xl font-bold text-yellow-400">Interactive Demo</h3>
+            <button onclick="closeDemoModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+          </div>
+          <div id="modal-content" class="space-y-4">
+            <!-- Dynamic content will be inserted here -->
+          </div>
+        </div>
       </div>
 
-      <!-- Chapter Content -->
-      <div class="space-y-8">
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Core Techniques</h2>
-          <p class="text-gray-300 mb-4 leading-relaxed">
-                    <strong>Effective prompting strategies for CS applications</strong>:
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-gray-700 p-4 rounded-lg text-center">
-                        <div class="text-2xl font-bold text-purple-400 mb-2">1</div>
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Chain-of-Thought</h3>
-                        <p class="text-gray-300 text-sm">Break complex problems into reasoning steps</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg text-center">
-                        <div class="text-2xl font-bold text-purple-400 mb-2">2</div>
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Few-Shot Learning</h3>
-                        <p class="text-gray-300 text-sm">Provide examples of desired input-output patterns</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg text-center">
-                        <div class="text-2xl font-bold text-purple-400 mb-2">3</div>
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Role-Based Prompting</h3>
-                        <p class="text-gray-300 text-sm">Assign specific personas or expertise domains</p>
-                    </div>
-                </div>
-        </section>
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Advanced Methods</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Constitutional AI</h3>
-                        <p class="text-gray-300 text-sm">Self-correction through principle-based feedback</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Retrieval-Augmented Generation</h3>
-                        <p class="text-gray-300 text-sm">Combine prompts with external knowledge</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Multi-step Reasoning</h3>
-                        <p class="text-gray-300 text-sm">Sequential problem decomposition</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Constraint Specification</h3>
-                        <p class="text-gray-300 text-sm">Explicit output format requirements</p>
-                    </div>
-                </div>
-        </section>
-        <!-- Chapter Navigation Component -->
-        <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
-      </div>
+      <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
     </main>
   </div>
   
-  <!-- Footer Component -->
   <ask-the-model-footer></ask-the-model-footer>
-
-  <!-- Mobile Navigation Component -->
   <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
 
-  <!-- Web Components Script -->
   <script src="web-components.js"></script>
+  
+  <!-- Interactive Prompt Engineering JavaScript -->
+  <script>
+    // Prompt examples for different techniques
+    const promptExamples = {
+      basic: `Write a summary of artificial intelligence.`,
+      
+      role: `You are a senior AI researcher with 10 years of experience. 
+Explain the current state of large language models to a technical audience, 
+focusing on recent breakthroughs and limitations. 
+Use precise terminology and include specific examples.`,
+      
+      cot: `Let's analyze this customer complaint step by step:
+
+Step 1: Identify the core issues mentioned
+Step 2: Categorize each issue by severity  
+Step 3: Determine the root cause for each issue
+Step 4: Propose specific solutions with timelines
+Step 5: Draft a response addressing all concerns
+
+Customer complaint: "Your app crashes every time I try to upload photos, and when I contacted support last week, no one responded. This is incredibly frustrating as I need this for my business."`,
+      
+      fewshot: `Convert emotions to emojis following these examples:
+
+happy → 😊
+sad → 😢  
+excited → 🤩
+angry → 😠
+confused → 😕
+
+Now convert: nervous → ?`
+    };
+
+    // Pattern library content
+    const promptPatterns = {
+      coding: {
+        title: "Code Generation Patterns",
+        patterns: [
+          {
+            name: "Code Review Assistant",
+            pattern: `You are an experienced code reviewer. Analyze the following code for:
+- Bugs and potential issues
+- Performance optimizations  
+- Code style and best practices
+- Security vulnerabilities
+
+Provide specific suggestions with corrected code examples.
+
+Code to review:
+[INSERT CODE HERE]`
+          },
+          {
+            name: "Documentation Generator",
+            pattern: `Generate comprehensive documentation for this function:
+
+Requirements:
+- Clear description of purpose
+- Parameter types and descriptions
+- Return value explanation
+- Usage examples
+- Edge cases and error handling
+
+Function:
+[INSERT FUNCTION HERE]`
+          },
+          {
+            name: "Debug Helper",
+            pattern: `Help me debug this issue:
+
+Problem: [DESCRIBE THE BUG]
+Expected behavior: [WHAT SHOULD HAPPEN]
+Actual behavior: [WHAT ACTUALLY HAPPENS]
+Code: [INSERT CODE]
+
+Please:
+1. Identify the likely cause
+2. Explain why it's happening
+3. Provide a fixed version
+4. Suggest how to prevent similar issues`
+          }
+        ]
+      },
+      analysis: {
+        title: "Data Analysis Patterns",
+        patterns: [
+          {
+            name: "Trend Analysis",
+            pattern: `Analyze the following data for trends and insights:
+
+Data: [INSERT DATA]
+
+Please provide:
+1. Key trends identified
+2. Statistical significance of patterns
+3. Potential contributing factors  
+4. Recommendations based on findings
+5. Areas requiring additional data
+
+Format as: Trend | Significance | Recommendation`
+          },
+          {
+            name: "Competitive Analysis",
+            pattern: `Conduct a competitive analysis using this framework:
+
+Company/Product: [INSERT SUBJECT]
+Competitors: [LIST COMPETITORS]
+
+Analyze across these dimensions:
+- Market positioning
+- Feature comparison
+- Pricing strategy
+- Strengths and weaknesses
+- Market opportunity
+
+Provide a summary table and strategic recommendations.`
+          }
+        ]
+      },
+      creative: {
+        title: "Creative Writing Patterns",
+        patterns: [
+          {
+            name: "Story Development",
+            pattern: `Develop a compelling story with these elements:
+
+Genre: [SPECIFY GENRE]
+Setting: [TIME/PLACE]
+Main character: [DESCRIBE CHARACTER]
+Conflict: [CENTRAL PROBLEM]
+
+Create:
+1. Three-act story outline
+2. Character development arc
+3. Key plot points and twists
+4. Dialogue samples for crucial scenes
+5. Thematic elements
+
+Length: [SPECIFY WORD COUNT]`
+          },
+          {
+            name: "Brand Voice Creator",
+            pattern: `Develop a brand voice based on these characteristics:
+
+Brand: [BRAND NAME]
+Industry: [SECTOR]
+Target audience: [DEMOGRAPHICS]
+Brand personality: [TRAITS]
+Values: [CORE VALUES]
+
+Create:
+- Tone of voice guidelines
+- Do's and Don'ts
+- Example messaging for different contexts
+- Content style recommendations`
+          }
+        ]
+      },
+      data: {
+        title: "Data Science Patterns",
+        patterns: [
+          {
+            name: "Exploratory Data Analysis",
+            pattern: `Perform exploratory data analysis on this dataset:
+
+Dataset: [DESCRIBE DATA]
+Variables: [LIST KEY VARIABLES]
+Business question: [WHAT WE WANT TO UNDERSTAND]
+
+Please provide:
+1. Data quality assessment
+2. Descriptive statistics
+3. Correlation analysis
+4. Outlier detection
+5. Visualization recommendations
+6. Hypothesis for further testing`
+          },
+          {
+            name: "Model Selection Guide",
+            pattern: `Help me choose the right machine learning model:
+
+Problem type: [CLASSIFICATION/REGRESSION/CLUSTERING]
+Dataset size: [NUMBER OF SAMPLES]
+Feature count: [NUMBER OF FEATURES]
+Data type: [NUMERICAL/CATEGORICAL/MIXED]
+Performance priority: [ACCURACY/SPEED/INTERPRETABILITY]
+Business constraints: [TIME/RESOURCES/EXPLAINABILITY]
+
+Recommend:
+1. Top 3 suitable algorithms
+2. Pros/cons of each approach
+3. Data preprocessing requirements
+4. Expected performance benchmarks`
+          }
+        ]
+      },
+      teaching: {
+        title: "Educational Patterns",
+        patterns: [
+          {
+            name: "Concept Explainer",
+            pattern: `Explain this complex concept using the Feynman Technique:
+
+Concept: [INSERT TOPIC]
+Audience: [SPECIFY LEVEL - BEGINNER/INTERMEDIATE/ADVANCED]
+
+Structure:
+1. Simple explanation in everyday language
+2. Use analogies and real-world examples
+3. Break down into smaller components
+4. Address common misconceptions
+5. Provide practice questions
+6. Suggest next learning steps`
+          },
+          {
+            name: "Lesson Plan Generator",
+            pattern: `Create a comprehensive lesson plan:
+
+Subject: [TOPIC]
+Duration: [TIME ALLOCATION]
+Learning level: [GRADE/SKILL LEVEL]
+Learning objectives: [WHAT STUDENTS SHOULD ACHIEVE]
+
+Include:
+1. Pre-lesson preparation
+2. Opening hook/engagement
+3. Main content delivery methods
+4. Interactive activities
+5. Assessment methods
+6. Homework/follow-up tasks
+7. Required materials`
+          }
+        ]
+      }
+    };
+
+    // Token counting function (approximate)
+    function countTokens(text) {
+      // Simple approximation: roughly 1 token per 4 characters for English
+      return Math.ceil(text.length / 4);
+    }
+
+    // Update token count in real-time
+    document.addEventListener('DOMContentLoaded', function() {
+      const promptEditor = document.getElementById('prompt-editor');
+      if (promptEditor) {
+        promptEditor.addEventListener('input', function() {
+          const tokenCount = countTokens(this.value);
+          document.getElementById('token-count').textContent = tokenCount;
+        });
+      }
+    });
+
+    // Load prompt examples
+    function loadPromptExample(type) {
+      const promptEditor = document.getElementById('prompt-editor');
+      if (promptEditor && promptExamples[type]) {
+        promptEditor.value = promptExamples[type];
+        const tokenCount = countTokens(promptExamples[type]);
+        document.getElementById('token-count').textContent = tokenCount;
+      }
+    }
+
+    // Analyze prompt quality
+    function analyzePrompt() {
+      const promptText = document.getElementById('prompt-editor').value;
+      
+      if (!promptText.trim()) {
+        alert('Please enter a prompt to analyze.');
+        return;
+      }
+
+      // Simple scoring algorithm
+      const clarity = analyzeClarity(promptText);
+      const specificity = analyzeSpecificity(promptText);
+      const structure = analyzeStructure(promptText);
+      const effectiveness = Math.round((clarity + specificity + structure) / 3);
+
+      // Update scores
+      document.getElementById('clarity-score').textContent = clarity + '/10';
+      document.getElementById('specificity-score').textContent = specificity + '/10';
+      document.getElementById('structure-score').textContent = structure + '/10';
+      document.getElementById('effectiveness-score').textContent = effectiveness + '/10';
+
+      // Generate suggestions
+      const suggestions = generateSuggestions(promptText, clarity, specificity, structure);
+      document.getElementById('prompt-suggestions').innerHTML = suggestions;
+
+      // Show analysis
+      document.getElementById('prompt-analysis').classList.remove('hidden');
+    }
+
+    function analyzeClarity(text) {
+      let score = 5;
+      
+      // Check for clear instructions
+      if (text.includes('please') || text.includes('create') || text.includes('generate') || text.includes('analyze')) {
+        score += 2;
+      }
+      
+      // Check for question words
+      if (/\b(what|how|why|when|where|which)\b/i.test(text)) {
+        score += 1;
+      }
+      
+      // Penalize very short prompts
+      if (text.length < 20) {
+        score -= 2;
+      }
+      
+      // Reward moderate length
+      if (text.length > 50 && text.length < 500) {
+        score += 1;
+      }
+      
+      return Math.min(10, Math.max(1, score));
+    }
+
+    function analyzeSpecificity(text) {
+      let score = 5;
+      
+      // Check for specific requirements
+      const specificWords = ['format', 'length', 'style', 'tone', 'audience', 'example', 'step'];
+      const foundWords = specificWords.filter(word => text.toLowerCase().includes(word));
+      score += foundWords.length;
+      
+      // Check for numbers/quantities
+      if (/\d+/.test(text)) {
+        score += 1;
+      }
+      
+      // Check for context
+      if (text.toLowerCase().includes('context') || text.toLowerCase().includes('background')) {
+        score += 1;
+      }
+      
+      return Math.min(10, Math.max(1, score));
+    }
+
+    function analyzeStructure(text) {
+      let score = 5;
+      
+      // Check for structured format
+      if (/\d+\./.test(text) || text.includes('•') || text.includes('-')) {
+        score += 2;
+      }
+      
+      // Check for clear sections
+      if (text.includes(':') || text.includes('\n')) {
+        score += 1;
+      }
+      
+      // Check for role definition
+      if (text.toLowerCase().includes('you are') || text.toLowerCase().includes('act as')) {
+        score += 2;
+      }
+      
+      return Math.min(10, Math.max(1, score));
+    }
+
+    function generateSuggestions(text, clarity, specificity, structure) {
+      const suggestions = [];
+      
+      if (clarity < 7) {
+        suggestions.push("💡 <strong>Improve clarity:</strong> Use more specific action verbs (analyze, create, explain) instead of vague terms.");
+      }
+      
+      if (specificity < 7) {
+        suggestions.push("🎯 <strong>Add specificity:</strong> Include details about format, length, audience, or style requirements.");
+      }
+      
+      if (structure < 7) {
+        suggestions.push("📝 <strong>Better structure:</strong> Use numbered lists, bullet points, or clear sections to organize your prompt.");
+      }
+      
+      if (text.length < 30) {
+        suggestions.push("📏 <strong>Add context:</strong> Your prompt is quite short. Consider adding background information or examples.");
+      }
+      
+      if (!text.toLowerCase().includes('you are') && !text.toLowerCase().includes('act as')) {
+        suggestions.push("🎭 <strong>Define a role:</strong> Consider starting with 'You are...' or 'Act as...' to give the AI a specific perspective.");
+      }
+      
+      if (suggestions.length === 0) {
+        suggestions.push("✅ <strong>Great prompt!</strong> Your prompt shows good clarity, specificity, and structure.");
+      }
+      
+      return suggestions.map(s => `<p class="mb-2">${s}</p>`).join('');
+    }
+
+    // Show pattern categories
+    function showPattern(category) {
+      const patternData = promptPatterns[category];
+      const displayArea = document.getElementById('pattern-display');
+      
+      if (!patternData || !displayArea) return;
+      
+      // Update active tab
+      document.querySelectorAll('.pattern-tab').forEach(tab => {
+        tab.classList.remove('bg-blue-600', 'bg-green-600', 'bg-purple-600', 'bg-orange-600', 'bg-yellow-600');
+        tab.classList.add('bg-gray-700');
+      });
+      
+      event.target.classList.remove('bg-gray-700');
+      const colors = {
+        coding: 'bg-green-600',
+        analysis: 'bg-blue-600',
+        creative: 'bg-purple-600',
+        data: 'bg-orange-600',
+        teaching: 'bg-yellow-600'
+      };
+      event.target.classList.add(colors[category] || 'bg-blue-600');
+      
+      // Display patterns
+      displayArea.innerHTML = `
+        <h3 class="text-xl font-bold text-white mb-6">${patternData.title}</h3>
+        <div class="space-y-6">
+          ${patternData.patterns.map(pattern => `
+            <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-600">
+              <h4 class="text-lg font-semibold text-blue-300 mb-3">${pattern.name}</h4>
+              <pre class="bg-gray-900 p-3 rounded text-sm text-gray-300 whitespace-pre-wrap font-fira overflow-x-auto">${pattern.pattern}</pre>
+              <button onclick="copyPattern('${pattern.pattern.replace(/'/g, "\\'")}', '${pattern.name}')" 
+                      class="mt-3 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors">
+                Copy Template
+              </button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // Copy pattern to clipboard
+    function copyPattern(pattern, name) {
+      navigator.clipboard.writeText(pattern).then(() => {
+        // Show temporary success message
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('bg-green-600');
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove('bg-green-600');
+          button.classList.add('bg-blue-600');
+        }, 2000);
+      }).catch(() => {
+        alert('Failed to copy. Please select and copy manually.');
+      });
+    }
+
+    // Demo modal functions
+    function showCoTDemo() {
+      showDemoModal('Chain-of-Thought Demo', `
+        <div class="space-y-4">
+          <p class="text-gray-300">Chain-of-Thought prompting guides the model through step-by-step reasoning:</p>
+          
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <h4 class="text-yellow-300 font-semibold mb-2">Example Problem:</h4>
+            <p class="text-gray-300 text-sm">"A company's revenue increased by 15% in Q1, then decreased by 10% in Q2. If Q1 revenue was $100K, what was Q2 revenue?"</p>
+          </div>
+          
+          <div class="bg-blue-900/30 p-4 rounded-lg">
+            <h4 class="text-blue-300 font-semibold mb-2">Chain-of-Thought Response:</h4>
+            <div class="text-sm text-gray-300 space-y-2">
+              <p><strong>Step 1:</strong> Calculate Q1 revenue after 15% increase</p>
+              <p><strong>Step 2:</strong> Apply the 10% decrease to find Q2 revenue</p>
+              <p><strong>Step 3:</strong> Verify the calculation</p>
+              <p><strong>Final Answer:</strong> Q2 revenue = $103,500</p>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 p-4 rounded-lg">
+            <h4 class="text-green-300 font-semibold mb-2">Why It Works:</h4>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Forces the model to show reasoning steps</li>
+              <li>• Reduces calculation errors</li>
+              <li>• Makes logic transparent and verifiable</li>
+              <li>• Improves performance on complex problems</li>
+            </ul>
+          </div>
+        </div>
+      `);
+    }
+
+    function showFewShotDemo() {
+      showDemoModal('Few-Shot Learning Demo', `
+        <div class="space-y-4">
+          <p class="text-gray-300">Few-shot learning teaches patterns through examples:</p>
+          
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <h4 class="text-green-300 font-semibold mb-2">Training Examples:</h4>
+            <div class="font-fira text-sm text-gray-300 space-y-1">
+              <div>Review: "Amazing product!" → Sentiment: Positive</div>
+              <div>Review: "Terrible experience" → Sentiment: Negative</div>
+              <div>Review: "It's okay, nothing special" → Sentiment: Neutral</div>
+            </div>
+          </div>
+          
+          <div class="bg-blue-900/30 p-4 rounded-lg">
+            <h4 class="text-blue-300 font-semibold mb-2">New Input:</h4>
+            <div class="font-fira text-sm text-gray-300">
+              Review: "Love the design but shipping was slow" → Sentiment: ?
+            </div>
+          </div>
+          
+          <div class="bg-purple-900/30 p-4 rounded-lg">
+            <h4 class="text-purple-300 font-semibold mb-2">Model Output:</h4>
+            <div class="font-fira text-sm text-gray-300">
+              Sentiment: Mixed (Positive about product, negative about service)
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 p-4 rounded-lg">
+            <h4 class="text-yellow-300 font-semibold mb-2">Best Practices:</h4>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Use 2-5 diverse examples</li>
+              <li>• Include edge cases in your examples</li>
+              <li>• Maintain consistent formatting</li>
+              <li>• Order examples from simple to complex</li>
+            </ul>
+          </div>
+        </div>
+      `);
+    }
+
+    function showRoleDemo() {
+      showDemoModal('Role-Based Prompting Demo', `
+        <div class="space-y-4">
+          <p class="text-gray-300">Role-based prompting assigns specific expertise or personas:</p>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-gray-900 p-4 rounded-lg">
+              <h4 class="text-red-300 font-semibold mb-2">❌ Generic Prompt:</h4>
+              <div class="font-fira text-sm text-gray-300">
+                "Explain machine learning"
+              </div>
+            </div>
+            
+            <div class="bg-green-900/30 p-4 rounded-lg">
+              <h4 class="text-green-300 font-semibold mb-2">✅ Role-Based Prompt:</h4>
+              <div class="font-fira text-sm text-gray-300">
+                "You are a senior data scientist at Google. Explain machine learning to a team of product managers who need to understand its business applications."
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-blue-900/30 p-4 rounded-lg">
+            <h4 class="text-blue-300 font-semibold mb-2">Popular Roles:</h4>
+            <div class="grid grid-cols-2 gap-2 text-sm text-gray-300">
+              <div>• Senior Software Engineer</div>
+              <div>• Marketing Expert</div>
+              <div>• Technical Writer</div>
+              <div>• Business Analyst</div>
+              <div>• UX Designer</div>
+              <div>• Project Manager</div>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 p-4 rounded-lg">
+            <h4 class="text-orange-300 font-semibold mb-2">Role Elements to Include:</h4>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Professional background and experience level</li>
+              <li>• Specific domain expertise</li>
+              <li>• Communication style preferences</li>
+              <li>• Target audience for the response</li>
+            </ul>
+          </div>
+        </div>
+      `);
+    }
+
+    function showToTDemo() {
+      showDemoModal('Tree of Thoughts Demo', `
+        <div class="space-y-4">
+          <p class="text-gray-300">Tree of Thoughts explores multiple reasoning paths before choosing the best solution:</p>
+          
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <h4 class="text-red-300 font-semibold mb-2">Problem:</h4>
+            <p class="text-sm text-gray-300">"Design a mobile app feature to increase user engagement"</p>
+          </div>
+          
+          <div class="space-y-3">
+            <div class="bg-purple-900/20 p-3 rounded-lg border-l-4 border-purple-400">
+              <h5 class="text-purple-300 font-semibold text-sm">Path A: Gamification Approach</h5>
+              <p class="text-xs text-gray-300">Add points, badges, leaderboards...</p>
+              <div class="text-xs text-gray-400 mt-1">Pros: High engagement | Cons: May feel gimmicky</div>
+            </div>
+            
+            <div class="bg-blue-900/20 p-3 rounded-lg border-l-4 border-blue-400">
+              <h5 class="text-blue-300 font-semibold text-sm">Path B: Personalization Focus</h5>
+              <p class="text-xs text-gray-300">AI-driven content recommendations...</p>
+              <div class="text-xs text-gray-400 mt-1">Pros: Relevant content | Cons: Complex implementation</div>
+            </div>
+            
+            <div class="bg-green-900/20 p-3 rounded-lg border-l-4 border-green-400">
+              <h5 class="text-green-300 font-semibold text-sm">Path C: Social Features</h5>
+              <p class="text-xs text-gray-300">User-generated content, sharing, communities...</p>
+              <div class="text-xs text-gray-400 mt-1">Pros: Network effects | Cons: Moderation needed</div>
+            </div>
+          </div>
+          
+          <div class="bg-yellow-900/30 p-4 rounded-lg">
+            <h4 class="text-yellow-300 font-semibold mb-2">Synthesis & Recommendation:</h4>
+            <p class="text-sm text-gray-300">Combine personalized content (Path B) with light social elements (Path C). Start with AI recommendations and gradually introduce community features as user base grows.</p>
+          </div>
+        </div>
+      `);
+    }
+
+    function showDemoModal(title, content) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-content').innerHTML = content;
+      document.getElementById('demo-modal').classList.remove('hidden');
+      document.getElementById('demo-modal').classList.add('flex');
+    }
+
+    function closeDemoModal() {
+      document.getElementById('demo-modal').classList.add('hidden');
+      document.getElementById('demo-modal').classList.remove('flex');
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('demo-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeDemoModal();
+      }
+    });
+  </script>
 </body>
 </html>
