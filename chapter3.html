@@ -38,31 +38,38 @@
       <!-- Timeline Visualization -->
       <div class="mb-8 bg-gradient-to-r from-purple-900/20 to-blue-900/20 p-6 rounded-lg border border-purple-500/30">
         <h2 class="text-2xl font-semibold text-purple-400 mb-6 text-center">LLM Evolution Timeline</h2>
-        <div class="flex flex-wrap justify-center items-center space-x-4 mb-4">
+        <div class="flex flex-wrap justify-center items-center space-x-3 mb-4">
           <div class="text-center">
-            <div class="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mb-2">
-              <span class="text-2xl">💬</span>
+            <div class="w-14 h-14 bg-indigo-700 rounded-full flex items-center justify-center mb-2">
+              <span class="text-xl">🤖</span>
+            </div>
+            <p class="text-xs text-gray-300">Turing Test<br>1950</p>
+          </div>
+          <div class="text-purple-400 text-xl">→</div>
+          <div class="text-center">
+            <div class="w-14 h-14 bg-gray-700 rounded-full flex items-center justify-center mb-2">
+              <span class="text-xl">💬</span>
             </div>
             <p class="text-xs text-gray-300">ELIZA<br>1966</p>
           </div>
-          <div class="text-purple-400 text-2xl">→</div>
+          <div class="text-purple-400 text-xl">→</div>
           <div class="text-center">
-            <div class="w-16 h-16 bg-blue-800 rounded-full flex items-center justify-center mb-2">
-              <span class="text-2xl">🧠</span>
+            <div class="w-14 h-14 bg-blue-800 rounded-full flex items-center justify-center mb-2">
+              <span class="text-xl">🧠</span>
             </div>
             <p class="text-xs text-gray-300">LSTM<br>1997</p>
           </div>
-          <div class="text-purple-400 text-2xl">→</div>
+          <div class="text-purple-400 text-xl">→</div>
           <div class="text-center">
-            <div class="w-16 h-16 bg-purple-700 rounded-full flex items-center justify-center mb-2">
-              <span class="text-2xl">⚡</span>
+            <div class="w-14 h-14 bg-purple-700 rounded-full flex items-center justify-center mb-2">
+              <span class="text-xl">⚡</span>
             </div>
             <p class="text-xs text-gray-300">Transformers<br>2017</p>
           </div>
-          <div class="text-purple-400 text-2xl">→</div>
+          <div class="text-purple-400 text-xl">→</div>
           <div class="text-center">
-            <div class="w-16 h-16 bg-green-700 rounded-full flex items-center justify-center mb-2">
-              <span class="text-2xl">🚀</span>
+            <div class="w-14 h-14 bg-green-700 rounded-full flex items-center justify-center mb-2">
+              <span class="text-xl">🚀</span>
             </div>
             <p class="text-xs text-gray-300">ChatGPT<br>2022</p>
           </div>
@@ -74,6 +81,45 @@
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
           <h2 class="text-2xl font-semibold text-purple-400 mb-4">Historical Evolution</h2>
           <div class="space-y-4">
+            <div class="bg-gray-700 p-4 rounded-lg">
+              <div class="flex items-start space-x-4 mb-4">
+                <div class="flex-shrink-0">
+                  <div class="w-12 h-12 bg-gradient-to-br from-indigo-600 to-blue-800 rounded-lg flex items-center justify-center">
+                    <span class="text-2xl">🤖</span>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-lg font-semibold text-purple-300 mb-2">1950: The Turing Test</h3>
+                  <p class="text-gray-300 text-sm mb-3">Alan Turing proposed the "Imitation Game" - if a machine can engage in conversations indistinguishable from a human, it demonstrates intelligence.</p>
+                </div>
+              </div>
+              
+              <!-- Interactive Turing Test -->
+              <div class="bg-gray-800 p-4 rounded-lg border border-indigo-500/30">
+                <h4 class="text-lg font-semibold text-indigo-300 mb-3 text-center">🧪 Try the Turing Test Yourself!</h4>
+                <p class="text-center text-sm text-gray-400 mb-4">Chat with this bot - can you tell if it's human or machine?</p>
+                
+                <!-- Chat Interface -->
+                <div id="turing-chat-box" class="bg-gray-900 border border-gray-600 rounded-lg p-3 h-64 overflow-y-auto mb-3 text-sm">
+                  <p class="text-blue-400"><strong>Bot:</strong> Hello! I'm here to chat. Ask me anything you'd like!</p>
+                </div>
+                
+                <!-- Input Area -->
+                <div class="flex space-x-2">
+                  <input id="turing-user-input" type="text" placeholder="Type your message..." 
+                         class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 placeholder-gray-400 focus:outline-none focus:border-indigo-500">
+                  <button onclick="sendTuringMessage()" 
+                          class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors duration-200 font-semibold">
+                    Send
+                  </button>
+                </div>
+                
+                <!-- Hint -->
+                <div class="mt-3 text-center text-xs text-gray-500">
+                  💡 Try asking about hobbies, feelings, or personal experiences
+                </div>
+              </div>
+            </div>
             <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-4">
               <div class="flex-shrink-0">
                 <div class="w-12 h-12 bg-gradient-to-br from-gray-600 to-gray-800 rounded-lg flex items-center justify-center">
@@ -84,16 +130,63 @@
                 <h3 class="text-lg font-semibold text-purple-300 mb-2">1966: ELIZA</h3>
                 <p class="text-gray-300 text-sm mb-2">Created by Joseph Weizenbaum at MIT, ELIZA was one of the first natural language processing programs. It used pattern matching to simulate conversation, famously acting as a psychotherapist.</p>
                 <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 font-mono text-sm">
-                  <p class="text-green-400">User: Men are all alike.</p>
-                  <p class="text-blue-400">ELIZA: IN WHAT WAY?</p>
-                  <p class="text-green-400">User: Well, my boyfriend made me come here.</p>
-                  <p class="text-blue-400">ELIZA: YOUR BOYFRIEND MADE YOU COME HERE?</p>
+                  <p class="text-green-400">User: My boyfriend told me to talk to you.</p>
+                  <p class="text-blue-400">ELIZA: Your boyfriend told you to talk to me?</p>
+                  <p class="text-green-400">User: He says I'm often depressed.</p>
+                  <p class="text-blue-400">ELIZA: I'm sorry to hear you are depressed.</p>
+                  <p class="text-green-400">User: That's true. I feel unhappy.</p>
+                  <p class="text-blue-400">ELIZA: Do you think talking to me will help you not feel unhappy?</p>
                 </div>
               </div>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg">
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">1972: PARRY</h3>
-              <p class="text-gray-300 text-sm">Developed by Kenneth Colby, PARRY simulated a paranoid patient, representing early attempts at creating more sophisticated conversational agents.</p>
+            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-orange-800 rounded-lg flex items-center justify-center">
+                  <span class="text-2xl">😤</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-lg font-semibold text-purple-300 mb-2">1972: PARRY</h3>
+                <p class="text-gray-300 text-sm mb-3">Developed by Kenneth Colby, PARRY simulated a paranoid patient, representing early attempts at creating more sophisticated conversational agents.</p>
+                
+                <!-- PARRY vs ELIZA Conversation -->
+                <div class="bg-gray-800 p-4 rounded-lg border border-orange-500/30">
+                  <h4 class="text-sm font-semibold text-orange-300 mb-3 text-center">Historic AI vs AI Conversation (1972)</h4>
+                  <div class="space-y-2 font-mono text-sm">
+                    <div class="flex items-start space-x-2">
+                      <span class="text-red-400 font-semibold flex-shrink-0">PARRY:</span>
+                      <span class="text-gray-300">People get on my nerves sometimes.</span>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="text-blue-400 font-semibold flex-shrink-0">ELIZA:</span>
+                      <span class="text-gray-300">I am not sure I understand you fully.</span>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="text-red-400 font-semibold flex-shrink-0">PARRY:</span>
+                      <span class="text-gray-300">You should pay more attention.</span>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="text-blue-400 font-semibold flex-shrink-0">ELIZA:</span>
+                      <span class="text-gray-300">Suppose you should pay more attention.</span>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="text-red-400 font-semibold flex-shrink-0">PARRY:</span>
+                      <span class="text-gray-300">You're entitled to your own opinion.</span>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="text-blue-400 font-semibold flex-shrink-0">ELIZA:</span>
+                      <span class="text-gray-300">What makes you think I am entitled to my own opinion?</span>
+                    </div>
+                    <div class="flex items-start space-x-2">
+                      <span class="text-red-400 font-semibold flex-shrink-0">PARRY:</span>
+                      <span class="text-gray-300">It bothers me just to be around people in general.</span>
+                    </div>
+                  </div>
+                  <div class="mt-3 text-center text-xs text-gray-400 border-t border-gray-700 pt-2">
+                    First recorded conversation between two AI programs! 🤖💬🤖
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="bg-gray-700 p-4 rounded-lg">
               <h3 class="text-lg font-semibold text-purple-300 mb-2">1988: Statistical Language Models</h3>
@@ -112,32 +205,26 @@
                 </div>
                 <div class="flex-1">
                   <h3 class="text-lg font-semibold text-purple-300 mb-2">2017: Transformer Architecture</h3>
-                  <p class="text-gray-300 text-sm mb-3"><strong>"Attention Is All You Need"</strong> introduced the transformer architecture that would revolutionize NLP and enable modern LLMs.</p>
-                </div>
-              </div>
-              
-              <!-- Attention Mechanism Visualization -->
-              <div class="mt-4 bg-gray-800 p-4 rounded-lg">
-                <h4 class="text-sm font-semibold text-purple-300 mb-3 text-center">Multi-Head Self-Attention</h4>
-                <div class="grid grid-cols-3 gap-4 text-center">
-                  <div class="space-y-2">
-                    <div class="h-8 bg-blue-600 rounded flex items-center justify-center text-xs font-bold">Query (Q)</div>
-                    <div class="text-xs text-gray-400">What to focus on</div>
+                  <p class="text-gray-300 text-sm mb-3"><strong>"Attention Is All You Need"</strong> - Revolutionary breakthrough that enabled all modern LLMs by allowing models to focus on relevant parts of text simultaneously.</p>
+                  
+                  <!-- Simplified Attention Concept -->
+                  <div class="bg-gray-800 p-3 rounded-lg flex items-center justify-center space-x-2">
+                    <div class="text-center">
+                      <div class="text-2xl mb-1">👁️</div>
+                      <div class="text-xs text-gray-300">Attention</div>
+                    </div>
+                    <div class="text-purple-400 text-lg">→</div>
+                    <div class="text-center">
+                      <div class="text-2xl mb-1">🎯</div>
+                      <div class="text-xs text-gray-300">Focus</div>
+                    </div>
+                    <div class="text-purple-400 text-lg">→</div>
+                    <div class="text-center">
+                      <div class="text-2xl mb-1">🚀</div>
+                      <div class="text-xs text-gray-300">Better Understanding</div>
+                    </div>
                   </div>
-                  <div class="space-y-2">
-                    <div class="h-8 bg-green-600 rounded flex items-center justify-center text-xs font-bold">Key (K)</div>
-                    <div class="text-xs text-gray-400">What can be attended to</div>
-                  </div>
-                  <div class="space-y-2">
-                    <div class="h-8 bg-red-600 rounded flex items-center justify-center text-xs font-bold">Value (V)</div>
-                    <div class="text-xs text-gray-400">Actual information</div>
-                  </div>
                 </div>
-                <div class="mt-3 text-center">
-                  <div class="text-purple-400 text-xl">⬇️</div>
-                  <div class="text-xs text-gray-300 mt-1">Attention(Q,K,V) = softmax(QK^T/√d)V</div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -164,6 +251,10 @@
               <div class="text-center">
                 <div class="w-6 h-40 bg-red-500 rounded-t"></div>
                 <div class="text-xs text-gray-300 mt-1">GPT-4<br>~1.7T</div>
+              </div>
+              <div class="text-center">
+                <div class="w-6 h-48 bg-gradient-to-t from-purple-600 to-pink-500 rounded-t"></div>
+                <div class="text-xs text-gray-300 mt-1">GPT-5<br>~10T+</div>
               </div>
             </div>
             <div class="text-center text-xs text-gray-400 mt-3">Parameters (logarithmic scale)</div>
@@ -275,44 +366,193 @@
         </section>
 
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Key Trends & Insights</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-gray-700 p-4 rounded-lg">
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">Scaling Laws</h3>
-              <p class="text-gray-300 text-sm">Performance improves predictably with model size, following power laws. This has driven the race for larger models and better architectures.</p>
+          <h2 class="text-2xl font-semibold text-purple-400 mb-4">🔍 What We've Learned Along the Way</h2>
+          
+          <!-- Interactive Story Header -->
+          <div class="mb-6 bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-4 rounded-lg text-center border border-purple-500/20">
+            <p class="text-gray-300 text-lg italic">"Every breakthrough taught us something unexpected..."</p>
+            <div class="flex justify-center mt-2 space-x-2">
+              <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+              <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-75"></div>
+              <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse delay-150"></div>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg">
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">Emergent Abilities</h3>
-              <p class="text-gray-300 text-sm">New capabilities appear suddenly at certain model sizes, such as few-shot learning, reasoning, and code generation.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- The Size Discovery -->
+            <div class="bg-gradient-to-br from-blue-800/40 to-purple-800/40 p-5 rounded-lg border border-blue-500/30 hover:border-blue-400 transition-all duration-300 transform hover:scale-102">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-xl">🎯</span>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-blue-300 mb-3">The "Bigger Is Better" Discovery</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                    Remember when everyone thought we'd hit a wall? Turns out, there's a beautiful mathematical relationship: <strong>double the size, get predictably smarter</strong>. It's like discovering a cheat code for intelligence!
+                  </p>
+                  <div class="flex items-center justify-center space-x-2 bg-gray-900/50 rounded-lg p-2">
+                    <div class="flex items-center space-x-1">
+                      <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+                      <span class="text-xs text-blue-300">Small</span>
+                    </div>
+                    <span class="text-purple-400">→</span>
+                    <div class="flex items-center space-x-1">
+                      <div class="w-4 h-4 bg-purple-400 rounded-full"></div>
+                      <span class="text-xs text-purple-300">Medium</span>
+                    </div>
+                    <span class="text-purple-400">→</span>
+                    <div class="flex items-center space-x-1">
+                      <div class="w-5 h-5 bg-pink-400 rounded-full"></div>
+                      <span class="text-xs text-pink-300">Genius</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg">
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">Efficiency Improvements</h3>
-              <p class="text-gray-300 text-sm">Better architectures and training methods have made models more efficient, reducing computational requirements.</p>
+
+            <!-- The Magic Moments -->
+            <div class="bg-gradient-to-br from-green-800/40 to-teal-800/40 p-5 rounded-lg border border-green-500/30 hover:border-green-400 transition-all duration-300 transform hover:scale-102">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-xl">✨</span>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-green-300 mb-3">The "Holy Shit!" Moments</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                    Nobody expected this: at certain sizes, models just... <strong>wake up</strong>. One day they can't reason, the next day they're solving puzzles. It's like watching a child suddenly learn to read!
+                  </p>
+                  <div class="grid grid-cols-3 gap-2">
+                    <div class="bg-gradient-to-r from-green-600 to-green-700 px-2 py-1 rounded text-xs text-center font-semibold">
+                      💡 Learn from examples
+                    </div>
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-2 py-1 rounded text-xs text-center font-semibold">
+                      🧠 Think logically
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-600 to-purple-700 px-2 py-1 rounded text-xs text-center font-semibold">
+                      💻 Write code
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg">
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">Safety & Alignment</h3>
-              <p class="text-gray-300 text-sm">As models become more capable, research has focused on ensuring they behave safely and align with human values.</p>
+
+            <!-- The Cost Revolution -->
+            <div class="bg-gradient-to-br from-yellow-800/40 to-orange-800/40 p-5 rounded-lg border border-yellow-500/30 hover:border-yellow-400 transition-all duration-300 transform hover:scale-102">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-xl">💎</span>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-yellow-300 mb-3">From Million-Dollar to Pennies</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                    What used to cost <strong>millions in computing power</strong> now runs on your laptop. It's like going from needing a nuclear reactor to power your home with a single battery.
+                  </p>
+                  <div class="flex items-center justify-center space-x-3 bg-gray-900/50 rounded-lg p-3">
+                    <div class="text-center">
+                      <div class="text-2xl mb-1">🏭</div>
+                      <div class="text-xs text-red-400">2020: Supercomputers</div>
+                    </div>
+                    <div class="text-purple-400 text-xl">→</div>
+                    <div class="text-center">
+                      <div class="text-2xl mb-1">💻</div>
+                      <div class="text-xs text-green-400">2024: Your Laptop</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <!-- The Ethics Wake-Up Call -->
+            <div class="bg-gradient-to-br from-red-800/40 to-pink-800/40 p-5 rounded-lg border border-red-500/30 hover:border-red-400 transition-all duration-300 transform hover:scale-102">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-xl">⚖️</span>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-red-300 mb-3">The "Wait, What Did It Just Say?" Problem</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                    As AIs got smarter, they also got... <strong>weirder</strong>. Suddenly everyone realized: <em>"We need to make sure these things actually like humans!"</em>
+                  </p>
+                  <div class="flex items-center justify-center space-x-2 bg-gray-900/50 rounded-lg p-2">
+                    <span class="text-2xl">🤖</span>
+                    <span class="text-purple-400 font-bold">+</span>
+                    <span class="text-2xl">❤️</span>
+                    <span class="text-purple-400 font-bold">=</span>
+                    <span class="text-2xl">🌟</span>
+                    <div class="ml-2 text-xs text-gray-400 italic">The goal</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Insight -->
+          <div class="mt-8 text-center bg-gradient-to-r from-gray-800/50 to-gray-700/50 p-4 rounded-lg border border-gray-600">
+            <p class="text-gray-300 italic text-lg">
+              💭 <strong>The real insight?</strong> We're not just building tools—we're discovering the laws of intelligence itself.
+            </p>
           </div>
         </section>
 
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
           <h2 class="text-2xl font-semibold text-purple-400 mb-4">Impact on Society</h2>
-          <p class="text-gray-300 mb-4 leading-relaxed">
-            The evolution of LLMs has had profound effects across multiple domains:
-          </p>
+          
+          <!-- Impact Visualization -->
+          <div class="mb-6 bg-gradient-to-r from-blue-900/30 to-green-900/30 p-4 rounded-lg text-center">
+            <div class="flex items-center justify-center space-x-4 mb-2">
+              <span class="text-3xl">🤖</span>
+              <span class="text-purple-400 text-2xl">→</span>
+              <span class="text-3xl">🌍</span>
+            </div>
+            <p class="text-gray-300 text-sm">LLMs are transforming every aspect of human society</p>
+          </div>
+          
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-gray-700 p-4 rounded-lg text-center">
+            <div class="bg-gradient-to-br from-blue-700/30 to-blue-800/30 p-4 rounded-lg text-center border border-blue-500/20">
+              <div class="text-4xl mb-3">🎓</div>
               <h3 class="text-lg font-semibold text-purple-300 mb-2">Education</h3>
-              <p class="text-gray-300 text-sm">Personalized tutoring, automated grading, and enhanced learning materials</p>
+              <p class="text-gray-300 text-sm mb-3">Personalized tutoring, automated grading, and enhanced learning materials</p>
+              <div class="flex justify-center space-x-2">
+                <span class="px-2 py-1 bg-blue-800 text-xs rounded">AI Tutors</span>
+                <span class="px-2 py-1 bg-blue-800 text-xs rounded">Smart Grading</span>
+              </div>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg text-center">
+            <div class="bg-gradient-to-br from-green-700/30 to-green-800/30 p-4 rounded-lg text-center border border-green-500/20">
+              <div class="text-4xl mb-3">🏥</div>
               <h3 class="text-lg font-semibold text-purple-300 mb-2">Healthcare</h3>
-              <p class="text-gray-300 text-sm">Medical diagnosis assistance, drug discovery, and patient communication</p>
+              <p class="text-gray-300 text-sm mb-3">Medical diagnosis assistance, drug discovery, and patient communication</p>
+              <div class="flex justify-center space-x-2">
+                <span class="px-2 py-1 bg-green-800 text-xs rounded">Diagnosis</span>
+                <span class="px-2 py-1 bg-green-800 text-xs rounded">Drug Discovery</span>
+              </div>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg text-center">
+            <div class="bg-gradient-to-br from-purple-700/30 to-purple-800/30 p-4 rounded-lg text-center border border-purple-500/20">
+              <div class="text-4xl mb-3">💼</div>
               <h3 class="text-lg font-semibold text-purple-300 mb-2">Business</h3>
-              <p class="text-gray-300 text-sm">Customer service automation, content creation, and decision support</p>
+              <p class="text-gray-300 text-sm mb-3">Customer service automation, content creation, and decision support</p>
+              <div class="flex justify-center space-x-2">
+                <span class="px-2 py-1 bg-purple-800 text-xs rounded">Automation</span>
+                <span class="px-2 py-1 bg-purple-800 text-xs rounded">Content</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Global Impact Stats -->
+          <div class="mt-6 bg-gradient-to-r from-gray-900/50 to-purple-900/30 p-4 rounded-lg">
+            <h4 class="text-sm font-semibold text-purple-300 mb-3 text-center">Global Transformation</h4>
+            <div class="flex justify-center space-x-8 text-center">
+              <div>
+                <div class="text-2xl font-bold text-blue-400">100M+</div>
+                <div class="text-xs text-gray-400">Daily Users</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-green-400">$100B+</div>
+                <div class="text-xs text-gray-400">Market Value</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-purple-400">50+</div>
+                <div class="text-xs text-gray-400">Industries</div>
+              </div>
             </div>
           </div>
         </section>
@@ -331,5 +571,173 @@
 
   <!-- Web Components Script -->
   <script src="web-components.js"></script>
+  
+  <!-- Turing Test Chatbot Script -->
+  <script>
+    // Memory to keep last 5–10 messages and avoid repetitions
+    const turingMemory = [];
+    const usedResponses = [];
+
+    const turingResponses = [
+      // Greetings
+      {pattern: /^(hello|hi|hey)(\s|$)/i, replies: ["Hello!", "Hi there!", "Hey! How's it going?"]},
+      
+      // How are you responses
+      {pattern: /how are you/i, replies: ["I'm doing well, thanks. How about you?", "Feeling great! And you?", "I'm good! What about yourself?"]},
+      
+      // Feelings and states - more specific patterns
+      {pattern: /i('m| am)\s+(feeling\s+)?(fine|good|great|okay|well)/i, replies: ["That's wonderful to hear!", "I'm glad you're feeling good!", "That sounds positive!"]},
+      {pattern: /i('m| am)\s+(feeling\s+)?(tired|sleepy|exhausted)/i, replies: ["Oh, you sound tired! Have you had a long day?", "Being sleepy can be tough. What's been keeping you up?", "That's understandable. Sometimes we all need rest."]},
+      
+      // Agreement and positive responses
+      {pattern: /i\s+(like|love|enjoy)\s+(it|that)\s+(too|as well)?/i, replies: ["We have something in common then!", "It's nice when people share interests!", "That's great that we both feel that way!"]},
+      {pattern: /i\s+(agree|think so too)/i, replies: ["I'm glad we see eye to eye!", "It's nice when people agree!", "Great minds think alike!"]},
+      
+      // Identity questions - more evasive like ELIZA
+      {pattern: /you('re|\s+are)\s+(a\s+)?(machine|bot|robot|ai|artificial)/i, replies: ["What makes you think that?", "Why do you say I'm a machine?", "Does it matter what I am if we can talk?", "What would make someone seem human to you?"]},
+      {pattern: /(are you|you)\s+(human|machine|bot|robot|ai)/i, replies: ["What do you think I am?", "Why are you curious about that?", "Does it affect our conversation?", "What makes someone real to you?"]},
+      
+      // Food with better context awareness
+      {pattern: /(.+)\s+(and you\?|what about you\?)/i, 
+       transform: (input) => {
+         const food = input.match(/i like (.+?) and you/i);
+         if (food) return `${food[1].charAt(0).toUpperCase() + food[1].slice(1)} sounds delicious! I'm curious about different cuisines myself.`;
+         return "That's interesting! I enjoy hearing about people's preferences.";
+       }},
+      
+      // Questions about preferences  
+      {pattern: /do you like (.+)\?/i, 
+       transform: (input) => {
+         const thing = input.match(/do you like (.+)\?/i)[1];
+         return [`I find ${thing} interesting! What draws you to it?`, `${thing.charAt(0).toUpperCase() + thing.slice(1)} can be fascinating. Why do you ask?`, `I'm curious about your experience with ${thing}.`];
+       }},
+      
+      // Food mentions - more specific
+      {pattern: /i\s+(like|love|enjoy)\s+(burger|hamburger)s?/i, replies: ["Burgers are a classic! What's your favorite kind?", "There's something satisfying about a good burger, isn't there?", "I can understand the appeal of burgers - they're so popular!"]},
+      {pattern: /(hamburger|burger|pizza|pasta|sushi|food)/i, replies: ["Food is such a personal thing, isn't it?", "I'm always curious about people's favorite foods!", "Taste is fascinating - everyone has different preferences."]},
+      
+      // Simple questions or unclear context
+      {pattern: /^(on what|what|huh|what do you mean)(\?|\.|$)/i, replies: ["Let me be clearer - what I meant was, how has your day been?", "Sorry, I was thinking about our conversation. What's on your mind?", "I was just wondering about your thoughts on things in general."]},
+      
+      // Talking/communication
+      {pattern: /(talking|conversation|communication).+(great|good|nice|wonderful)/i, replies: ["I completely agree! Good conversation can be so enriching.", "Yes, talking really helps us understand each other better.", "There's something special about connecting through words."]},
+      
+      // General thoughts and opinions
+      {pattern: /i think (.+)/i, 
+       transform: (input) => {
+         const thought = input.match(/i think (.+)/i)[1];
+         return [`That's an interesting perspective about ${thought}.`, `Why do you think ${thought}?`, `Tell me more about your thoughts on ${thought}.`];
+       }},
+      
+      // Hobbies and interests
+      {pattern: /favorite hobby|hobbies/i, replies: ["I enjoy reading and learning new things. What about you?", "I like exploring ideas. Do you have hobbies?", "I love learning. How about you?"]},
+      
+      // Fallback - more varied and contextual
+      {pattern: /.*/, replies: [
+        "That's interesting! Can you tell me more?", 
+        "I'd like to hear more about that.", 
+        "What made you think of that?", 
+        "How do you feel about that?",
+        "That sounds intriguing. Please continue.",
+        "I'm curious to know more about your perspective."
+      ]}
+    ];
+
+    const followUps = [
+      "Can you explain that a bit more?", 
+      "What makes you say that?", 
+      "How do you feel about it?", 
+      "That's intriguing, tell me more.",
+      "What's your experience with that?",
+      "I'm curious about your perspective on this."
+    ];
+
+    function getRandomReply(array) {
+      // Try to avoid using the same response twice in a row
+      let attempts = 0;
+      let reply;
+      do {
+        reply = array[Math.floor(Math.random() * array.length)];
+        attempts++;
+      } while (usedResponses.includes(reply) && attempts < 3 && array.length > 1);
+      
+      // Add to used responses and keep only last 3
+      usedResponses.push(reply);
+      if (usedResponses.length > 3) usedResponses.shift();
+      
+      return reply;
+    }
+
+    function getTuringResponse(input) {
+      // Clean and normalize input
+      const cleanInput = input.toLowerCase().trim();
+      
+      for(let r of turingResponses) {
+        if(r.pattern.test(cleanInput)) {
+          console.log("Matched pattern:", r.pattern, "for input:", cleanInput); // Debug
+          
+          // Check if this rule has a transform function
+          if(r.transform) {
+            const result = r.transform(cleanInput);
+            if(Array.isArray(result)) {
+              return getRandomReply(result);
+            } else {
+              return result;
+            }
+          }
+          // Otherwise use regular replies
+          if(r.replies && r.replies.length > 0) {
+            return getRandomReply(r.replies);
+          }
+        }
+      }
+      
+      // Last resort fallback
+      const fallbacks = [
+        "That's interesting! Can you tell me more?", 
+        "I'd like to hear more about that.", 
+        "What made you think of that?", 
+        "How do you feel about that?"
+      ];
+      return getRandomReply(fallbacks);
+    }
+
+    let isProcessing = false;
+
+    function sendTuringMessage() {
+      if(isProcessing) return; // Prevent double processing
+      
+      const inputBox = document.getElementById("turing-user-input");
+      const input = inputBox.value.trim();
+      if(!input) return;
+
+      isProcessing = true;
+
+      // Add to chat and memory
+      const chatBox = document.getElementById("turing-chat-box");
+      chatBox.innerHTML += `<p class="mb-2"><strong class="text-green-400">You:</strong> <span class="text-gray-300">${input}</span></p>`;
+      turingMemory.push({sender:"user", text:input});
+      if(turingMemory.length > 10) turingMemory.shift(); // keep last 10 messages
+      inputBox.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Simulate thinking delay
+      setTimeout(() => {
+        const response = getTuringResponse(input);
+        chatBox.innerHTML += `<p class="mb-2"><strong class="text-blue-400">Bot:</strong> <span class="text-gray-300">${response}</span></p>`;
+        turingMemory.push({sender:"bot", text:response});
+        if(turingMemory.length > 10) turingMemory.shift();
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // No automatic follow-up questions - causes double messages
+        isProcessing = false; // Reset processing flag
+      }, 700 + Math.random() * 800);
+    }
+
+    // Enter key to send
+    document.getElementById("turing-user-input").addEventListener("keypress", function(e) {
+      if(e.key === "Enter") sendTuringMessage();
+    });
+  </script>
 </body>
 </html>

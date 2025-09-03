@@ -35,33 +35,122 @@
         <p class="text-xl text-gray-300">Peek under the hood of these fascinating AI systems</p>
       </div>
 
+      <!-- Architecture Overview -->
+      <div class="mb-8 bg-gradient-to-r from-purple-900/20 to-indigo-900/20 p-6 rounded-lg border border-purple-500/30">
+        <h2 class="text-2xl font-semibold text-purple-400 mb-6 text-center">LLM Architecture Stack</h2>
+        <div class="space-y-3">
+          <div class="bg-red-800/30 p-3 rounded-lg border border-red-500/30 text-center">
+            <span class="text-sm font-semibold text-red-300">Output Layer (Vocabulary Prediction)</span>
+          </div>
+          <div class="bg-purple-800/30 p-3 rounded-lg border border-purple-500/30 text-center">
+            <span class="text-sm font-semibold text-purple-300">Transformer Layer N (Self-Attention + FFN)</span>
+          </div>
+          <div class="text-center text-purple-400">⋮</div>
+          <div class="bg-purple-800/30 p-3 rounded-lg border border-purple-500/30 text-center">
+            <span class="text-sm font-semibold text-purple-300">Transformer Layer 1 (Self-Attention + FFN)</span>
+          </div>
+          <div class="bg-blue-800/30 p-3 rounded-lg border border-blue-500/30 text-center">
+            <span class="text-sm font-semibold text-blue-300">Input Embeddings + Positional Encoding</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Chapter Content -->
       <div class="space-y-8">
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Transformer Architecture</h2>
-          <p class="text-gray-300 mb-4 leading-relaxed">
-            LLMs use <strong>decoder-only transformer architectures</strong>. Unlike encoder-decoder models, <strong>GPT-style models process input and output as a single sequence</strong>, predicting each token based on all preceding tokens. This <strong>causal modeling</strong> approach uses <strong>masked self-attention</strong> to prevent the model from "seeing" future tokens during training.
-          </p>
-          <div class="bg-gray-700 p-4 rounded-lg">
-            <h3 class="text-lg font-semibold text-purple-300 mb-2">Key Components:</h3>
-            <ul class="text-gray-300 text-sm space-y-1">
-              <li>• <strong>Input Embeddings:</strong> Convert words to numerical representations</li>
-              <li>• <strong>Positional Encoding:</strong> Give the model information about word order</li>
-              <li>• <strong>Multi-Head Attention:</strong> Allow the model to focus on different parts of the input</li>
-              <li>• <strong>Feed-Forward Networks:</strong> Process the attended information</li>
-            </ul>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-lg flex items-center justify-center">
+                <span class="text-2xl">🏗️</span>
+              </div>
+            </div>
+            <div class="flex-1">
+              <h2 class="text-2xl font-semibold text-purple-400 mb-4">Transformer Architecture</h2>
+              <p class="text-gray-300 mb-4 leading-relaxed">
+                LLMs use <strong>decoder-only transformer architectures</strong> that process input and output as a single sequence, predicting each token based on all preceding tokens.
+              </p>
+
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="bg-blue-800/30 p-3 rounded-lg text-center border border-blue-500/20">
+                  <div class="text-lg mb-1">🔢</div>
+                  <h4 class="text-xs font-semibold text-blue-300">Embeddings</h4>
+                  <p class="text-xs text-gray-400">Words → Vectors</p>
+                </div>
+                <div class="bg-green-800/30 p-3 rounded-lg text-center border border-green-500/20">
+                  <div class="text-lg mb-1">📍</div>
+                  <h4 class="text-xs font-semibold text-green-300">Position</h4>
+                  <p class="text-xs text-gray-400">Sequence Order</p>
+                </div>
+                <div class="bg-purple-800/30 p-3 rounded-lg text-center border border-purple-500/20">
+                  <div class="text-lg mb-1">🎯</div>
+                  <h4 class="text-xs font-semibold text-purple-300">Attention</h4>
+                  <p class="text-xs text-gray-400">Focus Points</p>
+                </div>
+                <div class="bg-red-800/30 p-3 rounded-lg text-center border border-red-500/20">
+                  <div class="text-lg mb-1">⚡</div>
+                  <h4 class="text-xs font-semibold text-red-300">Feed-Forward</h4>
+                  <p class="text-xs text-gray-400">Transform Data</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Self-Attention Mechanism</h2>
-          <p class="text-gray-300 mb-4 leading-relaxed">
-            <strong>Self-attention computes relationships between all positions in a sequence simultaneously</strong>. For each word, the mechanism asks: "Which other words in this sequence are relevant for understanding this word?". Mathematically, attention weights are computed as:
-          </p>
-          <div class="bg-gray-700 p-4 rounded-lg font-fira text-center">
-            <p class="text-purple-300 font-semibold mb-2">Attention Formula:</p>
-            <p class="text-gray-300 text-sm">Attention(Q,K,V) = softmax(QK^T/√d_k)V</p>
-            <p class="text-gray-400 text-xs mt-2">Where Q (queries), K (keys), and V (values) are learned projections of input embeddings</p>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center">
+                <span class="text-2xl">🎯</span>
+              </div>
+            </div>
+            <div class="flex-1">
+              <h2 class="text-2xl font-semibold text-purple-400 mb-4">Self-Attention Mechanism</h2>
+              <p class="text-gray-300 mb-4 leading-relaxed">
+                <strong>Self-attention finds connections between words in a sentence</strong>. It asks: "Which other words help me understand this word?"
+              </p>
+
+              <!-- Attention Visualization Example -->
+              <div class="bg-gray-700 p-4 rounded-lg mb-4">
+                <h3 class="text-sm font-semibold text-purple-300 mb-3 text-center">Attention in Action</h3>
+                <div class="bg-gray-800 p-3 rounded text-center">
+                  <div class="text-sm text-gray-300 mb-2">Sentence: "The cat sat on the mat"</div>
+                  <div class="flex items-center justify-center space-x-2 text-xs">
+                    <span class="px-2 py-1 bg-blue-600 rounded">The</span>
+                    <span class="px-2 py-1 bg-purple-600 rounded font-bold">cat</span>
+                    <span class="px-2 py-1 bg-green-600 rounded">sat</span>
+                    <span class="px-2 py-1 bg-yellow-600 rounded">on</span>
+                    <span class="px-2 py-1 bg-blue-600 rounded">the</span>
+                    <span class="px-2 py-1 bg-red-600 rounded">mat</span>
+                  </div>
+                  <div class="text-xs text-gray-400 mt-2">
+                    When processing "cat", attention focuses most on "sat" and "mat" for context
+                  </div>
+                </div>
+              </div>
+
+              <!-- Simplified QKV -->
+              <div class="grid grid-cols-3 gap-3 mb-4">
+                <div class="bg-blue-800/30 p-3 rounded-lg text-center border border-blue-500/20">
+                  <div class="text-lg mb-1">❓</div>
+                  <h4 class="text-xs font-semibold text-blue-300">Query (Q)</h4>
+                  <p class="text-xs text-gray-400">"What am I looking for?"</p>
+                </div>
+                <div class="bg-green-800/30 p-3 rounded-lg text-center border border-green-500/20">
+                  <div class="text-lg mb-1">🔑</div>
+                  <h4 class="text-xs font-semibold text-green-300">Key (K)</h4>
+                  <p class="text-xs text-gray-400">"What can I offer?"</p>
+                </div>
+                <div class="bg-red-800/30 p-3 rounded-lg text-center border border-red-500/20">
+                  <div class="text-lg mb-1">💎</div>
+                  <h4 class="text-xs font-semibold text-red-300">Value (V)</h4>
+                  <p class="text-xs text-gray-400">"Here's my information"</p>
+                </div>
+              </div>
+
+              <div class="bg-purple-900/30 p-3 rounded-lg text-center">
+                <span class="text-xs text-gray-300">🧮 Math: attention finds connections → weights → combines information</span>
+              </div>
+            </div>
           </div>
         </section>
 

@@ -13,85 +13,172 @@
           fontFamily: {
             'inter': ['Inter', 'sans-serif'],
             'fira': ['Fira Code', 'monospace']
+          },
+          animation: {
+            'glow': 'glow 2s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            glow: {
+              'from': { textShadow: '0 0 5px #a855f7, 0 0 10px #a855f7' },
+              'to': { textShadow: '0 0 20px #a855f7, 0 0 30px #d946ef' },
+            }
           }
         }
       }
     }
   </script>
+  <style>
+    /* For smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Custom dark scrollbar for a polished look */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #111827; /* bg-gray-900 */
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #4f46e5; /* indigo-600 */
+      border-radius: 4px;
+      border: 2px solid #111827;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #6366f1; /* indigo-500 */
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
-  <!-- Header Component -->
+<body class="bg-gray-900 text-gray-300 font-inter min-h-screen flex flex-col">
   <ask-the-model-header></ask-the-model-header>
 
   <div class="flex flex-col lg:flex-row flex-1">
-    <!-- Sidebar Component -->
     <ask-the-model-sidebar></ask-the-model-sidebar>
 
-    <!-- Main Content -->
-    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
-      <!-- Chapter Header -->
-      <div class="mb-8">
-        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">AI Jargon Demystified (Glossary)</h1>
-        <p class="text-xl text-gray-300">Understanding the terminology of modern AI</p>
+    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-6xl mx-auto">
+      <div class="mb-12 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-4">
+          AI Jargon Demystified
+        </h1>
+        <p class="text-xl text-gray-400">Your ultimate guide to the terminology of modern Artificial Intelligence.</p>
       </div>
 
-      <!-- Chapter Content -->
-      <div class="space-y-8">
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Architecture Terms</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Transformer</h3>
-                        <p class="text-gray-300 text-sm">Neural architecture using self-attention for sequence processing</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Attention Head</h3>
-                        <p class="text-gray-300 text-sm">Parallel attention computations in transformer layers</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Feed-Forward Network</h3>
-                        <p class="text-gray-300 text-sm">Dense layers within transformer blocks</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Embedding</h3>
-                        <p class="text-gray-300 text-sm">Dense vector representations of discrete tokens</p>
-                    </div>
-                </div>
-        </section>
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Training Concepts</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Pre-training</h3>
-                        <p class="text-gray-300 text-sm">Initial training on large, unlabeled text corpora</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Fine-tuning</h3>
-                        <p class="text-gray-300 text-sm">Adaptation to specific tasks with labeled data</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">RLHF</h3>
-                        <p class="text-gray-300 text-sm">Reinforcement Learning from Human Feedback for alignment</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Gradient Descent</h3>
-                        <p class="text-gray-300 text-sm">Optimization algorithm for parameter updates</p>
-                    </div>
-                </div>
-        </section>
-        <!-- Chapter Navigation Component -->
-        <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
+      <div class="sticky top-0 bg-gray-900/80 backdrop-blur-sm py-4 z-10 mb-10 border-y border-gray-700">
+        <div class="flex flex-wrap justify-center gap-1 md:gap-2">
+          <a href="#A" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">A</a>
+          <a href="#B" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">B</a>
+          <a href="#C" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">C</a>
+          <a href="#D" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">D</a>
+          <a href="#E" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">E</a>
+          <a href="#F" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">F</a>
+          <a href="#G" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">G</a>
+          <a href="#H" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">H</a>
+          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">I</span>
+          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">J</span>
+          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">K</span>
+          <a href="#L" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">L</a>
+          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">M</span>
+          <a href="#N" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">N</a>
+          <a href="#O" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">O</a>
+          <a href="#P" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">P</a>
+          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">Q</span>
+          <a href="#R" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">R</a>
+          <a href="#S" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">S</a>
+          <a href="#T" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">T</a>
+          <a href="#U" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">U</a>
+          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">V</span>
+          <a href="#W" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">W</a>
+          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">X</span>
+          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">Y</span>
+          <a href="#Z" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">Z</a>
+        </div>
       </div>
+
+      <div class="space-y-16">
+        
+        <section id="A">
+          <h2 class="text-4xl font-bold text-purple-400 mb-8 border-b-2 border-purple-500/30 pb-3">A</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300">
+              <dt class="text-2xl font-bold text-purple-300 mb-3 flex items-center justify-between">
+                <span>Attention</span>
+                <span class="text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">🏗️ Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed">A mechanism in neural networks, central to the Transformer architecture, that allows a model to weigh the importance of different parts of the input sequence when producing an output. It helps the model focus on relevant information.</dd>
+            </div>
+            </div>
+        </section>
+
+        <section id="B">
+          <h2 class="text-4xl font-bold text-green-400 mb-8 border-b-2 border-green-500/30 pb-3">B</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-green-500 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300">
+              <dt class="text-2xl font-bold text-green-300 mb-3 flex items-center justify-between">
+                <span>Backpropagation</span>
+                <span class="text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">🎓 Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed">The core algorithm for training neural networks. It calculates the error gradient and propagates it backward through the network's layers, allowing the model's weights to be adjusted to minimize the error.</dd>
+            </div>
+             <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-green-500 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300">
+              <dt class="text-2xl font-bold text-green-300 mb-3 flex items-center justify-between">
+                <span>Bias</span>
+                <span class="text-sm font-semibold px-3 py-1 bg-red-900/70 text-red-300 rounded-full border border-red-500/30">🧪 Evaluation</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed">Refers to systematic errors or prejudices in a model's predictions, often stemming from skewed or unrepresentative training data. It can lead to unfair or inaccurate outcomes for certain groups.</dd>
+            </div>
+          </div>
+        </section>
+
+        <section id="L">
+          <h2 class="text-4xl font-bold text-yellow-400 mb-8 border-b-2 border-yellow-500/30 pb-3">L</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/10 transition-all duration-300">
+              <dt class="text-2xl font-bold text-yellow-300 mb-3 flex items-center justify-between">
+                <span>LLM (Large Language Model)</span>
+                <span class="text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">🏗️ Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed">A type of AI model, typically based on the Transformer architecture and trained on vast amounts of text data, designed to understand, generate, and process human language. Examples include GPT-4, Gemini, and Llama.</dd>
+            </div>
+            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/10 transition-all duration-300">
+              <dt class="text-2xl font-bold text-yellow-300 mb-3 flex items-center justify-between">
+                <span>Loss</span>
+                <span class="text-sm font-semibold px-3 py-1 bg-purple-900/70 text-purple-300 rounded-full border border-purple-500/30">📊 Metrics</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed">A value that quantifies how well the model's prediction matches the target label during training. The goal of training is to minimize this "loss function," thereby improving the model's accuracy.</dd>
+            </div>
+          </div>
+        </section>
+
+        <section id="T">
+          <h2 class="text-4xl font-bold text-cyan-400 mb-8 border-b-2 border-cyan-500/30 pb-3">T</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300">
+              <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
+                <span>Transformer</span>
+                <span class="text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">🏗️ Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed">A revolutionary neural network architecture introduced in the paper "Attention Is All You Need." It relies heavily on self-attention mechanisms and is the foundation for most modern LLMs.</dd>
+            </div>
+             <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300">
+              <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
+                <span>Token</span>
+                <span class="text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed">A piece of a text sequence, which can be a word, part of a word, or a punctuation mark. Language models process text by first breaking it down into tokens.</dd>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      
+      <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
     </main>
   </div>
   
-  <!-- Footer Component -->
   <ask-the-model-footer></ask-the-model-footer>
 
-  <!-- Mobile Navigation Component -->
   <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
 
-  <!-- Web Components Script -->
   <script src="web-components.js"></script>
 </body>
 </html>

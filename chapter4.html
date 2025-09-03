@@ -13,111 +13,218 @@
           fontFamily: {
             'inter': ['Inter', 'sans-serif'],
             'fira': ['Fira Code', 'monospace']
+          },
+          animation: {
+            'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 8s linear infinite',
+          },
+          keyframes: {
+            'pulse-glow': {
+              '0%, 100%': { boxShadow: '0 0 5px rgba(168, 85, 247, 0.3)', borderColor: 'rgba(168, 85, 247, 0.5)' },
+              '50%': { boxShadow: '0 0 20px rgba(168, 85, 247, 0.7)', borderColor: 'rgba(168, 85, 247, 0.9)' },
+            }
           }
         }
       }
     }
   </script>
+  <style>
+    .gradient-text {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
-  <!-- Header Component -->
   <ask-the-model-header></ask-the-model-header>
 
   <div class="flex flex-col lg:flex-row flex-1">
-    <!-- Sidebar Component -->
     <ask-the-model-sidebar></ask-the-model-sidebar>
 
-    <!-- Main Content -->
     <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
-      <!-- Chapter Header -->
-      <div class="mb-8">
-        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">The LLM DNA: Tokens, Parameters & Prompts</h1>
-        <p class="text-xl text-gray-300">Understanding the building blocks of language models</p>
+      <div class="mb-10 text-center">
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 gradient-text bg-gradient-to-r from-purple-400 to-pink-500 animate-pulse-glow">
+          The LLM DNA: Tokens, Parameters & Prompts
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+          Unpacking the fundamental building blocks that empower Large Language Models.
+        </p>
       </div>
 
-      <!-- Chapter Content -->
-      <div class="space-y-8">
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">What Are Tokens?</h2>
-          <p class="text-gray-300 mb-4 leading-relaxed">
-                    <strong>Tokens are the atomic units of text processing</strong>. LLMs convert text into numerical tokens via <strong>tokenization algorithms</strong> like Byte Pair Encoding (BPE). A single token might represent a word, subword, or character depending on the tokenizer.
-                </p>
-                <p class="text-gray-300 leading-relaxed">
-                    The tokenization process is crucial because it determines how efficiently the model can process text and how much context it can handle in a single pass.
-                </p>
-                <div class="bg-gray-700 p-4 rounded-lg mt-4">
-                    <h3 class="text-lg font-semibold text-purple-300 mb-2">Key Concepts:</h3>
-                    <ul class="text-gray-300 text-sm space-y-1">
-                        <li>• <strong>Token IDs:</strong> Numerical mappings for vocabulary elements</li>
-                        <li>• <strong>Context Window:</strong> Maximum tokens the model can process simultaneously (e.g., 4K-32K tokens)</li>
-                        <li>• <strong>Token Embeddings:</strong> Dense vector representations learned during training</li>
-                        <li>• <strong>Subword Tokenization:</strong> Breaking words into smaller units for better coverage</li>
-                    </ul>
-                </div>
+      <div class="mb-12 bg-gradient-to-br from-gray-800/60 to-purple-900/30 p-8 rounded-xl shadow-2xl border border-gray-700 animate-pulse-glow">
+        <h2 class="text-3xl font-bold text-purple-300 mb-8 text-center">The Core Components of an LLM</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-center">
+          <div class="text-center p-4 bg-gray-700/40 rounded-lg hover:bg-green-700/30 transition-all duration-300 cursor-pointer border border-gray-600 hover:border-green-400 shadow-md">
+            <div class="w-20 h-20 bg-green-600/30 rounded-full flex items-center justify-center mx-auto mb-3 transform hover:scale-110 transition-transform duration-300 border-2 border-green-500 shadow-lg">
+              <span class="text-4xl">🧬</span>
+            </div>
+            <h3 class="text-xl font-semibold text-green-300">Tokens</h3>
+            <p class="text-sm text-gray-400 mt-1">The Linguistic Atoms</p>
+          </div>
+          <div class="text-center p-4 bg-gray-700/40 rounded-lg hover:bg-blue-700/30 transition-all duration-300 cursor-pointer border border-gray-600 hover:border-blue-400 shadow-md">
+            <div class="w-20 h-20 bg-blue-600/30 rounded-full flex items-center justify-center mx-auto mb-3 transform hover:scale-110 transition-transform duration-300 border-2 border-blue-500 shadow-lg">
+              <span class="text-4xl">⚙️</span>
+            </div>
+            <h3 class="text-xl font-semibold text-blue-300">Parameters</h3>
+            <p class="text-sm text-gray-400 mt-1">The Stored Knowledge</p>
+          </div>
+          <div class="text-center p-4 bg-gray-700/40 rounded-lg hover:bg-purple-700/30 transition-all duration-300 cursor-pointer border border-gray-600 hover:border-purple-400 shadow-md">
+            <div class="w-20 h-20 bg-purple-600/30 rounded-full flex items-center justify-center mx-auto mb-3 transform hover:scale-110 transition-transform duration-300 border-2 border-purple-500 shadow-lg">
+              <span class="text-4xl">💬</span>
+            </div>
+            <h3 class="text-xl font-semibold text-purple-300">Prompts</h3>
+            <p class="text-sm text-gray-400 mt-1">The Guiding Instructions</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-12">
+        <section class="bg-gray-800/60 p-8 rounded-xl border border-gray-700 shadow-xl hover:shadow-purple-500/20 transition-shadow duration-300">
+          <h2 class="text-3xl font-bold text-green-400 mb-6 flex items-center gap-x-3">
+            <span class="text-4xl">📚</span> What Are Tokens?
+          </h2>
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            <strong class="text-green-300">Tokens are the fundamental units of text processing</strong> for LLMs. Imagine them as the linguistic "atoms" that large language models understand. When you input text, it's first broken down into these numerical tokens by a <code class="font-fira bg-gray-700 px-2 py-1 rounded text-pink-300">tokenization algorithm</code> like Byte Pair Encoding (BPE).
+          </p>
+          
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            A single token might be a whole word ("hello"), a subword unit ("un" in "unbelievable"), or even a single character. This process is critical because it dictates how efficiently the model processes text and how much <code class="font-fira bg-gray-700 px-2 py-1 rounded text-pink-300">context</code> it can manage.
+          </p>
+
+          <div class="relative mb-6">
+            <div class="bg-gray-700 p-6 rounded-lg font-fira text-sm text-gray-50 flex items-center justify-center border border-gray-600 shadow-inner">
+              <pre class="whitespace-pre-wrap"><code class="language-plaintext">"The quick brown fox" ⟶ ["The", " quick", " brown", " fox"]
+"unbelievable" ⟶ ["un", "believ", "able"]
+"Hello World!" ⟶ ["Hello", " World", "!"]</code></pre>
+            </div>
+            <p class="text-sm text-gray-500 text-center mt-2">
+              <span class="text-green-400">Example:</span> How a phrase can be tokenized.
+            </p>
+          </div>
+
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            The concept of a <strong class="text-green-300">context window</strong> refers to the maximum number of tokens an LLM can process at once. This directly impacts the length and complexity of conversations or documents it can handle.
+          </p>
+          
+          <div class="bg-gray-700/50 p-6 rounded-lg mt-6 border border-green-500/40 shadow-inner">
+            <h3 class="text-xl font-semibold text-green-300 mb-4 flex items-center gap-x-2">
+              <span class="text-2xl">💡</span> Key Token Concepts:
+            </h3>
+            <ul class="text-gray-300 text-base space-y-2 list-disc list-inside">
+              <li><strong class="text-green-300">Token IDs:</strong> Numerical identifiers for each unique token in the model's vocabulary.</li>
+              <li><strong class="text-green-300">Context Window:</strong> The total number of tokens (input + output) an LLM can consider for a single response (e.g., 4K, 32K, 128K tokens).</li>
+              <li><strong class="text-green-300">Token Embeddings:</strong> Dense vector representations that capture the semantic meaning of tokens, allowing the model to understand relationships between words.</li>
+            </ul>
+          </div>
+          <p class="text-sm text-gray-500 text-center mt-4">
+            A visual representation of tokens being generated from an input sentence, with each token highlighted and an arrow pointing to a numerical ID.
+          </p>
+          
+
+          <div class="mt-8 flex justify-center">
+            
+          </div>
+          
         </section>
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Parameters: The Model's Knowledge</h2>
-          <p class="text-gray-300 mb-4 leading-relaxed">
-                    <strong>Parameters are the learnable weights and biases that encode model knowledge</strong>. In neural networks, <strong>weights determine connection strength between neurons, while biases provide activation thresholds</strong>.
-                </p>
-                <p class="text-gray-300 leading-relaxed">
-                    These parameters are what the model learns during training - they represent the patterns, relationships, and knowledge extracted from the massive training datasets.
-                </p>
-                <div class="bg-gray-700 p-4 rounded-lg mt-4">
-                    <h3 class="text-lg font-semibold text-purple-300 mb-2">Parameter Calculation:</h3>
-                    <p class="text-gray-300 text-sm">For a layer with <strong>m</strong> inputs and <strong>n</strong> outputs: <strong>(m × n) weights + n biases</strong>. Modern LLMs contain billions of these trainable coefficients.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Weight Parameters</h3>
-                        <p class="text-gray-300 text-sm">Control how strongly input features influence the output, learned through backpropagation</p>
-                    </div>
-                    <div class="bg-gray-700 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-300 mb-2">Bias Parameters</h3>
-                        <p class="text-gray-300 text-sm">Provide activation thresholds, helping neurons decide when to "fire"</p>
-                    </div>
-                </div>
+
+        <section class="bg-gray-800/60 p-8 rounded-xl border border-gray-700 shadow-xl hover:shadow-blue-500/20 transition-shadow duration-300">
+          <h2 class="text-3xl font-bold text-blue-400 mb-6 flex items-center gap-x-3">
+            <span class="text-4xl">🧠</span> Parameters: The Model's Knowledge
+          </h2>
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            <strong class="text-blue-300">Parameters are the learnable weights and biases</strong> that fundamentally encode all of an LLM's knowledge. Think of them as the neural connections and thresholds within the model's "brain."
+          </p>
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            These parameters are what the model meticulously adjusts during its extensive training phase, learning complex patterns, relationships, grammar, and factual information from billions of data points.
+          </p>
+          
+          <p class="text-sm text-gray-500 text-center mt-4">
+            An abstract representation of a neural network with billions of interconnected nodes and lines, illustrating weights and biases.
+          </p>
+          
+          <div class="relative my-8">
+            
+          </div>
+          
+
+          <div class="bg-gray-700/50 p-6 rounded-lg mt-6 border border-blue-500/40 shadow-inner">
+            <h3 class="text-xl font-semibold text-blue-300 mb-4 flex items-center gap-x-2">
+              <span class="text-2xl">🧮</span> How Parameters Work:
+            </h3>
+            <ul class="text-gray-300 text-base space-y-2 list-disc list-inside">
+              <li><strong class="text-blue-300">Weights:</strong> Control the strength of connections between neurons. They determine how much influence an input feature has on the output.</li>
+              <li><strong class="text-blue-300">Biases:</strong> Provide activation thresholds, essentially helping a neuron decide when to "fire" or contribute to the next layer's computation.</li>
+            </ul>
+            <p class="text-gray-400 text-sm mt-4">
+              Modern LLMs can contain hundreds of billions, or even trillions, of these trainable coefficients, making them incredibly powerful and versatile.
+            </p>
+          </div>
         </section>
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Prompts: Your Instructions</h2>
-          <p class="text-gray-300 mb-4 leading-relaxed">
-                    <strong>Prompts are input instructions that guide model behavior</strong>. Unlike traditional programming, LLMs are <strong>conditioned through natural language instructions</strong> rather than code. Effective prompting requires understanding how models interpret and respond to different input patterns.
-                </p>
-                <div class="bg-gray-700 p-4 rounded-lg mt-4">
-                    <h3 class="text-lg font-semibold text-purple-300 mb-2">Prompt Types:</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <h4 class="text-purple-300 font-semibold mb-2">Instruction Prompts</h4>
-                            <p class="text-gray-300 text-sm">Direct commands like "Write a summary of..." or "Explain how..."</p>
-                        </div>
-                        <div>
-                            <h4 class="text-purple-300 font-semibold mb-2">Few-Shot Prompts</h4>
-                            <p class="text-gray-300 text-sm">Provide examples of desired input-output patterns</p>
-                        </div>
-                        <div>
-                            <h4 class="text-purple-300 font-semibold mb-2">Role-Based Prompts</h4>
-                            <p class="text-gray-300 text-sm">"Act as a teacher" or "You are a coding expert"</p>
-                        </div>
-                        <div>
-                            <h4 class="text-purple-300 font-semibold mb-2">Chain-of-Thought</h4>
-                            <p class="text-gray-300 text-sm">Ask the model to show its reasoning process</p>
-                        </div>
-                    </div>
-                </div>
+
+        <section class="bg-gray-800/60 p-8 rounded-xl border border-gray-700 shadow-xl hover:shadow-purple-500/20 transition-shadow duration-300">
+          <h2 class="text-3xl font-bold text-purple-400 mb-6 flex items-center gap-x-3">
+            <span class="text-4xl">✍️</span> Prompts: Your Instructions
+          </h2>
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            <strong class="text-purple-300">Prompts are the natural language instructions</strong> you provide to an LLM to guide its behavior and elicit a desired response. This is how you "program" a large language model, without writing a single line of traditional code.
+          </p>
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            Effective prompting is an art and a science. Understanding how models interpret different input patterns is key to unlocking their full potential.
+          </p>
+          
+          <p class="text-sm text-gray-500 text-center mt-4">
+            A stylized depiction of a user typing into a chat interface with a glowing cursor, with text bubbles showing various prompt examples.
+          </p>
+          
+          <div class="relative my-8">
+            
+          </div>
+
+          <div class="bg-gray-700/50 p-6 rounded-lg mt-6 border border-purple-500/40 shadow-inner">
+            <h3 class="text-xl font-semibold text-purple-300 mb-4 flex items-center gap-x-2">
+              <span class="text-2xl">✨</span> Types of Prompts:
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base">
+              <div>
+                <h4 class="text-purple-300 font-semibold mb-1">Instruction Prompts:</h4>
+                <p class="text-gray-300 text-sm">Direct commands, e.g., "Write a poem about space travel."</p>
+              </div>
+              <div>
+                <h4 class="text-purple-300 font-semibold mb-1">Few-Shot Prompts:</h4>
+                <p class="text-gray-300 text-sm">Provide examples to teach the model a pattern, e.g., "Translate: Cat -> Chat. Dog -> ?"</p>
+              </div>
+              <div>
+                <h4 class="text-purple-300 font-semibold mb-1">Role-Based Prompts:</h4>
+                <p class="text-gray-300 text-sm">Assign a persona, e.g., "Act as a seasoned historian and explain the French Revolution."</p>
+              </div>
+              <div>
+                <h4 class="text-purple-300 font-semibold mb-1">Chain-of-Thought Prompts:</h4>
+                <p class="text-gray-300 text-sm">Encourage step-by-step reasoning, e.g., "Explain your thought process before answering."</p>
+              </div>
+            </div>
+            <div class="bg-gray-900/70 p-4 rounded-lg font-fira text-sm text-yellow-300 mt-6 border border-purple-600 shadow-md">
+              <pre class="whitespace-pre-wrap"><code>User: "Explain quantum entanglement in simple terms."</code></pre>
+            </div>
+          </div>
         </section>
-        <!-- Chapter Navigation Component -->
+
+        <div class="bg-gradient-to-r from-gray-800 to-purple-900/40 p-6 rounded-xl text-center shadow-lg border border-gray-700">
+          <h3 class="text-2xl font-bold text-white mb-3">Connecting the Dots</h3>
+          <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+            Tokens form the input, parameters encode the learned knowledge, and prompts are the bridge allowing us to interact with that knowledge. Together, they unlock the vast capabilities of LLMs.
+          </p>
+        </div>
+
         <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
       </div>
     </main>
   </div>
   
-  <!-- Footer Component -->
   <ask-the-model-footer></ask-the-model-footer>
 
-  <!-- Mobile Navigation Component -->
   <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
 
-  <!-- Web Components Script -->
   <script src="web-components.js"></script>
 </body>
 </html>
