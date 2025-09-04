@@ -1011,22 +1011,86 @@ Include:
       `;
     }
 
-    // Copy pattern to clipboard
-    function copyPattern(pattern, name) {
-      navigator.clipboard.writeText(pattern).then(() => {
-        // Show temporary success message
-        const button = event.target;
-        const originalText = button.textContent;
-        button.textContent = 'Copied!';
-        button.classList.add('bg-green-600');
-        setTimeout(() => {
-          button.textContent = originalText;
-          button.classList.remove('bg-green-600');
-          button.classList.add('bg-blue-600');
-        }, 2000);
-      }).catch(() => {
-        alert('Failed to copy. Please select and copy manually.');
-      });
+    // Copy pattern to clipboard with fallback
+    function copyPattern(index) {
+      if (!window.currentPatterns || !window.currentPatterns[index]) {
+        alert('Pattern not found. Please try again.');
+        return;
+      }
+      
+      const pattern = window.currentPatterns[index].pattern;
+      const name = window.currentPatterns[index].name;
+      const button = event.target;
+      const originalText = button.textContent;
+      
+      // Try modern clipboard API first
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(pattern).then(() => {
+          showCopySuccess(button, originalText);
+        }).catch(() => {
+          fallbackCopy(pattern, button, originalText);
+        });
+      } else {
+        // Fallback for older browsers or non-HTTPS
+        fallbackCopy(pattern, button, originalText);
+      }
+    }
+    
+    function showCopySuccess(button, originalText) {
+      button.textContent = 'Copied!';
+      button.classList.remove('bg-blue-600');
+      button.classList.add('bg-green-600');
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.classList.remove('bg-green-600');
+        button.classList.add('bg-blue-600');
+      }, 2000);
+    }
+    
+    function fallbackCopy(text, button, originalText) {
+      // Create a temporary textarea element
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-9999px';
+      textArea.style.top = '-9999px';
+      document.body.appendChild(textArea);
+      
+      try {
+        textArea.focus();
+        textArea.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        if (successful) {
+          showCopySuccess(button, originalText);
+        } else {
+          throw new Error('Copy command failed');
+        }
+      } catch (err) {
+        document.body.removeChild(textArea);
+        // Final fallback: show the text in a modal for manual copying
+        showCopyModal(text);
+      }
+    }
+    
+    function showCopyModal(text) {
+      const modal = document.createElement('div');
+      modal.className = 'fixed inset-0 bg-black bg-opacity-75 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+      modal.innerHTML = `
+        <div class="bg-gray-800 rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-hidden">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-white">Copy Template</h3>
+            <button onclick="this.parentElement.parentElement.parentElement.remove()" class="text-gray-400 hover:text-white">×</button>
+          </div>
+          <p class="text-gray-300 text-sm mb-3">Select all text below and copy manually (Ctrl+C / Cmd+C):</p>
+          <textarea readonly class="w-full h-64 p-3 bg-gray-900 border border-gray-600 rounded-lg text-gray-200 font-mono text-sm resize-none" onclick="this.select()">${text}</textarea>
+          <div class="mt-4 flex justify-end">
+            <button onclick="this.parentElement.parentElement.parentElement.remove()" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg">Close</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
     }
 
     // Demo modal functions

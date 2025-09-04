@@ -13,11 +13,56 @@
           fontFamily: {
             'inter': ['Inter', 'sans-serif'],
             'fira': ['Fira Code', 'monospace']
+          },
+          animation: {
+            'shimmer': 'shimmer 3s ease-in-out infinite',
+            'float': 'float 6s ease-in-out infinite'
+          },
+          keyframes: {
+            shimmer: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          },
+          backgroundSize: {
+            '200': '200% 200%'
           }
         }
       }
     }
   </script>
+  <style>
+    /* Custom shimmer effect for the title */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    .animate-shimmer {
+      background: linear-gradient(
+        90deg,
+        #a855f7 0%,
+        #ec4899 25%,
+        #3b82f6 50%,
+        #10b981 75%,
+        #a855f7 100%
+      );
+      background-size: 400% 100%;
+      animation: shimmer 3s ease-in-out infinite;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Glowing text effect */
+    .text-glow {
+      text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
   <!-- Header Component -->
@@ -30,9 +75,51 @@
     <!-- Main Content -->
     <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-4xl mx-auto">
       <!-- Chapter Header -->
-      <div class="mb-8">
-        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-4">From ELIZA to GPT-5: The LLM Timeline</h1>
-        <p class="text-xl text-gray-300">A journey through the evolution of language models</p>
+      <div class="mb-12 text-center relative">
+        <!-- Background Glow Effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-blue-600/20 blur-3xl animate-pulse"></div>
+        
+        <div class="relative z-10">
+          <!-- Shiny Animated Title -->
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 relative">
+            <!-- Main gradient text with shimmer effect -->
+            <span class="bg-gradient-to-r from-purple-400 via-pink-400 via-blue-400 to-green-400 bg-clip-text text-transparent bg-size-200 animate-shimmer">
+              From ELIZA to GPT-5
+            </span>
+            
+            <!-- Glowing overlay -->
+            <span class="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 via-blue-400 to-green-400 bg-clip-text text-transparent opacity-50 blur-sm animate-pulse">
+              From ELIZA to GPT-5
+            </span>
+          </h1>
+          
+          <!-- Subtitle with sparkle effect -->
+          <div class="flex items-center justify-center space-x-3 mb-6">
+            <div class="w-1 h-1 bg-purple-400 rounded-full animate-ping"></div>
+            <div class="w-2 h-2 bg-pink-400 rounded-full animate-bounce"></div>
+            <h2 class="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
+              The LLM Timeline
+            </h2>
+            <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+            <div class="w-1 h-1 bg-green-400 rounded-full animate-ping" style="animation-delay: 0.4s"></div>
+          </div>
+          
+          <!-- Enhanced description -->
+          <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <span class="text-purple-300 font-semibold">A journey through the evolution</span> 
+            of language models 
+            <span class="text-blue-300 font-semibold">that changed the world</span>
+          </p>
+          
+          <!-- Decorative elements -->
+          <div class="flex justify-center space-x-4 mt-6">
+            <div class="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse"></div>
+            <div class="w-2 h-2 bg-gradient-to-r from-pink-400 to-blue-400 rounded-full animate-pulse" style="animation-delay: 0.3s"></div>
+            <div class="w-4 h-4 bg-gradient-to-r from-blue-400 to-green-400 rounded-full animate-pulse" style="animation-delay: 0.6s"></div>
+            <div class="w-2 h-2 bg-gradient-to-r from-green-400 to-purple-400 rounded-full animate-pulse" style="animation-delay: 0.9s"></div>
+            <div class="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse" style="animation-delay: 1.2s"></div>
+          </div>
+        </div>
       </div>
 
       <!-- Timeline Visualization -->
@@ -78,58 +165,84 @@
 
       <!-- Chapter Content -->
       <div class="space-y-8">
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Historical Evolution</h2>
-          <div class="space-y-4">
-            <div class="bg-gray-700 p-4 rounded-lg">
-              <div class="flex items-start space-x-4 mb-4">
+        <section class="bg-gradient-to-br from-gray-800 via-indigo-900/20 to-purple-900/20 p-8 rounded-xl border border-indigo-500/30 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-indigo-600/5 via-transparent to-purple-600/5 animate-pulse"></div>
+          <div class="relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-400 bg-clip-text text-transparent mb-6 text-center">🏛️ The Early Pioneers</h2>
+            <p class="text-center text-gray-300 mb-8 text-lg">Where artificial intelligence first learned to speak</p>
+            <div class="space-y-6">
+            <div class="bg-gradient-to-br from-indigo-800/40 to-blue-800/40 p-6 rounded-xl border border-indigo-500/40 hover:border-indigo-400 transition-all duration-300 transform hover:scale-[1.01] shadow-lg hover:shadow-indigo-500/20">
+              <div class="flex items-start space-x-4 mb-6">
                 <div class="flex-shrink-0">
-                  <div class="w-12 h-12 bg-gradient-to-br from-indigo-600 to-blue-800 rounded-lg flex items-center justify-center">
-                    <span class="text-2xl">🤖</span>
+                  <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span class="text-3xl">🤖</span>
                   </div>
                 </div>
                 <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-purple-300 mb-2">1950: The Turing Test</h3>
-                  <p class="text-gray-300 text-sm mb-3">Alan Turing proposed the "Imitation Game" - if a machine can engage in conversations indistinguishable from a human, it demonstrates intelligence.</p>
+                  <div class="flex items-center space-x-2 mb-3">
+                    <h3 class="text-2xl font-bold text-indigo-300">1950: The Turing Test</h3>
+                    <div class="px-3 py-1 bg-indigo-900/50 rounded-full text-xs text-indigo-200 border border-indigo-400/30">
+                      Foundation
+                    </div>
+                  </div>
+                  <p class="text-gray-300 mb-4 leading-relaxed">Alan Turing proposed the "Imitation Game" - if a machine can engage in conversations indistinguishable from a human, it demonstrates intelligence.</p>
+                  <div class="flex items-center space-x-2 text-sm text-indigo-200">
+                    <span class="w-2 h-2 bg-indigo-400 rounded-full animate-pulse"></span>
+                    <span>Try the interactive test below!</span>
+                  </div>
                 </div>
               </div>
               
               <!-- Interactive Turing Test -->
-              <div class="bg-gray-800 p-4 rounded-lg border border-indigo-500/30">
+              <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl border border-indigo-500/50 shadow-inner">
                 <h4 class="text-lg font-semibold text-indigo-300 mb-3 text-center">🧪 Try the Turing Test Yourself!</h4>
                 <p class="text-center text-sm text-gray-400 mb-4">Chat with this bot - can you tell if it's human or machine?</p>
                 
                 <!-- Chat Interface -->
-                <div id="turing-chat-box" class="bg-gray-900 border border-gray-600 rounded-lg p-3 h-64 overflow-y-auto mb-3 text-sm">
+                <div id="turing-chat-box" class="bg-gray-900 border border-indigo-600/30 rounded-xl p-4 h-64 overflow-y-auto mb-4 text-sm shadow-inner">
                   <p class="text-blue-400"><strong>Bot:</strong> Hello! I'm here to chat. Ask me anything you'd like!</p>
                 </div>
                 
                 <!-- Input Area -->
-                <div class="flex space-x-2">
+                <div class="flex space-x-3">
                   <input id="turing-user-input" type="text" placeholder="Type your message..." 
-                         class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 placeholder-gray-400 focus:outline-none focus:border-indigo-500">
+                         class="flex-1 px-4 py-3 bg-gray-700 border border-indigo-600/30 rounded-xl text-gray-200 placeholder-gray-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20 transition-all duration-200">
                   <button onclick="sendTuringMessage()" 
-                          class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors duration-200 font-semibold">
+                          class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white rounded-xl transition-all duration-200 font-semibold shadow-lg hover:shadow-indigo-500/25 transform hover:scale-105">
                     Send
                   </button>
                 </div>
                 
                 <!-- Hint -->
-                <div class="mt-3 text-center text-xs text-gray-500">
+                <div class="mt-4 text-center text-xs text-indigo-300 bg-indigo-900/20 p-2 rounded-lg border border-indigo-500/20">
                   💡 Try asking about hobbies, feelings, or personal experiences
                 </div>
               </div>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-4">
-              <div class="flex-shrink-0">
-                <div class="w-12 h-12 bg-gradient-to-br from-gray-600 to-gray-800 rounded-lg flex items-center justify-center">
-                  <span class="text-2xl">💬</span>
+            <div class="bg-gradient-to-br from-gray-700/60 to-purple-800/40 p-6 rounded-xl border border-purple-500/40 hover:border-purple-400 transition-all duration-300 transform hover:scale-[1.01] shadow-lg hover:shadow-purple-500/20">
+              <div class="flex items-start space-x-4 mb-4">
+                <div class="flex-shrink-0">
+                  <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-gray-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span class="text-3xl">💬</span>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-3">
+                    <h3 class="text-2xl font-bold text-purple-300">1966: ELIZA</h3>
+                    <div class="px-3 py-1 bg-purple-900/50 rounded-full text-xs text-purple-200 border border-purple-400/30">
+                      Breakthrough
+                    </div>
+                  </div>
+                  <p class="text-gray-300 leading-relaxed mb-4">Created by Joseph Weizenbaum at MIT, ELIZA was one of the first natural language processing programs. It used pattern matching to simulate conversation, famously acting as a psychotherapist.</p>
                 </div>
               </div>
-              <div class="flex-1">
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">1966: ELIZA</h3>
-                <p class="text-gray-300 text-sm mb-2">Created by Joseph Weizenbaum at MIT, ELIZA was one of the first natural language processing programs. It used pattern matching to simulate conversation, famously acting as a psychotherapist.</p>
-                <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 font-mono text-sm">
+              <div class="bg-gradient-to-br from-gray-800 to-purple-900/20 p-4 rounded-xl border border-purple-500/30 shadow-inner">
+                <div class="flex items-center justify-center space-x-2 mb-3">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full animate-bounce"></div>
+                  <span class="text-sm font-semibold text-purple-300">Classic ELIZA Conversation</span>
+                  <div class="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                </div>
+                <div class="bg-gray-900 p-4 rounded-lg border-l-4 border-purple-500 font-mono text-sm space-y-2">
                   <p class="text-green-400">User: My boyfriend told me to talk to you.</p>
                   <p class="text-blue-400">ELIZA: Your boyfriend told you to talk to me?</p>
                   <p class="text-green-400">User: He says I'm often depressed.</p>
@@ -139,244 +252,592 @@
                 </div>
               </div>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-4">
-              <div class="flex-shrink-0">
-                <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-orange-800 rounded-lg flex items-center justify-center">
-                  <span class="text-2xl">😤</span>
-                </div>
-              </div>
-              <div class="flex-1">
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">1972: PARRY</h3>
-                <p class="text-gray-300 text-sm mb-3">Developed by Kenneth Colby, PARRY simulated a paranoid patient, representing early attempts at creating more sophisticated conversational agents.</p>
-                
-                <!-- PARRY vs ELIZA Conversation -->
-                <div class="bg-gray-800 p-4 rounded-lg border border-orange-500/30">
-                  <h4 class="text-sm font-semibold text-orange-300 mb-3 text-center">Historic AI vs AI Conversation (1972)</h4>
-                  <div class="space-y-2 font-mono text-sm">
-                    <div class="flex items-start space-x-2">
-                      <span class="text-red-400 font-semibold flex-shrink-0">PARRY:</span>
-                      <span class="text-gray-300">People get on my nerves sometimes.</span>
-                    </div>
-                    <div class="flex items-start space-x-2">
-                      <span class="text-blue-400 font-semibold flex-shrink-0">ELIZA:</span>
-                      <span class="text-gray-300">I am not sure I understand you fully.</span>
-                    </div>
-                    <div class="flex items-start space-x-2">
-                      <span class="text-red-400 font-semibold flex-shrink-0">PARRY:</span>
-                      <span class="text-gray-300">You should pay more attention.</span>
-                    </div>
-                    <div class="flex items-start space-x-2">
-                      <span class="text-blue-400 font-semibold flex-shrink-0">ELIZA:</span>
-                      <span class="text-gray-300">Suppose you should pay more attention.</span>
-                    </div>
-                    <div class="flex items-start space-x-2">
-                      <span class="text-red-400 font-semibold flex-shrink-0">PARRY:</span>
-                      <span class="text-gray-300">You're entitled to your own opinion.</span>
-                    </div>
-                    <div class="flex items-start space-x-2">
-                      <span class="text-blue-400 font-semibold flex-shrink-0">ELIZA:</span>
-                      <span class="text-gray-300">What makes you think I am entitled to my own opinion?</span>
-                    </div>
-                    <div class="flex items-start space-x-2">
-                      <span class="text-red-400 font-semibold flex-shrink-0">PARRY:</span>
-                      <span class="text-gray-300">It bothers me just to be around people in general.</span>
-                    </div>
-                  </div>
-                  <div class="mt-3 text-center text-xs text-gray-400 border-t border-gray-700 pt-2">
-                    First recorded conversation between two AI programs! 🤖💬🤖
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-lg">
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">1988: Statistical Language Models</h3>
-              <p class="text-gray-300 text-sm">The shift from rule-based to statistical approaches using n-grams and hidden Markov models for language processing.</p>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-lg">
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">1997: LSTM Networks</h3>
-              <p class="text-gray-300 text-sm">Long Short-Term Memory networks enable better sequence modeling and capture long-range dependencies in text.</p>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-lg">
-              <div class="flex items-start space-x-4">
+            <div class="bg-gradient-to-br from-red-800/40 to-orange-800/40 p-6 rounded-xl border border-orange-500/40 hover:border-orange-400 transition-all duration-300 transform hover:scale-[1.01] shadow-lg hover:shadow-orange-500/20">
+              <div class="flex items-start space-x-4 mb-4">
                 <div class="flex-shrink-0">
-                  <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg flex items-center justify-center">
-                    <span class="text-2xl">⚡</span>
+                  <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span class="text-3xl">😤</span>
                   </div>
                 </div>
                 <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-purple-300 mb-2">2017: Transformer Architecture</h3>
-                  <p class="text-gray-300 text-sm mb-3"><strong>"Attention Is All You Need"</strong> - Revolutionary breakthrough that enabled all modern LLMs by allowing models to focus on relevant parts of text simultaneously.</p>
-                  
-                  <!-- Simplified Attention Concept -->
-                  <div class="bg-gray-800 p-3 rounded-lg flex items-center justify-center space-x-2">
-                    <div class="text-center">
-                      <div class="text-2xl mb-1">👁️</div>
-                      <div class="text-xs text-gray-300">Attention</div>
+                  <div class="flex items-center space-x-2 mb-3">
+                    <h3 class="text-2xl font-bold text-orange-300">1972: PARRY</h3>
+                    <div class="px-3 py-1 bg-orange-900/50 rounded-full text-xs text-orange-200 border border-orange-400/30">
+                      Personality AI
                     </div>
-                    <div class="text-purple-400 text-lg">→</div>
-                    <div class="text-center">
-                      <div class="text-2xl mb-1">🎯</div>
-                      <div class="text-xs text-gray-300">Focus</div>
+                  </div>
+                  <p class="text-gray-300 leading-relaxed mb-4">Developed by Kenneth Colby, PARRY simulated a paranoid patient, representing early attempts at creating more sophisticated conversational agents.</p>
+                </div>
+              </div>
+                
+              <!-- PARRY vs ELIZA Conversation -->
+              <div class="bg-gradient-to-br from-gray-800 to-orange-900/20 p-6 rounded-xl border border-orange-500/50 shadow-inner">
+                  <div class="flex items-center justify-center space-x-2 mb-4">
+                    <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                    <span class="text-lg font-bold text-orange-300">Historic AI vs AI Conversation (1972)</span>
+                    <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  </div>
+                  <div class="bg-gray-900 p-4 rounded-lg space-y-3 font-mono text-sm border border-orange-500/20">
+                    <div class="flex items-start space-x-3 p-2 bg-red-900/20 rounded-lg border-l-4 border-red-400">
+                      <span class="text-red-400 font-bold flex-shrink-0">PARRY:</span>
+                      <span class="text-gray-300">People get on my nerves sometimes.</span>
                     </div>
-                    <div class="text-purple-400 text-lg">→</div>
-                    <div class="text-center">
-                      <div class="text-2xl mb-1">🚀</div>
-                      <div class="text-xs text-gray-300">Better Understanding</div>
+                    <div class="flex items-start space-x-3 p-2 bg-blue-900/20 rounded-lg border-l-4 border-blue-400">
+                      <span class="text-blue-400 font-bold flex-shrink-0">ELIZA:</span>
+                      <span class="text-gray-300">I am not sure I understand you fully.</span>
+                    </div>
+                    <div class="flex items-start space-x-3 p-2 bg-red-900/20 rounded-lg border-l-4 border-red-400">
+                      <span class="text-red-400 font-bold flex-shrink-0">PARRY:</span>
+                      <span class="text-gray-300">You should pay more attention.</span>
+                    </div>
+                    <div class="flex items-start space-x-3 p-2 bg-blue-900/20 rounded-lg border-l-4 border-blue-400">
+                      <span class="text-blue-400 font-bold flex-shrink-0">ELIZA:</span>
+                      <span class="text-gray-300">Suppose you should pay more attention.</span>
+                    </div>
+                    <div class="flex items-start space-x-3 p-2 bg-red-900/20 rounded-lg border-l-4 border-red-400">
+                      <span class="text-red-400 font-bold flex-shrink-0">PARRY:</span>
+                      <span class="text-gray-300">You're entitled to your own opinion.</span>
+                    </div>
+                    <div class="flex items-start space-x-3 p-2 bg-blue-900/20 rounded-lg border-l-4 border-blue-400">
+                      <span class="text-blue-400 font-bold flex-shrink-0">ELIZA:</span>
+                      <span class="text-gray-300">What makes you think I am entitled to my own opinion?</span>
+                    </div>
+                    <div class="flex items-start space-x-3 p-2 bg-red-900/20 rounded-lg border-l-4 border-red-400">
+                      <span class="text-red-400 font-bold flex-shrink-0">PARRY:</span>
+                      <span class="text-gray-300">It bothers me just to be around people in general.</span>
+                    </div>
+                  </div>
+                  <div class="mt-4 text-center bg-gradient-to-r from-orange-900/30 to-red-900/30 p-3 rounded-lg border border-orange-500/20">
+                    <div class="text-sm font-semibold text-orange-300 mb-1">🏆 Historic Moment</div>
+                    <div class="text-xs text-gray-400">First recorded conversation between two AI programs! 🤖💬🤖</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gradient-to-br from-green-800/40 to-teal-800/40 p-6 rounded-xl border border-green-500/40 hover:border-green-400 transition-all duration-300 transform hover:scale-[1.01] shadow-lg hover:shadow-green-500/20">
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span class="text-3xl">📊</span>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-3">
+                    <h3 class="text-2xl font-bold text-green-300">1988: Statistical Language Models</h3>
+                    <div class="px-3 py-1 bg-green-900/50 rounded-full text-xs text-green-200 border border-green-400/30">
+                      Mathematical
+                    </div>
+                  </div>
+                  <p class="text-gray-300 leading-relaxed">The shift from rule-based to statistical approaches using n-grams and hidden Markov models for language processing.</p>
+                  <div class="mt-3 flex items-center space-x-4 text-xs">
+                    <div class="bg-green-900/30 px-3 py-1 rounded-full border border-green-500/30">
+                      <span class="text-green-300">N-grams</span>
+                    </div>
+                    <div class="bg-teal-900/30 px-3 py-1 rounded-full border border-teal-500/30">
+                      <span class="text-teal-300">Hidden Markov Models</span>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="bg-gradient-to-br from-blue-800/40 to-cyan-800/40 p-6 rounded-xl border border-blue-500/40 hover:border-blue-400 transition-all duration-300 transform hover:scale-[1.01] shadow-lg hover:shadow-blue-500/20">
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span class="text-3xl">🧠</span>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-3">
+                    <h3 class="text-2xl font-bold text-blue-300">1997: LSTM Networks</h3>
+                    <div class="px-3 py-1 bg-blue-900/50 rounded-full text-xs text-blue-200 border border-blue-400/30">
+                      Memory
+                    </div>
+                  </div>
+                  <p class="text-gray-300 leading-relaxed mb-3">Long Short-Term Memory networks enable better sequence modeling and capture long-range dependencies in text.</p>
+                  <div class="bg-blue-900/20 p-3 rounded-lg border border-blue-500/20">
+                    <div class="flex items-center justify-center space-x-2">
+                      <div class="text-center">
+                        <div class="text-lg mb-1">🔍</div>
+                        <div class="text-xs text-blue-200">Remember</div>
+                      </div>
+                      <div class="text-blue-400">→</div>
+                      <div class="text-center">
+                        <div class="text-lg mb-1">🔄</div>
+                        <div class="text-xs text-blue-200">Process</div>
+                      </div>
+                      <div class="text-blue-400">→</div>
+                      <div class="text-center">
+                        <div class="text-lg mb-1">🎯</div>
+                        <div class="text-xs text-blue-200">Predict</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gradient-to-br from-purple-800/40 to-pink-800/40 p-6 rounded-xl border border-purple-500/40 hover:border-purple-400 transition-all duration-300 transform hover:scale-[1.01] shadow-lg hover:shadow-purple-500/20">
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span class="text-3xl">⚡</span>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-3">
+                    <h3 class="text-2xl font-bold text-purple-300">2017: Transformer Architecture</h3>
+                    <div class="px-3 py-1 bg-purple-900/50 rounded-full text-xs text-purple-200 border border-purple-400/30">
+                      Revolution
+                    </div>
+                  </div>
+                  <p class="text-gray-300 leading-relaxed mb-4"><strong class="text-purple-200">"Attention Is All You Need"</strong> - Revolutionary breakthrough that enabled all modern LLMs by allowing models to focus on relevant parts of text simultaneously.</p>
+                  
+                  <!-- Enhanced Attention Concept -->
+                  <div class="bg-gradient-to-r from-purple-900/30 to-pink-900/30 p-4 rounded-lg border border-purple-500/30">
+                    <div class="flex items-center justify-center space-x-3 mb-3">
+                      <div class="text-center">
+                        <div class="text-2xl mb-1">👁️</div>
+                        <div class="text-xs text-purple-200 font-semibold">Attention</div>
+                      </div>
+                      <div class="text-purple-400 text-xl animate-pulse">→</div>
+                      <div class="text-center">
+                        <div class="text-2xl mb-1">🎯</div>
+                        <div class="text-xs text-pink-200 font-semibold">Focus</div>
+                      </div>
+                      <div class="text-pink-400 text-xl animate-pulse">→</div>
+                      <div class="text-center">
+                        <div class="text-2xl mb-1">🚀</div>
+                        <div class="text-xs text-purple-200 font-semibold">Understanding</div>
+                      </div>
+                    </div>
+                    <div class="text-center text-xs text-purple-300 bg-purple-900/20 p-2 rounded border border-purple-500/20">
+                      The foundation of ChatGPT, Claude, and all modern AI
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </section>
+        </section>
+
+        <section class="bg-gradient-to-br from-gray-800 via-yellow-900/20 to-orange-900/20 p-8 rounded-xl border border-yellow-500/30 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-yellow-600/5 via-transparent to-orange-600/5 animate-pulse"></div>
+          <div class="relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent mb-6 text-center">🚀 The GPT Revolution (2018-Present)</h2>
+            <p class="text-center text-gray-300 mb-8 text-lg">When AI learned to scale beyond our wildest dreams</p>
+          
+          <!-- Enhanced Parameter Scaling Visualization -->
+          <div class="mb-8 bg-gradient-to-br from-gray-900/60 to-yellow-900/30 p-6 rounded-xl border border-yellow-500/30">
+            <h3 class="text-2xl font-bold text-center text-yellow-300 mb-6">📈 The Great Scaling Race</h3>
+            <div class="flex items-end justify-center space-x-6 mb-4">
+              <div class="text-center group">
+                <div class="w-8 h-12 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t shadow-lg group-hover:scale-110 transition-transform duration-300"></div>
+                <div class="text-sm text-blue-300 mt-2 font-semibold">GPT-1</div>
+                <div class="text-xs text-gray-400">117M</div>
+                <div class="text-xs text-blue-200">2018</div>
+              </div>
+              <div class="text-center group">
+                <div class="w-8 h-20 bg-gradient-to-t from-green-600 to-green-400 rounded-t shadow-lg group-hover:scale-110 transition-transform duration-300"></div>
+                <div class="text-sm text-green-300 mt-2 font-semibold">GPT-2</div>
+                <div class="text-xs text-gray-400">1.5B</div>
+                <div class="text-xs text-green-200">2019</div>
+              </div>
+              <div class="text-center group">
+                <div class="w-8 h-32 bg-gradient-to-t from-purple-600 to-purple-400 rounded-t shadow-lg group-hover:scale-110 transition-transform duration-300"></div>
+                <div class="text-sm text-purple-300 mt-2 font-semibold">GPT-3</div>
+                <div class="text-xs text-gray-400">175B</div>
+                <div class="text-xs text-purple-200">2020</div>
+              </div>
+              <div class="text-center group">
+                <div class="w-8 h-40 bg-gradient-to-t from-red-600 to-red-400 rounded-t shadow-lg group-hover:scale-110 transition-transform duration-300"></div>
+                <div class="text-sm text-red-300 mt-2 font-semibold">GPT-4</div>
+                <div class="text-xs text-gray-400">~1.7T</div>
+                <div class="text-xs text-red-200">2023</div>
+              </div>
+              <div class="text-center group">
+                <div class="w-8 h-48 bg-gradient-to-t from-pink-600 via-purple-500 to-yellow-400 rounded-t shadow-lg group-hover:scale-110 transition-transform duration-300 animate-pulse"></div>
+                <div class="text-sm text-pink-300 mt-2 font-semibold">GPT-5</div>
+                <div class="text-xs text-gray-400">~10T+</div>
+                <div class="text-xs text-pink-200">2025?</div>
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="bg-yellow-900/30 p-3 rounded-lg border border-yellow-500/20">
+                <div class="text-sm font-semibold text-yellow-300 mb-1">🎯 The Pattern</div>
+                <div class="text-xs text-gray-300">Each generation: ~10x more parameters, ~10x more capable</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gradient-to-br from-blue-800/40 to-blue-900/40 p-6 rounded-xl border border-blue-500/40 hover:border-blue-400 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-blue-500/20">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-xl font-bold">1</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-2">
+                    <h3 class="text-xl font-bold text-blue-300">2018: GPT-1</h3>
+                    <div class="px-2 py-1 bg-blue-900/50 rounded-full text-xs text-blue-200 border border-blue-400/30">
+                      Pioneer
+                    </div>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-blue-200">117M parameters</strong>, introduced the concept of pre-training on large text corpora and demonstrated the power of transformer-based language models.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-green-800/40 to-green-900/40 p-6 rounded-xl border border-green-500/40 hover:border-green-400 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-green-500/20">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-xl font-bold">2</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-2">
+                    <h3 class="text-xl font-bold text-green-300">2019: GPT-2</h3>
+                    <div class="px-2 py-1 bg-green-900/50 rounded-full text-xs text-green-200 border border-green-400/30">
+                      Controversial
+                    </div>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-green-200">1.5B parameters</strong>, demonstrated impressive text generation capabilities and sparked debates about AI safety and misuse.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-purple-800/40 to-purple-900/40 p-6 rounded-xl border border-purple-500/40 hover:border-purple-400 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-purple-500/20">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-xl font-bold">3</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-2">
+                    <h3 class="text-xl font-bold text-purple-300">2020: GPT-3</h3>
+                    <div class="px-2 py-1 bg-purple-900/50 rounded-full text-xs text-purple-200 border border-purple-400/30">
+                      Game Changer
+                    </div>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-purple-200">175B parameters</strong>, showed remarkable few-shot learning abilities and could perform tasks with minimal examples.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-emerald-800/40 to-teal-900/40 p-6 rounded-xl border border-emerald-500/40 hover:border-emerald-400 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-emerald-500/20">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-xl">💬</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2 mb-2">
+                    <h3 class="text-xl font-bold text-emerald-300">2022: ChatGPT</h3>
+                    <div class="px-2 py-1 bg-emerald-900/50 rounded-full text-xs text-emerald-200 border border-emerald-400/30">
+                      Mainstream
+                    </div>
+                  </div>
+                  <p class="text-gray-300 text-sm leading-relaxed">Based on <strong class="text-emerald-200">GPT-3.5</strong>, brought LLMs to mainstream attention through conversational interface and human-like responses.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </section>
+        </section>
+
+        <section class="bg-gradient-to-br from-gray-800 via-green-900/20 to-yellow-900/20 p-8 rounded-xl border border-green-500/30 relative overflow-hidden">
+          <!-- Background Effects -->
+          <div class="absolute inset-0 bg-gradient-to-r from-green-600/10 via-yellow-600/10 to-orange-600/10 animate-pulse opacity-50"></div>
+          
+          <div class="relative z-10">
+            <div class="text-center mb-10">
+              <h2 class="text-4xl font-bold bg-gradient-to-r from-green-400 via-yellow-400 to-orange-400 bg-clip-text text-transparent mb-4">
+                🚀 The AI Renaissance (2023-2025)
+              </h2>
+              <p class="text-lg text-gray-300 max-w-4xl mx-auto mb-6">
+                We're living through the most explosive period in AI history. Every month brings breakthroughs that would have been science fiction just years ago.
+              </p>
+            </div>
+
+            <!-- AI Battle Royale -->
+            <div class="bg-gradient-to-r from-gray-800/60 to-green-800/40 p-6 rounded-xl border border-green-500/30 mb-8">
+              <h3 class="text-2xl font-bold text-center text-green-300 mb-6">⚔️ The Great AI Race</h3>
+              
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="ai-company-card group cursor-pointer" onclick="showCompanyDetails('openai')">
+                  <div class="bg-gradient-to-br from-green-700 to-green-800 p-4 rounded-lg text-center border border-green-500/30 hover:border-green-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/20">
+                    <div class="w-14 h-14 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+                      <span class="text-2xl font-bold">🤖</span>
+                    </div>
+                    <h4 class="font-bold text-green-200 mb-1">OpenAI</h4>
+                    <div class="text-xs text-green-300">GPT-4o, o1</div>
+                    <div class="text-xs text-gray-400 mt-1">$157B valuation</div>
+                  </div>
+                </div>
+
+                <div class="ai-company-card group cursor-pointer" onclick="showCompanyDetails('anthropic')">
+                  <div class="bg-gradient-to-br from-orange-700 to-orange-800 p-4 rounded-lg text-center border border-orange-500/30 hover:border-orange-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20">
+                    <div class="w-14 h-14 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+                      <span class="text-2xl font-bold">🔶</span>
+                    </div>
+                    <h4 class="font-bold text-orange-200 mb-1">Anthropic</h4>
+                    <div class="text-xs text-orange-300">Claude 3.5 Sonnet</div>
+                    <div class="text-xs text-gray-400 mt-1">$15B valuation</div>
+                  </div>
+                </div>
+
+                <div class="ai-company-card group cursor-pointer" onclick="showCompanyDetails('google')">
+                  <div class="bg-gradient-to-br from-blue-700 to-blue-800 p-4 rounded-lg text-center border border-blue-500/30 hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20">
+                    <div class="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+                      <span class="text-2xl font-bold">🌟</span>
+                    </div>
+                    <h4 class="font-bold text-blue-200 mb-1">Google</h4>
+                    <div class="text-xs text-blue-300">Gemini 2.0</div>
+                    <div class="text-xs text-gray-400 mt-1">$2T company</div>
+                  </div>
+                </div>
+
+                <div class="ai-company-card group cursor-pointer" onclick="showCompanyDetails('meta')">
+                  <div class="bg-gradient-to-br from-purple-700 to-purple-800 p-4 rounded-lg text-center border border-purple-500/30 hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                    <div class="w-14 h-14 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+                      <span class="text-2xl font-bold">🦙</span>
+                    </div>
+                    <h4 class="font-bold text-purple-200 mb-1">Meta</h4>
+                    <div class="text-xs text-purple-300">Llama 3.1</div>
+                    <div class="text-xs text-gray-400 mt-1">Open source</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center bg-gray-800/50 p-4 rounded-lg">
+                <p class="text-sm text-gray-300 italic">
+                  💡 Each company is racing to achieve AGI first. The winner might reshape civilization.
+                </p>
+              </div>
+            </div>
+
+            <!-- 2024 Breakthroughs -->
+            <div class="bg-gradient-to-r from-yellow-800/40 to-orange-800/40 p-6 rounded-xl border border-yellow-500/30 mb-8">
+              <h3 class="text-2xl font-bold text-center text-yellow-300 mb-6">🎯 2024's Game Changers</h3>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="breakthrough-card bg-gradient-to-br from-yellow-900/40 to-orange-900/40 p-5 rounded-lg border border-yellow-500/20">
+                  <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span class="text-xl">🧠</span>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-bold text-yellow-300 mb-2">Reasoning Models</h4>
+                      <p class="text-gray-300 text-sm mb-2">OpenAI's o1 can actually think step-by-step, solving complex problems like humans</p>
+                      <div class="text-xs text-yellow-400">• PhD-level reasoning • Mathematical proofs • Scientific breakthroughs</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="breakthrough-card bg-gradient-to-br from-green-900/40 to-teal-900/40 p-5 rounded-lg border border-green-500/20">
+                  <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span class="text-xl">🤖</span>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-bold text-green-300 mb-2">AI Agents</h4>
+                      <p class="text-gray-300 text-sm mb-2">AI that can browse the web, use computers, and complete complex tasks autonomously</p>
+                      <div class="text-xs text-green-400">• Computer use • Web automation • Multi-step workflows</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="breakthrough-card bg-gradient-to-br from-purple-900/40 to-pink-900/40 p-5 rounded-lg border border-purple-500/20">
+                  <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span class="text-xl">🎬</span>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-bold text-purple-300 mb-2">Video Generation</h4>
+                      <p class="text-gray-300 text-sm mb-2">Sora and other models create Hollywood-quality videos from text prompts</p>
+                      <div class="text-xs text-purple-400">• Photorealistic scenes • Complex narratives • Consistent characters</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="breakthrough-card bg-gradient-to-br from-blue-900/40 to-indigo-900/40 p-5 rounded-lg border border-blue-500/20">
+                  <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span class="text-xl">🔬</span>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-bold text-blue-300 mb-2">Scientific AI</h4>
+                      <p class="text-gray-300 text-sm mb-2">AlphaFold 3, Nobel Prize winners, AI discovering new materials and drugs</p>
+                      <div class="text-xs text-blue-400">• Protein folding • Drug discovery • Material science</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- What's Coming Next -->
+            <div class="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 p-6 rounded-xl border border-indigo-500/30 text-center">
+              <h3 class="text-2xl font-bold text-indigo-300 mb-4">🔮 What's Next?</h3>
+              <p class="text-gray-300 mb-6">The next 12 months will bring changes that will make 2024 look slow</p>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-indigo-900/30 p-4 rounded-lg border border-indigo-500/20">
+                  <div class="text-3xl mb-2">🧠</div>
+                  <div class="text-sm font-semibold text-indigo-200 mb-1">AGI Approaching</div>
+                  <div class="text-xs text-gray-400">Models that match human intelligence across all domains</div>
+                </div>
+                <div class="bg-purple-900/30 p-4 rounded-lg border border-purple-500/20">
+                  <div class="text-3xl mb-2">🤖</div>
+                  <div class="text-sm font-semibold text-purple-200 mb-1">Embodied AI</div>
+                  <div class="text-xs text-gray-400">Robots with human-level intelligence in physical world</div>
+                </div>
+                <div class="bg-pink-900/30 p-4 rounded-lg border border-pink-500/20">
+                  <div class="text-3xl mb-2">🌐</div>
+                  <div class="text-sm font-semibold text-pink-200 mb-1">AI Internet</div>
+                  <div class="text-xs text-gray-400">Billions of AI agents collaborating globally</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="space-y-8">
+            <div class="bg-gradient-to-br from-green-800/40 to-orange-800/40 p-8 rounded-xl border border-green-500/40 hover:border-green-400 transition-all duration-300 transform hover:scale-[1.01] shadow-lg hover:shadow-green-500/20">
+              <div class="flex items-start space-x-6">
+                <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-4xl">🎯</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-3 mb-4">
+                    <h3 class="text-3xl font-bold text-green-300">2023: GPT-4 & Claude</h3>
+                    <div class="px-4 py-2 bg-green-900/50 rounded-full text-sm text-green-200 border border-green-400/30 font-semibold">
+                      Multimodal Era
+                    </div>
+                  </div>
+                  <p class="text-gray-300 text-base leading-relaxed mb-4"><strong class="text-green-200">Multimodal capabilities</strong> emerged, with models able to process both text and images. GPT-4 achieved near-human performance on many benchmarks, while Claude focused on safety and helpfulness.</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-green-900/30 rounded-full text-xs text-green-200 border border-green-500/30">Vision + Language</span>
+                    <span class="px-3 py-1 bg-orange-900/30 rounded-full text-xs text-orange-200 border border-orange-500/30">Near-human Performance</span>
+                    <span class="px-3 py-1 bg-green-800/30 rounded-full text-xs text-green-200 border border-green-500/30">Safety Focus</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-purple-800/40 to-blue-800/40 p-8 rounded-xl border border-purple-500/40 hover:border-purple-400 transition-all duration-300 transform hover:scale-[1.01] shadow-lg hover:shadow-purple-500/20">
+              <div class="flex items-start space-x-6">
+                <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-4xl">🔓</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-3 mb-4">
+                    <h3 class="text-3xl font-bold text-purple-300">2024: Open Source Revolution</h3>
+                    <div class="px-4 py-2 bg-purple-900/50 rounded-full text-sm text-purple-200 border border-purple-400/30 font-semibold">
+                      Democratization
+                    </div>
+                  </div>
+                  <p class="text-gray-300 text-base leading-relaxed mb-4">Models like <strong class="text-purple-200">LLaMA 3</strong>, <strong class="text-blue-200">Mistral</strong>, and <strong class="text-purple-200">Gemma</strong> made high-quality LLMs accessible to researchers and developers worldwide, democratizing AI development.</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-purple-900/30 rounded-full text-xs text-purple-200 border border-purple-500/30">Open Weights</span>
+                    <span class="px-3 py-1 bg-blue-900/30 rounded-full text-xs text-blue-200 border border-blue-500/30">Community Access</span>
+                    <span class="px-3 py-1 bg-purple-800/30 rounded-full text-xs text-purple-200 border border-purple-500/30">Research Freedom</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-yellow-800/40 to-red-800/40 p-8 rounded-xl border border-yellow-500/40 hover:border-yellow-400 transition-all duration-300 transform hover:scale-[1.01] shadow-lg hover:shadow-yellow-500/20">
+              <div class="flex items-start space-x-6">
+                <div class="w-20 h-20 bg-gradient-to-br from-yellow-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <span class="text-4xl">🔮</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-3 mb-4">
+                    <h3 class="text-3xl font-bold text-yellow-300">2025: The Future</h3>
+                    <div class="px-4 py-2 bg-yellow-900/50 rounded-full text-sm text-yellow-200 border border-yellow-400/30 font-semibold">
+                      Predictions
+                    </div>
+                  </div>
+                  <p class="text-gray-300 text-base leading-relaxed mb-4">Anticipated developments include <strong class="text-yellow-200">GPT-5</strong>, improved reasoning capabilities, better memory systems, and more efficient training methods.</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-yellow-900/30 rounded-full text-xs text-yellow-200 border border-yellow-500/30">GPT-5</span>
+                    <span class="px-3 py-1 bg-red-900/30 rounded-full text-xs text-red-200 border border-red-500/30">Advanced Reasoning</span>
+                    <span class="px-3 py-1 bg-orange-900/30 rounded-full text-xs text-orange-200 border border-orange-500/30">Long-term Memory</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">The GPT Revolution (2018-Present)</h2>
+        <section class="bg-gradient-to-br from-gray-800 via-purple-900/20 to-blue-900/20 p-8 rounded-xl border border-purple-500/30 relative overflow-hidden">
+          <!-- Background Animation -->
+          <div class="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-transparent to-blue-600/10 animate-pulse"></div>
           
-          <!-- Parameter Scaling Visualization -->
-          <div class="mb-6 bg-gradient-to-r from-gray-900/50 to-purple-900/30 p-4 rounded-lg">
-            <h3 class="text-lg font-semibold text-purple-300 mb-3 text-center">Exponential Parameter Growth</h3>
-            <div class="flex items-end justify-center space-x-4">
-              <div class="text-center">
-                <div class="w-6 h-8 bg-blue-500 rounded-t"></div>
-                <div class="text-xs text-gray-300 mt-1">GPT-1<br>117M</div>
-              </div>
-              <div class="text-center">
-                <div class="w-6 h-16 bg-green-500 rounded-t"></div>
-                <div class="text-xs text-gray-300 mt-1">GPT-2<br>1.5B</div>
-              </div>
-              <div class="text-center">
-                <div class="w-6 h-32 bg-purple-500 rounded-t"></div>
-                <div class="text-xs text-gray-300 mt-1">GPT-3<br>175B</div>
-              </div>
-              <div class="text-center">
-                <div class="w-6 h-40 bg-red-500 rounded-t"></div>
-                <div class="text-xs text-gray-300 mt-1">GPT-4<br>~1.7T</div>
-              </div>
-              <div class="text-center">
-                <div class="w-6 h-48 bg-gradient-to-t from-purple-600 to-pink-500 rounded-t"></div>
-                <div class="text-xs text-gray-300 mt-1">GPT-5<br>~10T+</div>
-              </div>
+          <div class="relative z-10">
+            <div class="text-center mb-8">
+              <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-4">
+                💡 Key Insights from the AI Revolution
+              </h2>
+              <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                Each breakthrough revealed unexpected truths about intelligence, language, and what it means to understand
+              </p>
             </div>
-            <div class="text-center text-xs text-gray-400 mt-3">Parameters (logarithmic scale)</div>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-3">
-              <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-sm font-bold">1</span>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">2018: GPT-1</h3>
-                <p class="text-gray-300 text-sm"><strong>117M parameters</strong>, introduced the concept of pre-training on large text corpora and demonstrated the power of transformer-based language models.</p>
-              </div>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-3">
-              <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-sm font-bold">2</span>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">2019: GPT-2</h3>
-                <p class="text-gray-300 text-sm"><strong>1.5B parameters</strong>, demonstrated impressive text generation capabilities and sparked debates about AI safety and misuse.</p>
-              </div>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-3">
-              <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-sm font-bold">3</span>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">2020: GPT-3</h3>
-                <p class="text-gray-300 text-sm"><strong>175B parameters</strong>, showed remarkable few-shot learning abilities and could perform tasks with minimal examples.</p>
-              </div>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-3">
-              <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-sm font-bold">💬</span>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">2022: ChatGPT</h3>
-                <p class="text-gray-300 text-sm">Based on GPT-3.5, brought LLMs to mainstream attention through conversational interface and human-like responses.</p>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Modern Era (2023-Present)</h2>
-          
-          <!-- AI Companies Ecosystem -->
-          <div class="mb-6 bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-4 rounded-lg">
-            <h3 class="text-lg font-semibold text-purple-300 mb-4 text-center">The AI Competition</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div class="text-center p-2">
-                <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <span class="text-lg font-bold">🤖</span>
+            <!-- Interactive Insight Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div class="insight-card group cursor-pointer" onclick="toggleInsight('scaling')">
+                <div class="bg-gradient-to-br from-purple-800/50 to-purple-900/50 p-6 rounded-xl border border-purple-500/30 hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20">
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <span class="text-2xl">📈</span>
+                    </div>
+                    <span class="text-xs text-purple-300 group-hover:text-purple-200">Click to explore</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-purple-300 mb-2 group-hover:text-purple-200">The Scaling Revolution</h3>
+                  <p class="text-gray-300 text-sm group-hover:text-gray-200">More parameters = More intelligence. But why?</p>
+                  <div id="scaling-details" class="hidden mt-4 p-4 bg-purple-900/30 rounded-lg border-l-4 border-purple-400">
+                    <p class="text-sm text-gray-300 mb-2">The discovery that larger models consistently perform better wasn't obvious. It revealed that intelligence might be an emergent property of scale.</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                      <div class="bg-purple-800/50 p-2 rounded">GPT-1: 117M params</div>
+                      <div class="bg-purple-700/50 p-2 rounded">GPT-3: 175B params</div>
+                    </div>
+                  </div>
                 </div>
-                <p class="text-xs text-gray-300">OpenAI<br>GPT-4</p>
               </div>
-              <div class="text-center p-2">
-                <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <span class="text-lg font-bold">🔶</span>
-                </div>
-                <p class="text-xs text-gray-300">Anthropic<br>Claude</p>
-              </div>
-              <div class="text-center p-2">
-                <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <span class="text-lg font-bold">🌟</span>
-                </div>
-                <p class="text-xs text-gray-300">Google<br>Gemini</p>
-              </div>
-              <div class="text-center p-2">
-                <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <span class="text-lg font-bold">🦙</span>
-                </div>
-                <p class="text-xs text-gray-300">Meta<br>LLaMA</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="space-y-4">
-            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-3">
-              <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-sm">🎯</span>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">2023: GPT-4 & Claude</h3>
-                <p class="text-gray-300 text-sm"><strong>Multimodal capabilities</strong> emerged, with models able to process both text and images. GPT-4 achieved near-human performance on many benchmarks, while Claude focused on safety and helpfulness.</p>
-              </div>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-3">
-              <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-sm">🔓</span>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">2024: Open Source Revolution</h3>
-                <p class="text-gray-300 text-sm">Models like <strong>LLaMA 3</strong>, <strong>Mistral</strong>, and <strong>Gemma</strong> made high-quality LLMs accessible to researchers and developers worldwide, democratizing AI development.</p>
-              </div>
-            </div>
-            <div class="bg-gray-700 p-4 rounded-lg flex items-start space-x-3">
-              <div class="w-8 h-8 bg-gradient-to-r from-yellow-500 to-red-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-sm">🔮</span>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">2025: The Future</h3>
-                <p class="text-gray-300 text-sm">Anticipated developments include <strong>GPT-5</strong>, improved reasoning capabilities, better memory systems, and more efficient training methods.</p>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">🔍 What We've Learned Along the Way</h2>
-          
-          <!-- Interactive Story Header -->
-          <div class="mb-6 bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-4 rounded-lg text-center border border-purple-500/20">
-            <p class="text-gray-300 text-lg italic">"Every breakthrough taught us something unexpected..."</p>
-            <div class="flex justify-center mt-2 space-x-2">
-              <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-              <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-75"></div>
-              <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse delay-150"></div>
+              <div class="insight-card group cursor-pointer" onclick="toggleInsight('emergence')">
+                <div class="bg-gradient-to-br from-blue-800/50 to-blue-900/50 p-6 rounded-xl border border-blue-500/30 hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20">
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <span class="text-2xl">✨</span>
+                    </div>
+                    <span class="text-xs text-blue-300 group-hover:text-blue-200">Click to explore</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-blue-300 mb-2 group-hover:text-blue-200">Emergent Abilities</h3>
+                  <p class="text-gray-300 text-sm group-hover:text-gray-200">Capabilities that appear suddenly at certain scales</p>
+                  <div id="emergence-details" class="hidden mt-4 p-4 bg-blue-900/30 rounded-lg border-l-4 border-blue-400">
+                    <p class="text-sm text-gray-300 mb-2">Models suddenly gained abilities like chain-of-thought reasoning and few-shot learning without being explicitly trained for them.</p>
+                    <div class="text-xs text-blue-200">🧠 Reasoning • 🎯 Few-shot learning • 🔄 In-context learning</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="insight-card group cursor-pointer" onclick="toggleInsight('alignment')">
+                <div class="bg-gradient-to-br from-green-800/50 to-green-900/50 p-6 rounded-xl border border-green-500/30 hover:border-green-400 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-green-500/20">
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <span class="text-2xl">🎯</span>
+                    </div>
+                    <span class="text-xs text-green-300 group-hover:text-green-200">Click to explore</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-green-300 mb-2 group-hover:text-green-200">The Alignment Problem</h3>
+                  <p class="text-gray-300 text-sm group-hover:text-gray-200">Making AI do what we actually want</p>
+                  <div id="alignment-details" class="hidden mt-4 p-4 bg-green-900/30 rounded-lg border-l-4 border-green-400">
+                    <p class="text-sm text-gray-300 mb-2">Intelligence ≠ Alignment. Powerful models need careful guidance to be helpful, harmless, and honest.</p>
+                    <div class="text-xs text-green-200">🛡️ RLHF • ⚖️ Constitutional AI • 🎭 Red teaming</div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- The Size Discovery -->
@@ -486,72 +947,220 @@
             </div>
           </div>
 
-          <!-- Bottom Insight -->
-          <div class="mt-8 text-center bg-gradient-to-r from-gray-800/50 to-gray-700/50 p-4 rounded-lg border border-gray-600">
-            <p class="text-gray-300 italic text-lg">
-              💭 <strong>The real insight?</strong> We're not just building tools—we're discovering the laws of intelligence itself.
-            </p>
-          </div>
+            <!-- Interactive Timeline of Discoveries -->
+            <div class="bg-gradient-to-r from-gray-800/50 to-purple-800/50 p-6 rounded-xl border border-purple-500/20 mt-8">
+              <h3 class="text-2xl font-bold text-center text-purple-300 mb-6">🕰️ Timeline of Revelations</h3>
+              <div class="space-y-4">
+                <div class="timeline-item flex items-center space-x-4 p-3 bg-gray-800/30 rounded-lg hover:bg-gray-700/30 transition-colors cursor-pointer">
+                  <div class="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
+                  <div class="text-sm text-blue-300 font-mono">2017</div>
+                  <div class="text-sm text-gray-300">"Attention is all you need" → Transformers change everything</div>
+                </div>
+                <div class="timeline-item flex items-center space-x-4 p-3 bg-gray-800/30 rounded-lg hover:bg-gray-700/30 transition-colors cursor-pointer">
+                  <div class="w-3 h-3 bg-gradient-to-r from-green-400 to-blue-400 rounded-full"></div>
+                  <div class="text-sm text-green-300 font-mono">2020</div>
+                  <div class="text-sm text-gray-300">GPT-3 surprises everyone with emergent abilities</div>
+                </div>
+                <div class="timeline-item flex items-center space-x-4 p-3 bg-gray-800/30 rounded-lg hover:bg-gray-700/30 transition-colors cursor-pointer">
+                  <div class="w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full"></div>
+                  <div class="text-sm text-yellow-300 font-mono">2022</div>
+                  <div class="text-sm text-gray-300">ChatGPT democratizes AI → 100M users in 2 months</div>
+                </div>
+                <div class="timeline-item flex items-center space-x-4 p-3 bg-gray-800/30 rounded-lg hover:bg-gray-700/30 transition-colors cursor-pointer">
+                  <div class="w-3 h-3 bg-gradient-to-r from-red-400 to-pink-400 rounded-full"></div>
+                  <div class="text-sm text-red-300 font-mono">2024</div>
+                  <div class="text-sm text-gray-300">The race for AGI intensifies</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Insight -->
+            <div class="mt-8 text-center bg-gradient-to-r from-indigo-900/30 to-purple-900/30 p-6 rounded-xl border border-indigo-500/30">
+              <p class="text-gray-300 italic text-lg mb-4">
+                💭 <strong>The real insight?</strong> We're not just building tools—we're discovering the laws of intelligence itself.
+              </p>
+              <div class="text-sm text-gray-400">
+                Every model teaches us something new about how minds could work
+              </div>
+            </div>
         </section>
 
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h2 class="text-2xl font-semibold text-purple-400 mb-4">Impact on Society</h2>
+        <section class="bg-gradient-to-br from-gray-800 via-blue-900/20 to-green-900/20 p-8 rounded-xl border border-blue-500/30 relative overflow-hidden">
+          <!-- Background Effects -->
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-green-600/10 animate-pulse opacity-50"></div>
           
-          <!-- Impact Visualization -->
-          <div class="mb-6 bg-gradient-to-r from-blue-900/30 to-green-900/30 p-4 rounded-lg text-center">
-            <div class="flex items-center justify-center space-x-4 mb-2">
-              <span class="text-3xl">🤖</span>
-              <span class="text-purple-400 text-2xl">→</span>
-              <span class="text-3xl">🌍</span>
+          <div class="relative z-10">
+            <div class="text-center mb-10">
+              <h2 class="text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent mb-4">
+                🌍 Transforming Our World
+              </h2>
+              <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-6">
+                AI isn't just changing technology—it's reshaping how we work, learn, create, and connect
+              </p>
+              
+              <!-- Interactive Impact Meter -->
+              <div class="bg-gradient-to-r from-blue-900/30 to-green-900/30 p-6 rounded-xl border border-blue-500/20 mb-8">
+                <div class="flex items-center justify-center space-x-6 mb-4">
+                  <div class="transform transition-transform hover:scale-110">
+                    <span class="text-4xl animate-pulse">🤖</span>
+                  </div>
+                  <div class="flex space-x-2">
+                    <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
+                    <div class="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                  </div>
+                  <div class="transform transition-transform hover:scale-110">
+                    <span class="text-4xl">🌍</span>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <div class="text-sm font-semibold text-blue-300 mb-2">Global Impact Level</div>
+                  <div class="bg-gray-700 rounded-full h-3 overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-400 to-green-400 h-full rounded-full animate-pulse" style="width: 85%"></div>
+                  </div>
+                  <div class="text-xs text-gray-400 mt-2">85% of industries already affected</div>
+                </div>
+              </div>
             </div>
-            <p class="text-gray-300 text-sm">LLMs are transforming every aspect of human society</p>
-          </div>
           
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-gradient-to-br from-blue-700/30 to-blue-800/30 p-4 rounded-lg text-center border border-blue-500/20">
-              <div class="text-4xl mb-3">🎓</div>
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">Education</h3>
-              <p class="text-gray-300 text-sm mb-3">Personalized tutoring, automated grading, and enhanced learning materials</p>
-              <div class="flex justify-center space-x-2">
-                <span class="px-2 py-1 bg-blue-800 text-xs rounded">AI Tutors</span>
-                <span class="px-2 py-1 bg-blue-800 text-xs rounded">Smart Grading</span>
+            <!-- Revolutionary Impact Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <!-- Education Revolution -->
+              <div class="impact-card group cursor-pointer" onclick="toggleImpact('education')">
+                <div class="bg-gradient-to-br from-blue-800/50 to-indigo-900/50 p-6 rounded-xl border border-blue-500/30 hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20">
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <span class="text-3xl">🎓</span>
+                    </div>
+                    <span class="text-xs text-blue-300 group-hover:text-blue-200">Hover for details</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-blue-300 mb-2 group-hover:text-blue-200">Education Revolution</h3>
+                  <p class="text-gray-300 text-sm group-hover:text-gray-200 mb-4">AI tutors that understand every student's unique learning style</p>
+                  
+                  <div id="education-impact" class="transform transition-all duration-300 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-40 overflow-hidden">
+                    <div class="space-y-2 pt-2 border-t border-blue-500/30">
+                      <div class="flex items-center text-xs text-blue-200">
+                        <div class="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                        Personalized learning paths
+                      </div>
+                      <div class="flex items-center text-xs text-blue-200">
+                        <div class="w-2 h-2 bg-indigo-400 rounded-full mr-2"></div>
+                        Instant homework help
+                      </div>
+                      <div class="flex items-center text-xs text-blue-200">
+                        <div class="w-2 h-2 bg-purple-400 rounded-full mr-2"></div>
+                        Language barriers eliminated
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Creativity Explosion -->
+              <div class="impact-card group cursor-pointer" onclick="toggleImpact('creativity')">
+                <div class="bg-gradient-to-br from-purple-800/50 to-pink-900/50 p-6 rounded-xl border border-purple-500/30 hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20">
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <span class="text-3xl">🎨</span>
+                    </div>
+                    <span class="text-xs text-purple-300 group-hover:text-purple-200">Hover for details</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-purple-300 mb-2 group-hover:text-purple-200">Creative Renaissance</h3>
+                  <p class="text-gray-300 text-sm group-hover:text-gray-200 mb-4">Every human becomes an artist, writer, and creator</p>
+                  
+                  <div class="transform transition-all duration-300 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-40 overflow-hidden">
+                    <div class="space-y-2 pt-2 border-t border-purple-500/30">
+                      <div class="flex items-center text-xs text-purple-200">
+                        <div class="w-2 h-2 bg-purple-400 rounded-full mr-2"></div>
+                        Text-to-image generation
+                      </div>
+                      <div class="flex items-center text-xs text-purple-200">
+                        <div class="w-2 h-2 bg-pink-400 rounded-full mr-2"></div>
+                        AI-assisted music composition
+                      </div>
+                      <div class="flex items-center text-xs text-purple-200">
+                        <div class="w-2 h-2 bg-indigo-400 rounded-full mr-2"></div>
+                        Collaborative storytelling
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Work Transformation -->
+              <div class="impact-card group cursor-pointer" onclick="toggleImpact('work')">
+                <div class="bg-gradient-to-br from-green-800/50 to-emerald-900/50 p-6 rounded-xl border border-green-500/30 hover:border-green-400 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-green-500/20">
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <span class="text-3xl">💼</span>
+                    </div>
+                    <span class="text-xs text-green-300 group-hover:text-green-200">Hover for details</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-green-300 mb-2 group-hover:text-green-200">Work Revolution</h3>
+                  <p class="text-gray-300 text-sm group-hover:text-gray-200 mb-4">AI colleagues that handle routine tasks, amplify creativity</p>
+                  
+                  <div class="transform transition-all duration-300 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-40 overflow-hidden">
+                    <div class="space-y-2 pt-2 border-t border-green-500/30">
+                      <div class="flex items-center text-xs text-green-200">
+                        <div class="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                        Automated documentation
+                      </div>
+                      <div class="flex items-center text-xs text-green-200">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full mr-2"></div>
+                        Intelligent code review
+                      </div>
+                      <div class="flex items-center text-xs text-green-200">
+                        <div class="w-2 h-2 bg-teal-400 rounded-full mr-2"></div>
+                        24/7 customer support
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="bg-gradient-to-br from-green-700/30 to-green-800/30 p-4 rounded-lg text-center border border-green-500/20">
-              <div class="text-4xl mb-3">🏥</div>
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">Healthcare</h3>
-              <p class="text-gray-300 text-sm mb-3">Medical diagnosis assistance, drug discovery, and patient communication</p>
-              <div class="flex justify-center space-x-2">
-                <span class="px-2 py-1 bg-green-800 text-xs rounded">Diagnosis</span>
-                <span class="px-2 py-1 bg-green-800 text-xs rounded">Drug Discovery</span>
+
+            <!-- Real-World Impact Stats -->
+            <div class="bg-gradient-to-r from-gray-800/50 to-blue-800/50 p-6 rounded-xl border border-blue-500/20 mb-6">
+              <h3 class="text-2xl font-bold text-center text-blue-300 mb-6">📊 By the Numbers</h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center p-4 bg-blue-900/30 rounded-lg">
+                  <div class="text-3xl font-bold text-blue-400">180M+</div>
+                  <div class="text-xs text-gray-400">ChatGPT users</div>
+                </div>
+                <div class="text-center p-4 bg-purple-900/30 rounded-lg">
+                  <div class="text-3xl font-bold text-purple-400">$15B</div>
+                  <div class="text-xs text-gray-400">OpenAI valuation</div>
+                </div>
+                <div class="text-center p-4 bg-green-900/30 rounded-lg">
+                  <div class="text-3xl font-bold text-green-400">40%</div>
+                  <div class="text-xs text-gray-400">Code written by AI</div>
+                </div>
+                <div class="text-center p-4 bg-red-900/30 rounded-lg">
+                  <div class="text-3xl font-bold text-red-400">300M</div>
+                  <div class="text-xs text-gray-400">Jobs to be affected</div>
+                </div>
               </div>
             </div>
-            <div class="bg-gradient-to-br from-purple-700/30 to-purple-800/30 p-4 rounded-lg text-center border border-purple-500/20">
-              <div class="text-4xl mb-3">💼</div>
-              <h3 class="text-lg font-semibold text-purple-300 mb-2">Business</h3>
-              <p class="text-gray-300 text-sm mb-3">Customer service automation, content creation, and decision support</p>
-              <div class="flex justify-center space-x-2">
-                <span class="px-2 py-1 bg-purple-800 text-xs rounded">Automation</span>
-                <span class="px-2 py-1 bg-purple-800 text-xs rounded">Content</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Global Impact Stats -->
-          <div class="mt-6 bg-gradient-to-r from-gray-900/50 to-purple-900/30 p-4 rounded-lg">
-            <h4 class="text-sm font-semibold text-purple-300 mb-3 text-center">Global Transformation</h4>
-            <div class="flex justify-center space-x-8 text-center">
-              <div>
-                <div class="text-2xl font-bold text-blue-400">100M+</div>
-                <div class="text-xs text-gray-400">Daily Users</div>
-              </div>
-              <div>
-                <div class="text-2xl font-bold text-green-400">$100B+</div>
-                <div class="text-xs text-gray-400">Market Value</div>
-              </div>
-              <div>
-                <div class="text-2xl font-bold text-purple-400">50+</div>
-                <div class="text-xs text-gray-400">Industries</div>
+
+            <!-- Future Vision -->
+            <div class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 p-6 rounded-xl border border-indigo-500/20 text-center">
+              <h3 class="text-2xl font-bold text-indigo-300 mb-4">🔮 The Next Wave</h3>
+              <p class="text-gray-300 mb-4">
+                We're just at the beginning. The next 5 years will bring changes we can barely imagine.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-indigo-900/30 p-3 rounded-lg">
+                  <div class="text-2xl mb-2">🏥</div>
+                  <div class="text-sm text-indigo-200">AI doctors diagnosing rare diseases</div>
+                </div>
+                <div class="bg-purple-900/30 p-3 rounded-lg">
+                  <div class="text-2xl mb-2">🧬</div>
+                  <div class="text-sm text-purple-200">Personalized medicine for everyone</div>
+                </div>
+                <div class="bg-pink-900/30 p-3 rounded-lg">
+                  <div class="text-2xl mb-2">🌱</div>
+                  <div class="text-sm text-pink-200">AI solving climate change</div>
+                </div>
               </div>
             </div>
           </div>
@@ -572,6 +1181,127 @@
   <!-- Web Components Script -->
   <script src="web-components.js"></script>
   
+  <!-- Interactive Chapter Elements Script -->
+  <script>
+    // Interactive functions for enhanced chapter elements
+    function toggleInsight(insightType) {
+      const insights = {
+        'scaling': 'scaling-details',
+        'emergent': 'emergent-details', 
+        'alignment': 'alignment-details'
+      };
+      
+      const detailsId = insights[insightType];
+      if (detailsId) {
+        const details = document.getElementById(detailsId);
+        if (details) {
+          details.classList.toggle('hidden');
+          
+          // Add visual feedback
+          const card = details.closest('.insight-card');
+          if (card) {
+            if (details.classList.contains('hidden')) {
+              card.style.transform = 'scale(1)';
+            } else {
+              card.style.transform = 'scale(1.02)';
+            }
+          }
+        }
+      }
+    }
+
+    function showCompanyDetails(company) {
+      const companyData = {
+        'openai': {
+          name: 'OpenAI',
+          valuation: '$157B',
+          key: 'ChatGPT, GPT-4o, o1 reasoning models',
+          highlight: 'Leading the consumer AI revolution'
+        },
+        'anthropic': {
+          name: 'Anthropic', 
+          valuation: '$15B',
+          key: 'Claude 3.5 Sonnet, Constitutional AI',
+          highlight: 'AI safety and helpfulness leaders'
+        },
+        'google': {
+          name: 'Google DeepMind',
+          valuation: '$2T market cap',
+          key: 'Gemini, AlphaFold, NotebookLM',
+          highlight: 'Research powerhouse with scale'
+        },
+        'meta': {
+          name: 'Meta AI',
+          valuation: '$1.3T market cap',
+          key: 'Llama 3.1, open-source leadership',
+          highlight: 'Democratizing AI access'
+        }
+      };
+
+      const data = companyData[company];
+      if (data) {
+        // Create a modal-like popup
+        const existingModal = document.getElementById('company-modal');
+        if (existingModal) existingModal.remove();
+
+        const modal = document.createElement('div');
+        modal.id = 'company-modal';
+        modal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4';
+        modal.onclick = () => modal.remove();
+
+        modal.innerHTML = `
+          <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl border border-purple-500/30 max-w-md w-full" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-2xl font-bold text-purple-400">${data.name}</h3>
+              <button onclick="this.closest('#company-modal').remove()" class="text-gray-400 hover:text-white text-xl">×</button>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <span class="text-gray-400 text-sm">Valuation:</span>
+                <div class="text-green-400 font-bold text-lg">${data.valuation}</div>
+              </div>
+              <div>
+                <span class="text-gray-400 text-sm">Key Products:</span>
+                <div class="text-blue-400">${data.key}</div>
+              </div>
+              <div class="bg-purple-900/20 p-3 rounded-lg border-l-4 border-purple-400">
+                <div class="text-purple-300 text-sm">${data.highlight}</div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.body.appendChild(modal);
+      }
+    }
+
+    function toggleImpact(sector) {
+      const impacts = {
+        'healthcare': 'Medical diagnosis, drug discovery, personalized treatment plans',
+        'education': 'Personalized tutoring, automated grading, accessible learning',
+        'business': 'Customer service, data analysis, process automation',
+        'creative': 'Content generation, design assistance, music composition'
+      };
+
+      const impact = impacts[sector];
+      if (impact) {
+        // Find the sector card and show details
+        const cards = document.querySelectorAll('[data-sector="' + sector + '"]');
+        cards.forEach(card => {
+          let details = card.querySelector('.impact-details');
+          if (!details) {
+            details = document.createElement('div');
+            details.className = 'impact-details mt-3 p-3 bg-gray-900/50 rounded-lg border-l-4 border-blue-400 text-sm text-gray-300';
+            details.textContent = impact;
+            card.appendChild(details);
+          } else {
+            details.style.display = details.style.display === 'none' ? 'block' : 'none';
+          }
+        });
+      }
+    }
+  </script>
+
   <!-- Turing Test Chatbot Script -->
   <script>
     // Memory to keep last 5–10 messages and avoid repetitions
