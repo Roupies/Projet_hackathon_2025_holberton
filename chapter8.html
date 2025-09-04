@@ -221,25 +221,27 @@
         <h2 class="text-3xl font-bold text-orange-400 mb-8 text-center">🚀 Advanced Prompting Techniques</h2>
         
         <!-- Technique Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="grid-auto-rows: 1fr;">
           <!-- Chain-of-Thought -->
-          <div class="bg-gradient-to-br from-purple-800/30 to-purple-900/30 p-6 rounded-lg border border-purple-500/30 hover:border-purple-400 transition-all duration-300 group">
+          <div class="bg-gradient-to-br from-purple-800/30 to-purple-900/30 p-6 rounded-lg border border-purple-500/30 hover:border-purple-400 transition-all duration-300 group flex flex-col">
             <div class="flex items-center mb-4">
               <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
                 <span class="text-2xl">🔗</span>
               </div>
               <h3 class="text-xl font-bold text-purple-300">Chain-of-Thought (CoT)</h3>
             </div>
-            <p class="text-gray-300 text-sm mb-4">Guide the model through step-by-step reasoning for complex problems.</p>
-            
-            <!-- Interactive Example -->
-            <div class="bg-gray-900/50 p-3 rounded-lg">
-              <div class="text-xs font-fira mb-2 text-purple-200">Example:</div>
-              <div class="text-xs font-fira text-gray-300">
-                <div class="mb-1">"Let's solve this step by step:</div>
-                <div class="ml-2">1. First, identify the problem...</div>
-                <div class="ml-2">2. Then, list possible approaches...</div>
-                <div class="ml-2">3. Finally, evaluate and choose..."</div>
+            <div class="flex-grow">
+              <p class="text-gray-300 text-sm mb-4">Guide the model through step-by-step reasoning for complex problems.</p>
+              
+              <!-- Interactive Example -->
+              <div class="bg-gray-900/50 p-3 rounded-lg">
+                <div class="text-xs font-fira mb-2 text-purple-200">Example:</div>
+                <div class="text-xs font-fira text-gray-300">
+                  <div class="mb-1">"Let's solve this step by step:</div>
+                  <div class="ml-2">1. First, identify the problem...</div>
+                  <div class="ml-2">2. Then, list possible approaches...</div>
+                  <div class="ml-2">3. Finally, evaluate and choose..."</div>
+                </div>
               </div>
             </div>
             
@@ -249,21 +251,23 @@
           </div>
 
           <!-- Few-Shot Learning -->
-          <div class="bg-gradient-to-br from-green-800/30 to-green-900/30 p-6 rounded-lg border border-green-500/30 hover:border-green-400 transition-all duration-300 group">
+          <div class="bg-gradient-to-br from-green-800/30 to-green-900/30 p-6 rounded-lg border border-green-500/30 hover:border-green-400 transition-all duration-300 group flex flex-col">
             <div class="flex items-center mb-4">
               <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
                 <span class="text-2xl">📚</span>
               </div>
               <h3 class="text-xl font-bold text-green-300">Few-Shot Learning</h3>
             </div>
-            <p class="text-gray-300 text-sm mb-4">Provide examples to teach the model your desired pattern.</p>
-            
-            <div class="bg-gray-900/50 p-3 rounded-lg">
-              <div class="text-xs font-fira mb-2 text-green-200">Pattern Teaching:</div>
-              <div class="text-xs font-fira text-gray-300">
-                <div>Input: "happy" → Output: "😊"</div>
-                <div>Input: "sad" → Output: "😢"</div>
-                <div>Input: "angry" → Output: ?</div>
+            <div class="flex-grow">
+              <p class="text-gray-300 text-sm mb-4">Provide examples to teach the model your desired pattern.</p>
+              
+              <div class="bg-gray-900/50 p-3 rounded-lg">
+                <div class="text-xs font-fira mb-2 text-green-200">Pattern Teaching:</div>
+                <div class="text-xs font-fira text-gray-300">
+                  <div>Input: "happy" → Output: "😊"</div>
+                  <div>Input: "sad" → Output: "😢"</div>
+                  <div>Input: "angry" → Output: ?</div>
+                </div>
               </div>
             </div>
             
@@ -273,21 +277,23 @@
           </div>
 
           <!-- Role-Based Prompting -->
-          <div class="bg-gradient-to-br from-blue-800/30 to-blue-900/30 p-6 rounded-lg border border-blue-500/30 hover:border-blue-400 transition-all duration-300 group">
+          <div class="bg-gradient-to-br from-blue-800/30 to-blue-900/30 p-6 rounded-lg border border-blue-500/30 hover:border-blue-400 transition-all duration-300 group flex flex-col">
             <div class="flex items-center mb-4">
               <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
                 <span class="text-2xl">🎭</span>
               </div>
               <h3 class="text-xl font-bold text-blue-300">Role-Based Prompting</h3>
             </div>
-            <p class="text-gray-300 text-sm mb-4">Assign specific expertise or personas to shape responses.</p>
-            
-            <div class="bg-gray-900/50 p-3 rounded-lg">
-              <div class="text-xs font-fira mb-2 text-blue-200">Personas:</div>
-              <div class="text-xs font-fira text-gray-300">
-                <div>• "Act as a senior developer..."</div>
-                <div>• "You are a creative writer..."</div>
-                <div>• "As a data scientist..."</div>
+            <div class="flex-grow">
+              <p class="text-gray-300 text-sm mb-4">Assign specific expertise or personas to shape responses.</p>
+              
+              <div class="bg-gray-900/50 p-3 rounded-lg">
+                <div class="text-xs font-fira mb-2 text-blue-200">Personas:</div>
+                <div class="text-xs font-fira text-gray-300">
+                  <div>• "Act as a senior developer..."</div>
+                  <div>• "You are a creative writer..."</div>
+                  <div>• "As a data scientist..."</div>
+                </div>
               </div>
             </div>
             
@@ -297,21 +303,23 @@
           </div>
 
           <!-- Tree of Thoughts -->
-          <div class="bg-gradient-to-br from-red-800/30 to-red-900/30 p-6 rounded-lg border border-red-500/30 hover:border-red-400 transition-all duration-300 group">
+          <div class="bg-gradient-to-br from-red-800/30 to-red-900/30 p-6 rounded-lg border border-red-500/30 hover:border-red-400 transition-all duration-300 group flex flex-col">
             <div class="flex items-center mb-4">
               <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
                 <span class="text-2xl">🌳</span>
               </div>
               <h3 class="text-xl font-bold text-red-300">Tree of Thoughts</h3>
             </div>
-            <p class="text-gray-300 text-sm mb-4">Explore multiple reasoning paths before choosing the best.</p>
-            
-            <div class="bg-gray-900/50 p-3 rounded-lg">
-              <div class="text-xs font-fira mb-2 text-red-200">Branching Logic:</div>
-              <div class="text-xs font-fira text-gray-300">
-                <div>Path A: Technical approach...</div>
-                <div>Path B: Creative approach...</div>
-                <div>Path C: Hybrid solution...</div>
+            <div class="flex-grow">
+              <p class="text-gray-300 text-sm mb-4">Explore multiple reasoning paths before choosing the best.</p>
+              
+              <div class="bg-gray-900/50 p-3 rounded-lg">
+                <div class="text-xs font-fira mb-2 text-red-200">Branching Logic:</div>
+                <div class="text-xs font-fira text-gray-300">
+                  <div>Path A: Technical approach...</div>
+                  <div>Path B: Creative approach...</div>
+                  <div>Path C: Hybrid solution...</div>
+                </div>
               </div>
             </div>
             

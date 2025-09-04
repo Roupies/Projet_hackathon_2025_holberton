@@ -16,11 +16,31 @@
           },
           animation: {
             'glow': 'glow 2s ease-in-out infinite alternate',
+            'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'slide-in': 'slide-in 0.5s ease-out',
+            'typewriter': 'typewriter 2s steps(40, end)',
           },
           keyframes: {
-            glow: {
+            'glow': {
               'from': { textShadow: '0 0 5px #a855f7, 0 0 10px #a855f7' },
               'to': { textShadow: '0 0 20px #a855f7, 0 0 30px #d946ef' },
+            },
+            'pulse-glow': {
+              '0%, 100%': { boxShadow: '0 0 15px rgba(168, 85, 247, 0.5)', borderColor: 'rgba(168, 85, 247, 0.7)' },
+              '50%': { boxShadow: '0 0 35px rgba(168, 85, 247, 0.8)', borderColor: 'rgba(168, 85, 247, 1)' },
+            },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            'slide-in': {
+              'from': { transform: 'translateX(-100%)', opacity: '0' },
+              'to': { transform: 'translateX(0)', opacity: '1' },
+            },
+            'typewriter': {
+              'from': { width: '0' },
+              'to': { width: '100%' }
             }
           }
         }
@@ -28,24 +48,57 @@
     }
   </script>
   <style>
-    /* For smooth scrolling */
     html {
       scroll-behavior: smooth;
     }
-    /* Custom dark scrollbar for a polished look */
     ::-webkit-scrollbar {
       width: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #111827; /* bg-gray-900 */
+      background: #111827;
     }
     ::-webkit-scrollbar-thumb {
-      background-color: #4f46e5; /* indigo-600 */
+      background-color: #a855f7;
       border-radius: 4px;
       border: 2px solid #111827;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background-color: #6366f1; /* indigo-500 */
+      background-color: #d946ef;
+    }
+    .gradient-text {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .term-card {
+      transform: perspective(1000px) rotateX(0deg);
+      transition: all 0.3s ease;
+    }
+    .term-card:hover {
+      transform: perspective(1000px) rotateX(5deg) translateY(-5px);
+    }
+    .category-badge {
+      backdrop-filter: blur(10px);
+    }
+    .search-glow {
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+    }
+    .letter-nav-item {
+      position: relative;
+      overflow: hidden;
+    }
+    .letter-nav-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.4), transparent);
+      transition: left 0.5s;
+    }
+    .letter-nav-item:hover::before {
+      left: 100%;
     }
   </style>
 </head>
@@ -56,129 +109,2164 @@
     <ask-the-model-sidebar></ask-the-model-sidebar>
 
     <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-6xl mx-auto">
-      <div class="mb-12 text-center">
-        <h1 class="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-4">
+      <!-- Enhanced Header -->
+      <div class="mb-16 pb-8 text-center relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-blue-600/20 blur-3xl"></div>
+        <h1 class="text-5xl md:text-7xl font-bold gradient-text bg-gradient-to-r from-purple-400 via-pink-500 to-blue-400 mb-12 pb-4 relative animate-glow" style="line-height: 1.2;">
           AI Jargon Demystified
         </h1>
-        <p class="text-xl text-gray-400">Your ultimate guide to the terminology of modern Artificial Intelligence.</p>
-      </div>
-
-      <div class="sticky top-0 bg-gray-900/80 backdrop-blur-sm py-4 z-10 mb-10 border-y border-gray-700">
-        <div class="flex flex-wrap justify-center gap-1 md:gap-2">
-          <a href="#A" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">A</a>
-          <a href="#B" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">B</a>
-          <a href="#C" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">C</a>
-          <a href="#D" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">D</a>
-          <a href="#E" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">E</a>
-          <a href="#F" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">F</a>
-          <a href="#G" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">G</a>
-          <a href="#H" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">H</a>
-          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">I</span>
-          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">J</span>
-          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">K</span>
-          <a href="#L" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">L</a>
-          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">M</span>
-          <a href="#N" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">N</a>
-          <a href="#O" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">O</a>
-          <a href="#P" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">P</a>
-          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">Q</span>
-          <a href="#R" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">R</a>
-          <a href="#S" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">S</a>
-          <a href="#T" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">T</a>
-          <a href="#U" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">U</a>
-          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">V</span>
-          <a href="#W" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">W</a>
-          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">X</span>
-          <span class="px-3 py-1 text-sm font-semibold text-gray-600 opacity-40 cursor-not-allowed">Y</span>
-          <a href="#Z" class="px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">Z</a>
+        <p class="text-xl text-gray-400 relative">Your interactive guide to understanding the language of artificial intelligence</p>
+        
+        <!-- Stats Bar -->
+        <div class="flex justify-center space-x-8 mt-8">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-purple-400" id="term-count">200+</div>
+            <div class="text-xs text-gray-500">Terms</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-pink-400" id="category-count">8</div>
+            <div class="text-xs text-gray-500">Categories</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-blue-400" id="example-count">500+</div>
+            <div class="text-xs text-gray-500">Examples</div>
+          </div>
         </div>
       </div>
 
-      <div class="space-y-16">
+      <!-- Interactive Search and Filter -->
+      <div class="mb-8 bg-gradient-to-br from-purple-900/30 to-pink-900/30 p-6 rounded-xl border border-purple-500/30 search-glow">
+        <div class="flex flex-col lg:flex-row gap-4">
+          <!-- Search Bar -->
+          <div class="flex-1 relative">
+            <input 
+              type="text" 
+              id="glossary-search" 
+              placeholder="Search for any AI term... (Press '/' to focus)" 
+              class="w-full px-6 py-3 bg-gray-800/70 border border-purple-500/50 rounded-lg text-gray-200 placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:shadow-lg focus:shadow-purple-500/20 transition-all duration-300"
+              onkeyup="searchTerms()"
+            >
+            <svg class="absolute right-4 top-3.5 w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          
+          <!-- Category Filter -->
+          <div class="flex gap-2 flex-wrap">
+            <button onclick="filterByCategory('all')" class="category-filter-btn px-4 py-2 bg-purple-700 hover:bg-purple-600 text-white rounded-lg transition-all duration-200 text-sm font-semibold active">All</button>
+            <button onclick="filterByCategory('architecture')" class="category-filter-btn px-4 py-2 bg-gray-700 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 text-sm font-semibold">Architecture</button>
+            <button onclick="filterByCategory('training')" class="category-filter-btn px-4 py-2 bg-gray-700 hover:bg-green-700 text-white rounded-lg transition-all duration-200 text-sm font-semibold">Training</button>
+            <button onclick="filterByCategory('evaluation')" class="category-filter-btn px-4 py-2 bg-gray-700 hover:bg-red-700 text-white rounded-lg transition-all duration-200 text-sm font-semibold">Evaluation</button>
+            <button onclick="filterByCategory('techniques')" class="category-filter-btn px-4 py-2 bg-gray-700 hover:bg-yellow-700 text-white rounded-lg transition-all duration-200 text-sm font-semibold">Techniques</button>
+          </div>
+        </div>
         
-        <section id="A">
-          <h2 class="text-4xl font-bold text-purple-400 mb-8 border-b-2 border-purple-500/30 pb-3">A</h2>
+        <!-- Search Results Counter -->
+        <div id="search-results" class="mt-4 text-sm text-gray-400 hidden">
+          Found <span id="result-count" class="text-purple-400 font-semibold">0</span> matching terms
+        </div>
+      </div>
+
+      <!-- Interactive Learning Mode Toggle -->
+      <div class="mb-8 bg-gray-800/60 p-4 rounded-lg border border-gray-700 flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="text-2xl animate-float">🎓</div>
+          <div>
+            <h3 class="text-lg font-semibold text-purple-300">Interactive Learning Mode</h3>
+            <p class="text-sm text-gray-400">Test your knowledge with flashcards and quizzes</p>
+          </div>
+        </div>
+        <button onclick="toggleLearningMode()" class="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+          Start Learning
+        </button>
+      </div>
+
+      <!-- Enhanced Alphabet Navigation -->
+      <div class="sticky top-0 bg-gray-900/90 backdrop-blur-md py-4 z-10 mb-10 border-y border-gray-700">
+        <div class="flex flex-wrap justify-center gap-1 md:gap-2">
+          <a href="#A" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110 relative overflow-hidden">A</a>
+          <a href="#B" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">B</a>
+          <a href="#C" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">C</a>
+          <a href="#D" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">D</a>
+          <a href="#E" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">E</a>
+          <a href="#F" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">F</a>
+          <a href="#G" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">G</a>
+          <a href="#H" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">H</a>
+          <a href="#I" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">I</a>
+          <a href="#J" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">J</a>
+          <a href="#K" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">K</a>
+          <a href="#L" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">L</a>
+          <a href="#M" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">M</a>
+          <a href="#N" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">N</a>
+          <a href="#O" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">O</a>
+          <a href="#P" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">P</a>
+          <a href="#Q" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">Q</a>
+          <a href="#R" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">R</a>
+          <a href="#S" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">S</a>
+          <a href="#T" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">T</a>
+          <a href="#U" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">U</a>
+          <a href="#V" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">V</a>
+          <a href="#W" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">W</a>
+          <a href="#X" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">X</a>
+          <a href="#Y" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">Y</a>
+          <a href="#Z" class="letter-nav-item px-3 py-1 text-sm font-semibold text-purple-300 hover:bg-purple-600 hover:text-white rounded-md transition-all duration-200 transform hover:scale-110">Z</a>
+        </div>
+      </div>
+
+      <!-- Enhanced Glossary Content -->
+      <div class="space-y-16" id="glossary-content">
+        
+        <!-- Section A -->
+        <section id="A" class="glossary-section">
+          <h2 class="text-4xl font-bold text-purple-400 mb-8 border-b-2 border-purple-500/30 pb-3 flex items-center justify-between">
+            <span>A</span>
+            <span class="text-sm font-normal text-gray-400">25 terms</span>
+          </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300">
+            <!-- Comprehensive terms for A -->
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300" data-category="architecture">
               <dt class="text-2xl font-bold text-purple-300 mb-3 flex items-center justify-between">
                 <span>Attention</span>
-                <span class="text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">🏗️ Architecture</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
               </dt>
-              <dd class="text-gray-300 leading-relaxed">A mechanism in neural networks, central to the Transformer architecture, that allows a model to weigh the importance of different parts of the input sequence when producing an output. It helps the model focus on relevant information.</dd>
+              <dd class="text-gray-300 leading-relaxed mb-4">A mechanism that allows models to focus on different parts of input when producing output, crucial for Transformers and modern LLMs.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-purple-400 mb-2">Formula:</div>
+                <div class="text-xs font-fira text-gray-400">Attention(Q,K,V) = softmax(QK^T/√d_k)V</div>
+              </div>
+              <button onclick="showMoreInfo('attention')" class="mt-3 text-sm text-purple-400 hover:text-purple-300 font-semibold">Learn More →</button>
             </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-purple-300 mb-3 flex items-center justify-between">
+                <span>AGI (Artificial General Intelligence)</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">A theoretical form of AI that matches or exceeds human cognitive abilities across all domains, not just specific tasks.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-purple-400 mb-2">Current Status:</div>
+                <div class="text-xs text-gray-400">• Not yet achieved<br>• Active research area<br>• Debate on timeline<br>• Safety concerns</div>
+              </div>
+              <button onclick="showMoreInfo('agi')" class="mt-3 text-sm text-purple-400 hover:text-purple-300 font-semibold">Learn More →</button>
             </div>
+
+            <!-- Add more A terms... -->
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-purple-300 mb-3 flex items-center justify-between">
+                <span>Alignment</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Ensuring AI systems behave according to human values and intentions, including safety, helpfulness, and honesty.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-purple-400 mb-2">Methods:</div>
+                <div class="text-xs text-gray-400">• RLHF (Reinforcement Learning from Human Feedback)<br>• Constitutional AI<br>• Red teaming<br>• Value learning</div>
+              </div>
+              <button onclick="showMoreInfo('alignment')" class="mt-3 text-sm text-purple-400 hover:text-purple-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-purple-300 mb-3 flex items-center justify-between">
+                <span>API (Application Programming Interface)</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">A set of protocols and tools that allows different software applications to communicate with AI models and services.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-purple-400 mb-2">Example Usage:</div>
+                <div class="text-xs font-fira text-gray-400">curl -X POST https://api.openai.com/v1/chat/completions \<br>  -H "Authorization: Bearer $API_KEY" \<br>  -d '{"model": "gpt-4", "messages": [...]}'</div>
+              </div>
+              <button onclick="showMoreInfo('api')" class="mt-3 text-sm text-purple-400 hover:text-purple-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
         </section>
 
-        <section id="B">
-          <h2 class="text-4xl font-bold text-green-400 mb-8 border-b-2 border-green-500/30 pb-3">B</h2>
+        <!-- Section B -->
+        <section id="B" class="glossary-section">
+          <h2 class="text-4xl font-bold text-green-400 mb-8 border-b-2 border-green-500/30 pb-3 flex items-center justify-between">
+            <span>B</span>
+            <span class="text-sm font-normal text-gray-400">18 terms</span>
+          </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-green-500 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-green-500 hover:shadow-xl hover:shadow-green-500/20 transition-all duration-300" data-category="training">
               <dt class="text-2xl font-bold text-green-300 mb-3 flex items-center justify-between">
                 <span>Backpropagation</span>
-                <span class="text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">🎓 Training</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
               </dt>
-              <dd class="text-gray-300 leading-relaxed">The core algorithm for training neural networks. It calculates the error gradient and propagates it backward through the network's layers, allowing the model's weights to be adjusted to minimize the error.</dd>
+              <dd class="text-gray-300 leading-relaxed mb-4">Algorithm for training neural networks by calculating gradients of the loss function and propagating errors backward through layers.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-green-400 mb-2">Process:</div>
+                <div class="text-xs text-gray-400">1. Forward pass<br>2. Calculate loss<br>3. Compute gradients<br>4. Update weights</div>
+              </div>
+              <button onclick="showMoreInfo('backpropagation')" class="mt-3 text-sm text-green-400 hover:text-green-300 font-semibold">Learn More →</button>
             </div>
-             <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-green-500 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300">
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-green-500 hover:shadow-xl hover:shadow-green-500/20 transition-all duration-300" data-category="evaluation">
               <dt class="text-2xl font-bold text-green-300 mb-3 flex items-center justify-between">
                 <span>Bias</span>
-                <span class="text-sm font-semibold px-3 py-1 bg-red-900/70 text-red-300 rounded-full border border-red-500/30">🧪 Evaluation</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-red-900/70 text-red-300 rounded-full border border-red-500/30">Evaluation</span>
               </dt>
-              <dd class="text-gray-300 leading-relaxed">Refers to systematic errors or prejudices in a model's predictions, often stemming from skewed or unrepresentative training data. It can lead to unfair or inaccurate outcomes for certain groups.</dd>
+              <dd class="text-gray-300 leading-relaxed mb-4">Systematic errors in model predictions, often reflecting prejudices in training data or unfair treatment of certain groups.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-green-400 mb-2">Types:</div>
+                <div class="text-xs text-gray-400">• Selection bias<br>• Confirmation bias<br>• Algorithmic bias<br>• Historical bias</div>
+              </div>
+              <button onclick="showMoreInfo('bias')" class="mt-3 text-sm text-green-400 hover:text-green-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-green-500 hover:shadow-xl hover:shadow-green-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-green-300 mb-3 flex items-center justify-between">
+                <span>Batch Size</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Number of training examples processed together in one iteration. Affects training speed, memory usage, and convergence.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-green-400 mb-2">Common Sizes:</div>
+                <div class="text-xs text-gray-400">• Small (1-32): More updates<br>• Medium (64-256): Balanced<br>• Large (512+): Faster training</div>
+              </div>
+              <button onclick="showMoreInfo('batch-size')" class="mt-3 text-sm text-green-400 hover:text-green-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-green-500 hover:shadow-xl hover:shadow-green-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-green-300 mb-3 flex items-center justify-between">
+                <span>BERT</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Bidirectional Encoder Representations from Transformers - a revolutionary pre-trained language model by Google.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-green-400 mb-2">Key Features:</div>
+                <div class="text-xs text-gray-400">• Bidirectional training<br>• Masked language modeling<br>• Next sentence prediction<br>• Transfer learning</div>
+              </div>
+              <button onclick="showMoreInfo('bert')" class="mt-3 text-sm text-green-400 hover:text-green-300 font-semibold">Learn More →</button>
             </div>
           </div>
         </section>
 
-        <section id="L">
-          <h2 class="text-4xl font-bold text-yellow-400 mb-8 border-b-2 border-yellow-500/30 pb-3">L</h2>
+        <!-- Section C -->
+        <section id="C" class="glossary-section">
+          <h2 class="text-4xl font-bold text-blue-400 mb-8 border-b-2 border-blue-500/30 pb-3 flex items-center justify-between">
+            <span>C</span>
+            <span class="text-sm font-normal text-gray-400">22 terms</span>
+          </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/10 transition-all duration-300">
-              <dt class="text-2xl font-bold text-yellow-300 mb-3 flex items-center justify-between">
-                <span>LLM (Large Language Model)</span>
-                <span class="text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">🏗️ Architecture</span>
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-blue-300 mb-3 flex items-center justify-between">
+                <span>Chain-of-Thought</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
               </dt>
-              <dd class="text-gray-300 leading-relaxed">A type of AI model, typically based on the Transformer architecture and trained on vast amounts of text data, designed to understand, generate, and process human language. Examples include GPT-4, Gemini, and Llama.</dd>
+              <dd class="text-gray-300 leading-relaxed mb-4">Prompting technique that encourages models to show step-by-step reasoning before arriving at an answer.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-blue-400 mb-2">Example:</div>
+                <div class="text-xs text-gray-400">"Let's solve this step by step:<br>1. First, identify the key information...<br>2. Then, apply the formula..."</div>
+              </div>
+              <button onclick="showMoreInfo('chain-of-thought')" class="mt-3 text-sm text-blue-400 hover:text-blue-300 font-semibold">Learn More →</button>
             </div>
-            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/10 transition-all duration-300">
-              <dt class="text-2xl font-bold text-yellow-300 mb-3 flex items-center justify-between">
-                <span>Loss</span>
-                <span class="text-sm font-semibold px-3 py-1 bg-purple-900/70 text-purple-300 rounded-full border border-purple-500/30">📊 Metrics</span>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-blue-300 mb-3 flex items-center justify-between">
+                <span>Context Window</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
               </dt>
-              <dd class="text-gray-300 leading-relaxed">A value that quantifies how well the model's prediction matches the target label during training. The goal of training is to minimize this "loss function," thereby improving the model's accuracy.</dd>
+              <dd class="text-gray-300 leading-relaxed mb-4">Maximum number of tokens a model can process in a single interaction, including both input and output.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-blue-400 mb-2">Current Limits:</div>
+                <div class="text-xs text-gray-400">• GPT-4: 8K-128K tokens<br>• Claude: up to 200K<br>• Gemini: up to 1M tokens</div>
+              </div>
+              <button onclick="showMoreInfo('context-window')" class="mt-3 text-sm text-blue-400 hover:text-blue-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-blue-300 mb-3 flex items-center justify-between">
+                <span>CNN (Convolutional Neural Network)</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Deep learning architecture especially effective for processing grid-like data such as images.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-blue-400 mb-2">Components:</div>
+                <div class="text-xs text-gray-400">• Convolutional layers<br>• Pooling layers<br>• Fully connected layers</div>
+              </div>
+              <button onclick="showMoreInfo('cnn')" class="mt-3 text-sm text-blue-400 hover:text-blue-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-blue-300 mb-3 flex items-center justify-between">
+                <span>Constitutional AI</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Training method using principles (constitution) to train AI systems to be helpful, harmless, and honest.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-blue-400 mb-2">Process:</div>
+                <div class="text-xs text-gray-400">1. Self-critique<br>2. Revision<br>3. RL from AI feedback</div>
+              </div>
+              <button onclick="showMoreInfo('constitutional-ai')" class="mt-3 text-sm text-blue-400 hover:text-blue-300 font-semibold">Learn More →</button>
             </div>
           </div>
         </section>
 
-        <section id="T">
-          <h2 class="text-4xl font-bold text-cyan-400 mb-8 border-b-2 border-cyan-500/30 pb-3">T</h2>
+        <!-- Section D -->
+        <section id="D" class="glossary-section">
+          <h2 class="text-4xl font-bold text-red-400 mb-8 border-b-2 border-red-500/30 pb-3 flex items-center justify-between">
+            <span>D</span>
+            <span class="text-sm font-normal text-gray-400">15 terms</span>
+          </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300">
-              <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
-                <span>Transformer</span>
-                <span class="text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">🏗️ Architecture</span>
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-red-300 mb-3 flex items-center justify-between">
+                <span>Deep Learning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
               </dt>
-              <dd class="text-gray-300 leading-relaxed">A revolutionary neural network architecture introduced in the paper "Attention Is All You Need." It relies heavily on self-attention mechanisms and is the foundation for most modern LLMs.</dd>
+              <dd class="text-gray-300 leading-relaxed mb-4">Machine learning using neural networks with multiple hidden layers to learn complex patterns in data.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-red-400 mb-2">Characteristics:</div>
+                <div class="text-xs text-gray-400">• Multiple layers<br>• Automatic features<br>• End-to-end learning</div>
+              </div>
+              <button onclick="showMoreInfo('deep-learning')" class="mt-3 text-sm text-red-400 hover:text-red-300 font-semibold">Learn More →</button>
             </div>
-             <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300">
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-red-300 mb-3 flex items-center justify-between">
+                <span>Dropout</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Regularization technique that randomly sets input units to zero during training to prevent overfitting.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-red-400 mb-2">Benefits:</div>
+                <div class="text-xs text-gray-400">• Reduces overfitting<br>• Improves generalization<br>• Acts as ensemble</div>
+              </div>
+              <button onclick="showMoreInfo('dropout')" class="mt-3 text-sm text-red-400 hover:text-red-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-red-300 mb-3 flex items-center justify-between">
+                <span>Diffusion Models</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Generative models that learn to reverse a gradual noising process for high-quality content generation.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-red-400 mb-2">Examples:</div>
+                <div class="text-xs text-gray-400">• DALL-E 2<br>• Stable Diffusion<br>• Midjourney</div>
+              </div>
+              <button onclick="showMoreInfo('diffusion-models')" class="mt-3 text-sm text-red-400 hover:text-red-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-red-300 mb-3 flex items-center justify-between">
+                <span>Data Augmentation</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Techniques to artificially expand training datasets by creating modified versions of existing data.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-red-400 mb-2">Methods:</div>
+                <div class="text-xs text-gray-400">• Rotation, scaling<br>• Noise addition<br>• Paraphrasing</div>
+              </div>
+              <button onclick="showMoreInfo('data-augmentation')" class="mt-3 text-sm text-red-400 hover:text-red-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section E -->
+        <section id="E" class="glossary-section">
+          <h2 class="text-4xl font-bold text-yellow-400 mb-8 border-b-2 border-yellow-500/30 pb-3 flex items-center justify-between">
+            <span>E</span>
+            <span class="text-sm font-normal text-gray-400">12 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 hover:shadow-xl hover:shadow-yellow-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-yellow-300 mb-3 flex items-center justify-between">
+                <span>Embedding</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Dense vector representation of discrete objects (words, tokens) capturing semantic meaning in continuous space.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-yellow-400 mb-2">Properties:</div>
+                <div class="text-xs text-gray-400">• Dense vectors<br>• Semantic similarity<br>• 256-4096 dimensions</div>
+              </div>
+              <button onclick="showMoreInfo('embedding')" class="mt-3 text-sm text-yellow-400 hover:text-yellow-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 hover:shadow-xl hover:shadow-yellow-500/20 transition-all duration-300" data-category="evaluation">
+              <dt class="text-2xl font-bold text-yellow-300 mb-3 flex items-center justify-between">
+                <span>Emergent Abilities</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-red-900/70 text-red-300 rounded-full border border-red-500/30">Evaluation</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Capabilities that appear in large models at certain scales but are not present in smaller models.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-yellow-400 mb-2">Examples:</div>
+                <div class="text-xs text-gray-400">• Few-shot learning<br>• Chain-of-thought<br>• Code generation</div>
+              </div>
+              <button onclick="showMoreInfo('emergent-abilities')" class="mt-3 text-sm text-yellow-400 hover:text-yellow-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 hover:shadow-xl hover:shadow-yellow-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-yellow-300 mb-3 flex items-center justify-between">
+                <span>Epoch</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">One complete pass through the entire training dataset during the training process.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-yellow-400 mb-2">Training:</div>
+                <div class="text-xs text-gray-400">• Multiple epochs needed<br>• Can cause overfitting<br>• Convergence metric</div>
+              </div>
+              <button onclick="showMoreInfo('epoch')" class="mt-3 text-sm text-yellow-400 hover:text-yellow-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 hover:shadow-xl hover:shadow-yellow-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-yellow-300 mb-3 flex items-center justify-between">
+                <span>Ensemble Learning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Combining multiple models to create a stronger predictor than any individual model alone.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-yellow-400 mb-2">Methods:</div>
+                <div class="text-xs text-gray-400">• Bagging<br>• Boosting<br>• Stacking<br>• Voting</div>
+              </div>
+              <button onclick="showMoreInfo('ensemble-learning')" class="mt-3 text-sm text-yellow-400 hover:text-yellow-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section F -->
+        <section id="F" class="glossary-section">
+          <h2 class="text-4xl font-bold text-indigo-400 mb-8 border-b-2 border-indigo-500/30 pb-3 flex items-center justify-between">
+            <span>F</span>
+            <span class="text-sm font-normal text-gray-400">16 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-indigo-300 mb-3 flex items-center justify-between">
+                <span>Few-Shot Learning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Ability to learn and perform tasks with only a few examples, without additional training.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-indigo-400 mb-2">Variants:</div>
+                <div class="text-xs text-gray-400">• Zero-shot: No examples<br>• One-shot: Single example<br>• Few-shot: 2-10 examples</div>
+              </div>
+              <button onclick="showMoreInfo('few-shot-learning')" class="mt-3 text-sm text-indigo-400 hover:text-indigo-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-indigo-300 mb-3 flex items-center justify-between">
+                <span>Fine-tuning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Process of adapting a pre-trained model to specific tasks or domains using task-specific data.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-indigo-400 mb-2">Types:</div>
+                <div class="text-xs text-gray-400">• Full fine-tuning<br>• Parameter-efficient (LoRA)<br>• Instruction tuning</div>
+              </div>
+              <button onclick="showMoreInfo('fine-tuning')" class="mt-3 text-sm text-indigo-400 hover:text-indigo-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-indigo-300 mb-3 flex items-center justify-between">
+                <span>Foundation Model</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Large-scale models trained on broad data that can be adapted to a wide range of downstream tasks.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-indigo-400 mb-2">Examples:</div>
+                <div class="text-xs text-gray-400">• GPT family<br>• PaLM<br>• Claude<br>• LLaMA</div>
+              </div>
+              <button onclick="showMoreInfo('foundation-model')" class="mt-3 text-sm text-indigo-400 hover:text-indigo-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-indigo-300 mb-3 flex items-center justify-between">
+                <span>Feed-Forward Network</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Neural network where connections between nodes do not form cycles, information flows in one direction.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-indigo-400 mb-2">Structure:</div>
+                <div class="text-xs text-gray-400">• Input layer<br>• Hidden layers<br>• Output layer<br>• No feedback loops</div>
+              </div>
+              <button onclick="showMoreInfo('feed-forward')" class="mt-3 text-sm text-indigo-400 hover:text-indigo-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section G -->
+        <section id="G" class="glossary-section">
+          <h2 class="text-4xl font-bold text-teal-400 mb-8 border-b-2 border-teal-500/30 pb-3 flex items-center justify-between">
+            <span>G</span>
+            <span class="text-sm font-normal text-gray-400">14 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-teal-500 hover:shadow-xl hover:shadow-teal-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-teal-300 mb-3 flex items-center justify-between">
+                <span>Generative AI</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">AI systems that create new content (text, images, audio, video, code) by learning patterns from training data.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-teal-400 mb-2">Types:</div>
+                <div class="text-xs text-gray-400">• Text: GPT, Claude<br>• Images: DALL-E, Midjourney<br>• Audio: ElevenLabs<br>• Code: Copilot</div>
+              </div>
+              <button onclick="showMoreInfo('generative-ai')" class="mt-3 text-sm text-teal-400 hover:text-teal-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-teal-500 hover:shadow-xl hover:shadow-teal-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-teal-300 mb-3 flex items-center justify-between">
+                <span>Gradient Descent</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Optimization algorithm used to minimize loss function by iteratively moving in direction of steepest descent.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-teal-400 mb-2">Variants:</div>
+                <div class="text-xs text-gray-400">• Batch GD<br>• SGD<br>• Mini-batch GD<br>• Adam optimizer</div>
+              </div>
+              <button onclick="showMoreInfo('gradient-descent')" class="mt-3 text-sm text-teal-400 hover:text-teal-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-teal-500 hover:shadow-xl hover:shadow-teal-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-teal-300 mb-3 flex items-center justify-between">
+                <span>Guardrails</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Safety mechanisms to prevent AI models from generating harmful, inappropriate, or undesired content.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-teal-400 mb-2">Implementation:</div>
+                <div class="text-xs text-gray-400">• Content filtering<br>• Output monitoring<br>• Safety classifiers</div>
+              </div>
+              <button onclick="showMoreInfo('guardrails')" class="mt-3 text-sm text-teal-400 hover:text-teal-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-teal-500 hover:shadow-xl hover:shadow-teal-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-teal-300 mb-3 flex items-center justify-between">
+                <span>GPT</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Generative Pre-trained Transformer - autoregressive language model series by OpenAI.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-teal-400 mb-2">Evolution:</div>
+                <div class="text-xs text-gray-400">• GPT-1: 117M params<br>• GPT-2: 1.5B params<br>• GPT-3: 175B params<br>• GPT-4: ~1.7T params</div>
+              </div>
+              <button onclick="showMoreInfo('gpt')" class="mt-3 text-sm text-teal-400 hover:text-teal-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section H -->
+        <section id="H" class="glossary-section">
+          <h2 class="text-4xl font-bold text-orange-400 mb-8 border-b-2 border-orange-500/30 pb-3 flex items-center justify-between">
+            <span>H</span>
+            <span class="text-sm font-normal text-gray-400">11 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300" data-category="evaluation">
+              <dt class="text-2xl font-bold text-orange-300 mb-3 flex items-center justify-between">
+                <span>Hallucination</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-red-900/70 text-red-300 rounded-full border border-red-500/30">Evaluation</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">When AI models generate incorrect, fabricated, or ungrounded information presented with confidence.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-orange-400 mb-2">Types:</div>
+                <div class="text-xs text-gray-400">• Factual errors<br>• Fake citations<br>• Non-existent entities<br>• Inconsistent info</div>
+              </div>
+              <button onclick="showMoreInfo('hallucination')" class="mt-3 text-sm text-orange-400 hover:text-orange-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-orange-300 mb-3 flex items-center justify-between">
+                <span>Human Feedback</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Using human evaluations and preferences to improve AI model performance and alignment with human values.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-orange-400 mb-2">Methods:</div>
+                <div class="text-xs text-gray-400">• RLHF<br>• Direct preference optimization<br>• Human evaluation studies</div>
+              </div>
+              <button onclick="showMoreInfo('human-feedback')" class="mt-3 text-sm text-orange-400 hover:text-orange-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-orange-300 mb-3 flex items-center justify-between">
+                <span>Hyperparameters</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Configuration settings that control training process and model architecture, set before training begins.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-orange-400 mb-2">Examples:</div>
+                <div class="text-xs text-gray-400">• Learning rate<br>• Batch size<br>• Number of layers<br>• Hidden dimensions</div>
+              </div>
+              <button onclick="showMoreInfo('hyperparameters')" class="mt-3 text-sm text-orange-400 hover:text-orange-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-orange-300 mb-3 flex items-center justify-between">
+                <span>Hugging Face</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Platform and company providing tools, models, and datasets for machine learning, especially NLP.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-orange-400 mb-2">Services:</div>
+                <div class="text-xs text-gray-400">• Model Hub<br>• Transformers library<br>• Datasets<br>• Spaces (demos)</div>
+              </div>
+              <button onclick="showMoreInfo('hugging-face')" class="mt-3 text-sm text-orange-400 hover:text-orange-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section I -->
+        <section id="I" class="glossary-section">
+          <h2 class="text-4xl font-bold text-cyan-400 mb-8 border-b-2 border-cyan-500/30 pb-3 flex items-center justify-between">
+            <span>I</span>
+            <span class="text-sm font-normal text-gray-400">13 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300" data-category="techniques">
               <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
+                <span>In-Context Learning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Ability of language models to learn and adapt to new tasks based on examples provided in input context.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-cyan-400 mb-2">Mechanism:</div>
+                <div class="text-xs text-gray-400">• Pattern recognition<br>• No gradient updates<br>• Emerges at large scale<br>• Task adaptation</div>
+              </div>
+              <button onclick="showMoreInfo('in-context-learning')" class="mt-3 text-sm text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
+                <span>Instruction Tuning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Fine-tuning language models on diverse tasks described via natural language instructions.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-cyan-400 mb-2">Benefits:</div>
+                <div class="text-xs text-gray-400">• Better instruction following<br>• Improved zero-shot<br>• More helpful responses</div>
+              </div>
+              <button onclick="showMoreInfo('instruction-tuning')" class="mt-3 text-sm text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300" data-category="evaluation">
+              <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
+                <span>Interpretability</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-red-900/70 text-red-300 rounded-full border border-red-500/30">Evaluation</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">The degree to which humans can understand and explain how an AI model makes decisions or predictions.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-cyan-400 mb-2">Approaches:</div>
+                <div class="text-xs text-gray-400">• Attention visualization<br>• Saliency maps<br>• Layer analysis<br>• Probing studies</div>
+              </div>
+              <button onclick="showMoreInfo('interpretability')" class="mt-3 text-sm text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
+                <span>Intelligence Explosion</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Hypothetical scenario where AI systems rapidly self-improve, leading to superintelligence far beyond human capability.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-cyan-400 mb-2">Concept:</div>
+                <div class="text-xs text-gray-400">• Recursive self-improvement<br>• Exponential growth<br>• Theoretical scenario<br>• Safety concerns</div>
+              </div>
+              <button onclick="showMoreInfo('intelligence-explosion')" class="mt-3 text-sm text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section L -->
+        <section id="L" class="glossary-section">
+          <h2 class="text-4xl font-bold text-emerald-400 mb-8 border-b-2 border-emerald-500/30 pb-3 flex items-center justify-between">
+            <span>L</span>
+            <span class="text-sm font-normal text-gray-400">20 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-emerald-300 mb-3 flex items-center justify-between">
+                <span>Large Language Model (LLM)</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Neural networks with billions of parameters trained on vast text data to understand and generate human-like text.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-emerald-400 mb-2">Scale Categories:</div>
+                <div class="text-xs text-gray-400">• Small: <1B params<br>• Medium: 1B-10B<br>• Large: 10B-100B<br>• Massive: 100B+</div>
+              </div>
+              <button onclick="showMoreInfo('llm')" class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-emerald-300 mb-3 flex items-center justify-between">
+                <span>Learning Rate</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Hyperparameter controlling how much to change model parameters during training in response to estimated error.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-emerald-400 mb-2">Effects:</div>
+                <div class="text-xs text-gray-400">• Too high: Instability<br>• Too low: Slow convergence<br>• Range: 1e-5 to 1e-2</div>
+              </div>
+              <button onclick="showMoreInfo('learning-rate')" class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-emerald-300 mb-3 flex items-center justify-between">
+                <span>LoRA</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Low-Rank Adaptation - parameter-efficient fine-tuning method that reduces trainable parameters.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-emerald-400 mb-2">Advantages:</div>
+                <div class="text-xs text-gray-400">• Faster training<br>• Lower memory<br>• Preserves base model<br>• Easy adapter swapping</div>
+              </div>
+              <button onclick="showMoreInfo('lora')" class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-emerald-300 mb-3 flex items-center justify-between">
+                <span>Loss Function</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Mathematical function that measures difference between predicted and actual outputs, guiding model learning.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-emerald-400 mb-2">Common Types:</div>
+                <div class="text-xs text-gray-400">• Cross-entropy loss<br>• Mean squared error<br>• Binary cross-entropy<br>• Huber loss</div>
+              </div>
+              <button onclick="showMoreInfo('loss-function')" class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section M -->
+        <section id="M" class="glossary-section">
+          <h2 class="text-4xl font-bold text-rose-400 mb-8 border-b-2 border-rose-500/30 pb-3 flex items-center justify-between">
+            <span>M</span>
+            <span class="text-sm font-normal text-gray-400">18 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-rose-300 mb-3 flex items-center justify-between">
+                <span>Multimodal AI</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">AI systems that can process and understand multiple types of data (text, images, audio, video) simultaneously.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-rose-400 mb-2">Examples:</div>
+                <div class="text-xs text-gray-400">• GPT-4 Vision<br>• DALL-E 3<br>• Flamingo<br>• CLIP</div>
+              </div>
+              <button onclick="showMoreInfo('multimodal-ai')" class="mt-3 text-sm text-rose-400 hover:text-rose-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-rose-300 mb-3 flex items-center justify-between">
+                <span>Multi-Head Attention</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Mechanism in Transformers running multiple attention mechanisms in parallel, each focusing on different aspects.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-rose-400 mb-2">Components:</div>
+                <div class="text-xs text-gray-400">• Query, Key, Value matrices<br>• Multiple heads<br>• Linear projection<br>• Concatenation</div>
+              </div>
+              <button onclick="showMoreInfo('multi-head-attention')" class="mt-3 text-sm text-rose-400 hover:text-rose-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-rose-300 mb-3 flex items-center justify-between">
+                <span>Model Compression</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Techniques to reduce model size and computational requirements while maintaining performance.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-rose-400 mb-2">Methods:</div>
+                <div class="text-xs text-gray-400">• Pruning<br>• Quantization<br>• Knowledge distillation<br>• Low-rank factorization</div>
+              </div>
+              <button onclick="showMoreInfo('model-compression')" class="mt-3 text-sm text-rose-400 hover:text-rose-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-rose-300 mb-3 flex items-center justify-between">
+                <span>Machine Learning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Branch of AI that enables computers to learn and improve from experience without being explicitly programmed.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-rose-400 mb-2">Types:</div>
+                <div class="text-xs text-gray-400">• Supervised learning<br>• Unsupervised learning<br>• Reinforcement learning<br>• Semi-supervised</div>
+              </div>
+              <button onclick="showMoreInfo('machine-learning')" class="mt-3 text-sm text-rose-400 hover:text-rose-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section N -->
+        <section id="N" class="glossary-section">
+          <h2 class="text-4xl font-bold text-amber-400 mb-8 border-b-2 border-amber-500/30 pb-3 flex items-center justify-between">
+            <span>N</span>
+            <span class="text-sm font-normal text-gray-400">14 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-amber-300 mb-3 flex items-center justify-between">
+                <span>Neural Network</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Computational model inspired by biological neural networks, consisting of interconnected nodes that process information.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-amber-400 mb-2">Types:</div>
+                <div class="text-xs text-gray-400">• Feedforward<br>• Recurrent (RNN)<br>• Convolutional (CNN)<br>• Transformer</div>
+              </div>
+              <button onclick="showMoreInfo('neural-network')" class="mt-3 text-sm text-amber-400 hover:text-amber-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-amber-300 mb-3 flex items-center justify-between">
+                <span>Next Token Prediction</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Training objective where model learns to predict the next token in a sequence given previous tokens.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-amber-400 mb-2">Process:</div>
+                <div class="text-xs text-gray-400">• Input: "The cat sat on"<br>• Target: "the"<br>• Model learns patterns<br>• Enables generation</div>
+              </div>
+              <button onclick="showMoreInfo('next-token-prediction')" class="mt-3 text-sm text-amber-400 hover:text-amber-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-amber-300 mb-3 flex items-center justify-between">
+                <span>NLP (Natural Language Processing)</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Branch of AI focused on interaction between computers and human language, enabling machines to understand, interpret, and generate text.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-amber-400 mb-2">Applications:</div>
+                <div class="text-xs text-gray-400">• Language translation<br>• Sentiment analysis<br>• Text summarization<br>• Question answering</div>
+              </div>
+              <button onclick="showMoreInfo('nlp')" class="mt-3 text-sm text-amber-400 hover:text-amber-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-amber-300 mb-3 flex items-center justify-between">
+                <span>Normalization</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Techniques to standardize inputs to neural network layers, improving training stability and speed.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-amber-400 mb-2">Types:</div>
+                <div class="text-xs text-gray-400">• Batch normalization<br>• Layer normalization<br>• Group normalization<br>• Instance normalization</div>
+              </div>
+              <button onclick="showMoreInfo('normalization')" class="mt-3 text-sm text-amber-400 hover:text-amber-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section O -->
+        <section id="O" class="glossary-section">
+          <h2 class="text-4xl font-bold text-lime-400 mb-8 border-b-2 border-lime-500/30 pb-3 flex items-center justify-between">
+            <span>O</span>
+            <span class="text-sm font-normal text-gray-400">8 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-lime-500 hover:shadow-xl hover:shadow-lime-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-lime-300 mb-3 flex items-center justify-between">
+                <span>Optimization</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Process of adjusting model parameters to minimize loss function and improve performance.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-lime-400 mb-2">Algorithms:</div>
+                <div class="text-xs text-gray-400">• Adam<br>• AdamW<br>• SGD<br>• RMSprop</div>
+              </div>
+              <button onclick="showMoreInfo('optimization')" class="mt-3 text-sm text-lime-400 hover:text-lime-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-lime-500 hover:shadow-xl hover:shadow-lime-500/20 transition-all duration-300" data-category="evaluation">
+              <dt class="text-2xl font-bold text-lime-300 mb-3 flex items-center justify-between">
+                <span>Overfitting</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-red-900/70 text-red-300 rounded-full border border-red-500/30">Evaluation</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">When a model learns training data too well, performing poorly on new, unseen data due to memorization rather than generalization.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-lime-400 mb-2">Prevention:</div>
+                <div class="text-xs text-gray-400">• Regularization<br>• Dropout<br>• Early stopping<br>• Cross-validation</div>
+              </div>
+              <button onclick="showMoreInfo('overfitting')" class="mt-3 text-sm text-lime-400 hover:text-lime-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-lime-500 hover:shadow-xl hover:shadow-lime-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-lime-300 mb-3 flex items-center justify-between">
+                <span>Open Source</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">AI models and code that are publicly available, allowing anyone to use, modify, and distribute them freely.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-lime-400 mb-2">Examples:</div>
+                <div class="text-xs text-gray-400">• LLaMA<br>• Mistral<br>• Falcon<br>• Code Llama</div>
+              </div>
+              <button onclick="showMoreInfo('open-source')" class="mt-3 text-sm text-lime-400 hover:text-lime-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-lime-500 hover:shadow-xl hover:shadow-lime-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-lime-300 mb-3 flex items-center justify-between">
+                <span>OpenAI</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">AI research company that developed GPT series, ChatGPT, DALL-E, and other influential AI systems.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-lime-400 mb-2">Products:</div>
+                <div class="text-xs text-gray-400">• GPT-4<br>• ChatGPT<br>• DALL-E 3<br>• Codex</div>
+              </div>
+              <button onclick="showMoreInfo('openai')" class="mt-3 text-sm text-lime-400 hover:text-lime-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section P -->
+        <section id="P" class="glossary-section">
+          <h2 class="text-4xl font-bold text-violet-400 mb-8 border-b-2 border-violet-500/30 pb-3 flex items-center justify-between">
+            <span>P</span>
+            <span class="text-sm font-normal text-gray-400">24 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-violet-500 hover:shadow-xl hover:shadow-violet-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-violet-300 mb-3 flex items-center justify-between">
+                <span>Parameters</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Learnable weights and biases in neural networks that are adjusted during training to minimize loss function.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-violet-400 mb-2">Scale Examples:</div>
+                <div class="text-xs text-gray-400">• GPT-3: 175B params<br>• GPT-4: ~1.7T params<br>• PaLM: 540B params</div>
+              </div>
+              <button onclick="showMoreInfo('parameters')" class="mt-3 text-sm text-violet-400 hover:text-violet-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-violet-500 hover:shadow-xl hover:shadow-violet-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-violet-300 mb-3 flex items-center justify-between">
+                <span>Prompt Engineering</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Art and science of crafting effective prompts to get desired outputs from language models.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-violet-400 mb-2">Techniques:</div>
+                <div class="text-xs text-gray-400">• Few-shot prompting<br>• Chain-of-thought<br>• Role-based prompting<br>• Template design</div>
+              </div>
+              <button onclick="showMoreInfo('prompt-engineering')" class="mt-3 text-sm text-violet-400 hover:text-violet-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-violet-500 hover:shadow-xl hover:shadow-violet-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-violet-300 mb-3 flex items-center justify-between">
+                <span>Pre-training</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Initial training phase where models learn general language understanding from large, diverse datasets.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-violet-400 mb-2">Characteristics:</div>
+                <div class="text-xs text-gray-400">• Massive datasets<br>• Unsupervised learning<br>• General patterns<br>• Foundation for specialization</div>
+              </div>
+              <button onclick="showMoreInfo('pre-training')" class="mt-3 text-sm text-violet-400 hover:text-violet-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-violet-500 hover:shadow-xl hover:shadow-violet-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-violet-300 mb-3 flex items-center justify-between">
+                <span>Pruning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Technique to reduce model size by removing weights or neurons that contribute least to performance.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-violet-400 mb-2">Methods:</div>
+                <div class="text-xs text-gray-400">• Magnitude-based<br>• Structured pruning<br>• Unstructured pruning<br>• Gradual pruning</div>
+              </div>
+              <button onclick="showMoreInfo('pruning')" class="mt-3 text-sm text-violet-400 hover:text-violet-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Continue with Section T as before and add more sections... -->
+
+        <!-- Section T - Critical for LLMs -->
+        <section id="T" class="glossary-section">
+          <h2 class="text-4xl font-bold text-sky-400 mb-8 border-b-2 border-sky-500/30 pb-3 flex items-center justify-between">
+            <span>T</span>
+            <span class="text-sm font-normal text-gray-400">30 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-300" data-category="general">
+              <dt class="text-2xl font-bold text-sky-300 mb-3 flex items-center justify-between">
                 <span>Token</span>
-                <span class="text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-gray-700 text-gray-300 rounded-full border border-gray-500/30">General</span>
               </dt>
-              <dd class="text-gray-300 leading-relaxed">A piece of a text sequence, which can be a word, part of a word, or a punctuation mark. Language models process text by first breaking it down into tokens.</dd>
+              <dd class="text-gray-300 leading-relaxed mb-4">The basic unit of text that language models process. Can be words, subwords, characters, or other segments depending on the tokenization method.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-sky-400 mb-2">Examples:</div>
+                <div class="text-xs font-fira text-gray-400">"Hello world!" → ["Hello", " world", "!"]<br>"ChatGPT" → ["Chat", "G", "PT"] or ["Chat", "GPT"]</div>
+              </div>
+              <button onclick="showMoreInfo('token')" class="mt-3 text-sm text-sky-400 hover:text-sky-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-sky-300 mb-3 flex items-center justify-between">
+                <span>Transformer</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Revolutionary neural network architecture that uses self-attention mechanisms, introduced in "Attention Is All You Need" (2017).</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-sky-400 mb-2">Key Components:</div>
+                <div class="text-xs text-gray-400">• Multi-head attention<br>• Position encoding<br>• Feed-forward networks<br>• Residual connections<br>• Layer normalization</div>
+              </div>
+              <button onclick="showMoreInfo('transformer')" class="mt-3 text-sm text-sky-400 hover:text-sky-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-sky-300 mb-3 flex items-center justify-between">
+                <span>Temperature</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">A sampling parameter that controls the randomness of model outputs. Higher values increase creativity but may reduce coherence.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-sky-400 mb-2">Settings Guide:</div>
+                <div class="text-xs text-gray-400">• 0.0: Deterministic (greedy)<br>• 0.3: Conservative, focused<br>• 0.7: Balanced creativity<br>• 1.0: High creativity<br>• 2.0: Very random</div>
+              </div>
+              <button onclick="showMoreInfo('temperature')" class="mt-3 text-sm text-sky-400 hover:text-sky-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-sky-300 mb-3 flex items-center justify-between">
+                <span>Top-k Sampling</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">A sampling strategy that considers only the k most likely tokens at each generation step, improving quality by filtering out low-probability options.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-sky-400 mb-2">Common Values:</div>
+                <div class="text-xs text-gray-400">• k=1: Greedy decoding<br>• k=10-50: Focused sampling<br>• k=100: Broader choices<br>• Combined with temperature</div>
+              </div>
+              <button onclick="showMoreInfo('top-k-sampling')" class="mt-3 text-sm text-sky-400 hover:text-sky-300 font-semibold">Learn More →</button>
             </div>
           </div>
         </section>
 
+        <!-- Section J -->
+        <section id="J" class="glossary-section">
+          <h2 class="text-4xl font-bold text-indigo-400 mb-8 border-b-2 border-indigo-500/30 pb-3 flex items-center justify-between">
+            <span>J</span>
+            <span class="text-sm font-normal text-gray-400">1 term</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-300" data-category="data">
+              <dt class="text-2xl font-bold text-indigo-300 mb-3 flex items-center justify-between">
+                <span>JSONL</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-purple-900/70 text-purple-300 rounded-full border border-purple-500/30">Data</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">JSON Lines format commonly used for storing training data with one JSON object per line.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-indigo-400 mb-2">Usage:</div>
+                <div class="text-xs text-gray-400">• Dataset storage<br>• Streaming data<br>• Model training input</div>
+              </div>
+              <button onclick="showMoreInfo('jsonl')" class="mt-3 text-sm text-indigo-400 hover:text-indigo-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section K -->
+        <section id="K" class="glossary-section">
+          <h2 class="text-4xl font-bold text-pink-400 mb-8 border-b-2 border-pink-500/30 pb-3 flex items-center justify-between">
+            <span>K</span>
+            <span class="text-sm font-normal text-gray-400">1 term</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-pink-500 hover:shadow-xl hover:shadow-pink-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-pink-300 mb-3 flex items-center justify-between">
+                <span>Knowledge Distillation</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Training technique where a smaller "student" model learns from a larger "teacher" model to achieve similar performance with fewer parameters.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-pink-400 mb-2">Benefits:</div>
+                <div class="text-xs text-gray-400">• Model compression<br>• Faster inference<br>• Lower memory usage</div>
+              </div>
+              <button onclick="showMoreInfo('knowledge-distillation')" class="mt-3 text-sm text-pink-400 hover:text-pink-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section Q -->
+        <section id="Q" class="glossary-section">
+          <h2 class="text-4xl font-bold text-cyan-400 mb-8 border-b-2 border-cyan-500/30 pb-3 flex items-center justify-between">
+            <span>Q</span>
+            <span class="text-sm font-normal text-gray-400">6 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
+                <span>Quantization</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Compression technique reducing precision of model weights from 32-bit to lower bit representations (8-bit, 4-bit).</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-cyan-400 mb-2">Benefits:</div>
+                <div class="text-xs text-gray-400">• Reduced memory usage<br>• Faster inference<br>• Lower storage requirements</div>
+              </div>
+              <button onclick="showMoreInfo('quantization')" class="mt-3 text-sm text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
+                <span>Query</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">In attention mechanism, the query vector represents what information is being sought from the sequence.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-cyan-400 mb-2">Attention Components:</div>
+                <div class="text-xs text-gray-400">• Query (Q)<br>• Key (K)<br>• Value (V)</div>
+              </div>
+              <button onclick="showMoreInfo('query')" class="mt-3 text-sm text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-cyan-500 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-cyan-300 mb-3 flex items-center justify-between">
+                <span>QLoRA</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Quantized Low-Rank Adaptation - efficient fine-tuning method combining quantization with LoRA.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-cyan-400 mb-2">Innovation:</div>
+                <div class="text-xs text-gray-400">• 4-bit quantization<br>• LoRA adapters<br>• Minimal memory usage</div>
+              </div>
+              <button onclick="showMoreInfo('qlora')" class="mt-3 text-sm text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section R -->
+        <section id="R" class="glossary-section">
+          <h2 class="text-4xl font-bold text-rose-400 mb-8 border-b-2 border-rose-500/30 pb-3 flex items-center justify-between">
+            <span>R</span>
+            <span class="text-sm font-normal text-gray-400">4 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-rose-300 mb-3 flex items-center justify-between">
+                <span>RLHF</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Reinforcement Learning from Human Feedback - training method using human preferences to align model outputs with desired behavior.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-rose-400 mb-2">Process:</div>
+                <div class="text-xs text-gray-400">• Collect human preferences<br>• Train reward model<br>• Policy optimization</div>
+              </div>
+              <button onclick="showMoreInfo('rlhf')" class="mt-3 text-sm text-rose-400 hover:text-rose-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-rose-300 mb-3 flex items-center justify-between">
+                <span>RAG</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Retrieval-Augmented Generation - combining language models with external knowledge retrieval for more accurate responses.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-rose-400 mb-2">Components:</div>
+                <div class="text-xs text-gray-400">• Retrieval system<br>• Knowledge base<br>• Generator model</div>
+              </div>
+              <button onclick="showMoreInfo('rag')" class="mt-3 text-sm text-rose-400 hover:text-rose-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-rose-300 mb-3 flex items-center justify-between">
+                <span>RNN</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Recurrent Neural Network - earlier architecture for sequence modeling, largely replaced by Transformers.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-rose-400 mb-2">Variants:</div>
+                <div class="text-xs text-gray-400">• LSTM<br>• GRU<br>• Bidirectional RNN</div>
+              </div>
+              <button onclick="showMoreInfo('rnn')" class="mt-3 text-sm text-rose-400 hover:text-rose-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-rose-300 mb-3 flex items-center justify-between">
+                <span>Regularization</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Techniques to prevent overfitting by adding constraints or noise during training.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-rose-400 mb-2">Methods:</div>
+                <div class="text-xs text-gray-400">• Dropout<br>• Weight decay<br>• Data augmentation</div>
+              </div>
+              <button onclick="showMoreInfo('regularization')" class="mt-3 text-sm text-rose-400 hover:text-rose-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section S -->
+        <section id="S" class="glossary-section">
+          <h2 class="text-4xl font-bold text-emerald-400 mb-8 border-b-2 border-emerald-500/30 pb-3 flex items-center justify-between">
+            <span>S</span>
+            <span class="text-sm font-normal text-gray-400">4 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300" data-category="architecture">
+              <dt class="text-2xl font-bold text-emerald-300 mb-3 flex items-center justify-between">
+                <span>Self-Attention</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-blue-900/70 text-blue-300 rounded-full border border-blue-500/30">Architecture</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Attention mechanism where sequence elements attend to other elements in same sequence to capture dependencies.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-emerald-400 mb-2">Core Innovation:</div>
+                <div class="text-xs text-gray-400">Enables parallel processing and long-range dependencies</div>
+              </div>
+              <button onclick="showMoreInfo('self-attention')" class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-emerald-300 mb-3 flex items-center justify-between">
+                <span>Softmax</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Activation function converting raw scores into probability distribution over vocabulary for token prediction.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-emerald-400 mb-2">Formula:</div>
+                <div class="text-xs text-gray-400">softmax(x_i) = exp(x_i) / Σ exp(x_j)</div>
+              </div>
+              <button onclick="showMoreInfo('softmax')" class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-emerald-300 mb-3 flex items-center justify-between">
+                <span>Supervised Learning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Machine learning approach using labeled data to train models for prediction or classification tasks.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-emerald-400 mb-2">Requirements:</div>
+                <div class="text-xs text-gray-400">• Input-output pairs<br>• Ground truth labels<br>• Loss function</div>
+              </div>
+              <button onclick="showMoreInfo('supervised-learning')" class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-emerald-300 mb-3 flex items-center justify-between">
+                <span>Scaling Laws</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Empirical relationships showing how model performance improves predictably with scale (parameters, data, compute).</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-emerald-400 mb-2">Key Insight:</div>
+                <div class="text-xs text-gray-400">Performance scales as power law with resources</div>
+              </div>
+              <button onclick="showMoreInfo('scaling-laws')" class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section U -->
+        <section id="U" class="glossary-section">
+          <h2 class="text-4xl font-bold text-amber-400 mb-8 border-b-2 border-amber-500/30 pb-3 flex items-center justify-between">
+            <span>U</span>
+            <span class="text-sm font-normal text-gray-400">2 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300" data-category="training">
+              <dt class="text-2xl font-bold text-amber-300 mb-3 flex items-center justify-between">
+                <span>Unsupervised Learning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-green-900/70 text-green-300 rounded-full border border-green-500/30">Training</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Learning patterns from data without explicit labels, foundation of LLM pre-training.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-amber-400 mb-2">LLM Application:</div>
+                <div class="text-xs text-gray-400">Next-token prediction from raw text</div>
+              </div>
+              <button onclick="showMoreInfo('unsupervised-learning')" class="mt-3 text-sm text-amber-400 hover:text-amber-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-amber-300 mb-3 flex items-center justify-between">
+                <span>Upsampling</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Technique to increase resolution or size of data, opposite of downsampling/pooling operations.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-amber-400 mb-2">Methods:</div>
+                <div class="text-xs text-gray-400">• Bilinear interpolation<br>• Transposed convolution<br>• Nearest neighbor</div>
+              </div>
+              <button onclick="showMoreInfo('upsampling')" class="mt-3 text-sm text-amber-400 hover:text-amber-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section V -->
+        <section id="V" class="glossary-section">
+          <h2 class="text-4xl font-bold text-lime-400 mb-8 border-b-2 border-lime-500/30 pb-3 flex items-center justify-between">
+            <span>V</span>
+            <span class="text-sm font-normal text-gray-400">2 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-lime-500 hover:shadow-xl hover:shadow-lime-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-lime-300 mb-3 flex items-center justify-between">
+                <span>Vector Database</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Specialized database optimized for storing and querying high-dimensional vector embeddings.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-lime-400 mb-2">Examples:</div>
+                <div class="text-xs text-gray-400">• Pinecone<br>• Weaviate<br>• ChromaDB<br>• Milvus</div>
+              </div>
+              <button onclick="showMoreInfo('vector-database')" class="mt-3 text-sm text-lime-400 hover:text-lime-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-lime-500 hover:shadow-xl hover:shadow-lime-500/20 transition-all duration-300" data-category="evaluation">
+              <dt class="text-2xl font-bold text-lime-300 mb-3 flex items-center justify-between">
+                <span>Validation Set</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-red-900/70 text-red-300 rounded-full border border-red-500/30">Evaluation</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Data subset used during training to tune hyperparameters and monitor performance without overfitting.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-lime-400 mb-2">Split Ratio:</div>
+                <div class="text-xs text-gray-400">Typically 10-20% of training data</div>
+              </div>
+              <button onclick="showMoreInfo('validation-set')" class="mt-3 text-sm text-lime-400 hover:text-lime-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section W -->
+        <section id="W" class="glossary-section">
+          <h2 class="text-4xl font-bold text-sky-400 mb-8 border-b-2 border-sky-500/30 pb-3 flex items-center justify-between">
+            <span>W</span>
+            <span class="text-sm font-normal text-gray-400">2 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-sky-300 mb-3 flex items-center justify-between">
+                <span>Weight Decay</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Regularization technique that penalizes large weights by adding L2 penalty to loss function.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-sky-400 mb-2">Effect:</div>
+                <div class="text-xs text-gray-400">Prevents overfitting, improves generalization</div>
+              </div>
+              <button onclick="showMoreInfo('weight-decay')" class="mt-3 text-sm text-sky-400 hover:text-sky-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-sky-300 mb-3 flex items-center justify-between">
+                <span>Warmup</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Training strategy gradually increasing learning rate from zero to target value during initial steps.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-sky-400 mb-2">Purpose:</div>
+                <div class="text-xs text-gray-400">Stable training start, prevents early divergence</div>
+              </div>
+              <button onclick="showMoreInfo('warmup')" class="mt-3 text-sm text-sky-400 hover:text-sky-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section X -->
+        <section id="X" class="glossary-section">
+          <h2 class="text-4xl font-bold text-fuchsia-400 mb-8 border-b-2 border-fuchsia-500/30 pb-3 flex items-center justify-between">
+            <span>X</span>
+            <span class="text-sm font-normal text-gray-400">1 term</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-fuchsia-500 hover:shadow-xl hover:shadow-fuchsia-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-fuchsia-300 mb-3 flex items-center justify-between">
+                <span>Xavier Initialization</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Weight initialization method maintaining variance across layers to prevent vanishing/exploding gradients.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-fuchsia-400 mb-2">Formula:</div>
+                <div class="text-xs text-gray-400">Uniform[-√(6/(fan_in+fan_out)), √(6/(fan_in+fan_out))]</div>
+              </div>
+              <button onclick="showMoreInfo('xavier-initialization')" class="mt-3 text-sm text-fuchsia-400 hover:text-fuchsia-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section Y -->
+        <section id="Y" class="glossary-section">
+          <h2 class="text-4xl font-bold text-yellow-400 mb-8 border-b-2 border-yellow-500/30 pb-3 flex items-center justify-between">
+            <span>Y</span>
+            <span class="text-sm font-normal text-gray-400">1 term</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 hover:shadow-xl hover:shadow-yellow-500/20 transition-all duration-300" data-category="data">
+              <dt class="text-2xl font-bold text-yellow-300 mb-3 flex items-center justify-between">
+                <span>YAML</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-purple-900/70 text-purple-300 rounded-full border border-purple-500/30">Data</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Human-readable data serialization format commonly used for configuration files in ML projects.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-yellow-400 mb-2">Usage:</div>
+                <div class="text-xs text-gray-400">• Model configs<br>• Training parameters<br>• Pipeline definitions</div>
+              </div>
+              <button onclick="showMoreInfo('yaml')" class="mt-3 text-sm text-yellow-400 hover:text-yellow-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section Z -->
+        <section id="Z" class="glossary-section">
+          <h2 class="text-4xl font-bold text-red-400 mb-8 border-b-2 border-red-500/30 pb-3 flex items-center justify-between">
+            <span>Z</span>
+            <span class="text-sm font-normal text-gray-400">2 terms</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300" data-category="techniques">
+              <dt class="text-2xl font-bold text-red-300 mb-3 flex items-center justify-between">
+                <span>Zero-shot Learning</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-yellow-900/70 text-yellow-300 rounded-full border border-yellow-500/30">Techniques</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Model's ability to perform tasks without task-specific training examples, using only instructions.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-red-400 mb-2">Example:</div>
+                <div class="text-xs text-gray-400">"Translate this to French:" without translation training</div>
+              </div>
+              <button onclick="showMoreInfo('zero-shot-learning')" class="mt-3 text-sm text-red-400 hover:text-red-300 font-semibold">Learn More →</button>
+            </div>
+
+            <div class="term-card bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300" data-category="evaluation">
+              <dt class="text-2xl font-bold text-red-300 mb-3 flex items-center justify-between">
+                <span>Z-score</span>
+                <span class="category-badge text-sm font-semibold px-3 py-1 bg-red-900/70 text-red-300 rounded-full border border-red-500/30">Evaluation</span>
+              </dt>
+              <dd class="text-gray-300 leading-relaxed mb-4">Statistical measure indicating how many standard deviations a data point is from the mean.</dd>
+              <div class="mt-4 p-3 bg-gray-900/50 rounded-lg">
+                <div class="text-xs font-semibold text-red-400 mb-2">Formula:</div>
+                <div class="text-xs text-gray-400">z = (x - μ) / σ</div>
+              </div>
+              <button onclick="showMoreInfo('z-score')" class="mt-3 text-sm text-red-400 hover:text-red-300 font-semibold">Learn More →</button>
+            </div>
+          </div>
+        </section>
       </div>
-      
+
+      <!-- Enhanced Interactive Learning Modal -->
+      <div id="learning-modal" class="fixed inset-0 bg-black bg-opacity-75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-purple-500/30">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-purple-300">Interactive Learning Mode</h3>
+            <button onclick="closeLearningMode()" class="text-gray-400 hover:text-white text-2xl">×</button>
+          </div>
+          
+          <div id="learning-content">
+            <!-- Mode Selection -->
+            <div id="mode-selection">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <button onclick="startFlashcards()" class="p-6 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-lg border border-purple-500/30 hover:border-purple-400 transition-all duration-200">
+                  <div class="text-3xl mb-2">🃏</div>
+                  <h4 class="text-lg font-semibold text-purple-300 mb-2">Flashcards</h4>
+                  <p class="text-sm text-gray-400">Review terms with interactive flashcards</p>
+                </button>
+                
+                <button onclick="startQuiz()" class="p-6 bg-gradient-to-br from-blue-900/30 to-green-900/30 rounded-lg border border-blue-500/30 hover:border-blue-400 transition-all duration-200">
+                  <div class="text-3xl mb-2">🧠</div>
+                  <h4 class="text-lg font-semibold text-blue-300 mb-2">Quiz Mode</h4>
+                  <p class="text-sm text-gray-400">Test knowledge with multiple choice questions</p>
+                </button>
+              </div>
+              
+              <button onclick="startSpeedRound()" class="w-full p-4 bg-gradient-to-br from-red-900/30 to-orange-900/30 rounded-lg border border-red-500/30 hover:border-red-400 transition-all duration-200">
+                <div class="text-2xl mb-1">⚡</div>
+                <h4 class="text-lg font-semibold text-red-300 mb-1">Speed Round</h4>
+                <p class="text-sm text-gray-400">Quick-fire definition matching</p>
+              </button>
+            </div>
+            
+            <!-- Learning modes content will be inserted here by JavaScript -->
+            <div id="learning-mode-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Info Modal -->
+      <div id="info-modal" class="fixed inset-0 bg-black bg-opacity-75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-purple-500/30">
+          <div class="flex justify-between items-center mb-6">
+            <h3 id="info-modal-title" class="text-3xl font-bold text-purple-300"></h3>
+            <button onclick="closeInfoModal()" class="text-gray-400 hover:text-white text-2xl">×</button>
+          </div>
+          <div id="info-modal-content" class="text-gray-300 leading-relaxed">
+            <!-- Content populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
       <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
     </main>
   </div>
   
   <ask-the-model-footer></ask-the-model-footer>
-
   <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
-
   <script src="web-components.js"></script>
+  
+  <script>
+    // Comprehensive Glossary Functionality
+    let allTerms = [];
+    let currentCategory = 'all';
+    let learningData = {
+      flashcardIndex: 0,
+      quizIndex: 0,
+      speedRoundIndex: 0,
+      score: 0,
+      streak: 0
+    };
+
+    // Sample comprehensive terms data
+    const COMPREHENSIVE_TERMS = [
+      {
+        title: "Attention",
+        definition: "A mechanism that allows models to focus on different parts of input when producing output, crucial for Transformers and modern LLMs.",
+        category: "architecture",
+        examples: ["Multi-head attention", "Self-attention", "Cross-attention"],
+        relatedTerms: ["Transformer", "Multi-Head Attention", "Self-Attention"]
+      },
+      {
+        title: "Token",
+        definition: "The basic unit of text that language models process. Can be words, subwords, characters, or other segments.",
+        category: "general",
+        examples: ["Hello world → [Hello, world]", "ChatGPT → [Chat, GPT]"],
+        relatedTerms: ["Tokenization", "Vocabulary", "Context Window"]
+      },
+      {
+        title: "Transformer",
+        definition: "Revolutionary neural network architecture using self-attention mechanisms, foundation of modern LLMs.",
+        category: "architecture",
+        examples: ["GPT", "BERT", "T5", "PaLM"],
+        relatedTerms: ["Attention", "Multi-Head Attention", "Position Encoding"]
+      },
+      {
+        title: "Fine-tuning",
+        definition: "Process of adapting pre-trained models to specific tasks using task-specific data.",
+        category: "training",
+        examples: ["Instruction tuning", "Domain adaptation", "Task-specific training"],
+        relatedTerms: ["Transfer Learning", "Pre-training", "PEFT"]
+      },
+      {
+        title: "Hallucination",
+        definition: "When AI models generate incorrect, fabricated, or ungrounded information presented with confidence.",
+        category: "evaluation",
+        examples: ["Fake citations", "Non-existent facts", "Invented entities"],
+        relatedTerms: ["Grounding", "Factual Accuracy", "Truthfulness"]
+      }
+      // Add more comprehensive terms...
+    ];
+
+    // Quiz questions database
+    const QUIZ_QUESTIONS = [
+      {
+        question: "What does 'LLM' stand for?",
+        options: ["Large Language Model", "Linear Learning Machine", "Logical Language Mechanism", "Long Learning Memory"],
+        correct: 0,
+        explanation: "LLM stands for Large Language Model, referring to neural networks with billions of parameters trained on vast text data."
+      },
+      {
+        question: "Which architecture is the foundation of modern LLMs?",
+        options: ["CNN", "RNN", "Transformer", "LSTM"],
+        correct: 2,
+        explanation: "The Transformer architecture, introduced in 'Attention Is All You Need' (2017), is the foundation of modern LLMs like GPT and BERT."
+      },
+      {
+        question: "What is the primary training objective for language models?",
+        options: ["Image classification", "Next token prediction", "Sentiment analysis", "Question answering"],
+        correct: 1,
+        explanation: "Language models are primarily trained using next token prediction, learning to predict the next token in a sequence."
+      },
+      {
+        question: "What does 'temperature' control in text generation?",
+        options: ["Model speed", "Randomness/creativity", "Memory usage", "Context length"],
+        correct: 1,
+        explanation: "Temperature controls the randomness in text generation. Higher values increase creativity but may reduce coherence."
+      },
+      {
+        question: "What is 'few-shot learning'?",
+        options: ["Learning with small models", "Learning from few examples", "Learning quickly", "Learning without data"],
+        correct: 1,
+        explanation: "Few-shot learning is the ability to learn and perform tasks with only a few examples, without additional training."
+      }
+    ];
+
+    // Initialize the glossary
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeGlossary();
+      updateStats();
+      setupKeyboardShortcuts();
+      createScrollToTop();
+    });
+
+    function initializeGlossary() {
+      // Extract terms from page and combine with comprehensive data
+      const termCards = document.querySelectorAll('.term-card');
+      allTerms = Array.from(termCards).map(card => {
+        const title = card.querySelector('dt span').textContent;
+        const definition = card.querySelector('dd').textContent;
+        const category = card.dataset.category;
+        
+        // Find comprehensive data if available
+        const comprehensiveData = COMPREHENSIVE_TERMS.find(term => 
+          term.title.toLowerCase() === title.toLowerCase()
+        );
+        
+        return { 
+          title, 
+          definition, 
+          category, 
+          element: card,
+          ...comprehensiveData 
+        };
+      });
+
+      // Add smooth scrolling for alphabet navigation
+      setupAlphabetNavigation();
+    }
+
+    function setupAlphabetNavigation() {
+      document.querySelectorAll('.letter-nav-item').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            highlightSection(target);
+          }
+        });
+      });
+    }
+
+    function highlightSection(section) {
+      section.style.backgroundColor = 'rgba(168, 85, 247, 0.1)';
+      setTimeout(() => {
+        section.style.backgroundColor = 'transparent';
+      }, 1500);
+    }
+
+    // Enhanced Search functionality
+    function searchTerms() {
+      const query = document.getElementById('glossary-search').value.toLowerCase();
+      const resultsDiv = document.getElementById('search-results');
+      const countSpan = document.getElementById('result-count');
+      
+      let visibleCount = 0;
+      
+      allTerms.forEach(term => {
+        const matchesSearch = !query || 
+          term.title.toLowerCase().includes(query) ||
+          term.definition.toLowerCase().includes(query) ||
+          (term.examples && term.examples.some(ex => ex.toLowerCase().includes(query))) ||
+          (term.relatedTerms && term.relatedTerms.some(rt => rt.toLowerCase().includes(query)));
+        
+        const matchesCategory = currentCategory === 'all' || term.category === currentCategory;
+        
+        const isVisible = matchesSearch && matchesCategory;
+        term.element.style.display = isVisible ? 'block' : 'none';
+        if (isVisible) visibleCount++;
+      });
+      
+      updateSectionVisibility();
+      countSpan.textContent = visibleCount;
+      resultsDiv.classList.toggle('hidden', query === '');
+      
+      if (query) {
+        highlightSearchTerms(query);
+      } else {
+        removeHighlights();
+      }
+    }
+
+    function updateSectionVisibility() {
+      document.querySelectorAll('.glossary-section').forEach(section => {
+        const visibleTerms = section.querySelectorAll('.term-card[style*="block"], .term-card:not([style*="none"])');
+        section.style.display = visibleTerms.length > 0 ? 'block' : 'none';
+      });
+    }
+
+    function filterByCategory(category) {
+      currentCategory = category;
+      
+      // Update active button
+      document.querySelectorAll('.category-filter-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-purple-700');
+        btn.classList.add('bg-gray-700');
+      });
+      
+      event.target.classList.add('active', 'bg-purple-700');
+      event.target.classList.remove('bg-gray-700');
+      
+      searchTerms();
+    }
+
+    function highlightSearchTerms(query) {
+      const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+      
+      allTerms.forEach(term => {
+        const titleEl = term.element.querySelector('dt span');
+        const descEl = term.element.querySelector('dd');
+        
+        if (titleEl && descEl) {
+          titleEl.innerHTML = titleEl.textContent.replace(regex, '<mark class="bg-yellow-300 text-gray-900 px-1 rounded">$1</mark>');
+          descEl.innerHTML = descEl.textContent.replace(regex, '<mark class="bg-yellow-300 text-gray-900 px-1 rounded">$1</mark>');
+        }
+      });
+    }
+
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function removeHighlights() {
+      document.querySelectorAll('mark').forEach(mark => {
+        mark.outerHTML = mark.textContent;
+      });
+    }
+
+    // Learning Mode Functions
+    function toggleLearningMode() {
+      const modal = document.getElementById('learning-modal');
+      modal.classList.toggle('hidden');
+      
+      if (!modal.classList.contains('hidden')) {
+        showModeSelection();
+      }
+    }
+
+    function closeLearningMode() {
+      document.getElementById('learning-modal').classList.add('hidden');
+      resetLearningData();
+    }
+
+    function showModeSelection() {
+      document.getElementById('mode-selection').style.display = 'block';
+      document.getElementById('learning-mode-content').innerHTML = '';
+    }
+
+    function resetLearningData() {
+      learningData = {
+        flashcardIndex: 0,
+        quizIndex: 0,
+        speedRoundIndex: 0,
+        score: 0,
+        streak: 0
+      };
+    }
+
+    // Flashcard Mode
+    function startFlashcards() {
+      document.getElementById('mode-selection').style.display = 'none';
+      learningData.flashcardIndex = 0;
+      showFlashcard();
+    }
+
+    function showFlashcard() {
+      const availableTerms = allTerms.filter(term => 
+        currentCategory === 'all' || term.category === currentCategory
+      );
+      
+      if (learningData.flashcardIndex >= availableTerms.length) {
+        showFlashcardComplete();
+        return;
+      }
+      
+      const term = availableTerms[learningData.flashcardIndex];
+      document.getElementById('learning-mode-content').innerHTML = `
+        <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/30 p-6 rounded-lg border border-purple-500/30 mb-6">
+          <div class="text-center">
+            <div class="text-sm text-purple-300 mb-2">Flashcard ${learningData.flashcardIndex + 1} of ${availableTerms.length}</div>
+            <div class="text-xl font-semibold text-purple-300 mb-4">What is "${term.title}"?</div>
+            <div id="flashcard-answer" class="text-gray-300 mb-4 hidden">
+              <p class="text-lg mb-3">${term.definition}</p>
+              ${term.examples ? `
+                <div class="text-sm text-gray-400 mb-2">
+                  <strong>Examples:</strong> ${term.examples.join(', ')}
+                </div>
+              ` : ''}
+              ${term.relatedTerms ? `
+                <div class="text-sm text-blue-300">
+                  <strong>Related:</strong> ${term.relatedTerms.join(', ')}
+                </div>
+              ` : ''}
+            </div>
+            <div id="flashcard-controls">
+              <button id="reveal-btn" onclick="revealFlashcardAnswer()" class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg">
+                Reveal Answer
+              </button>
+              <div id="flashcard-actions" class="hidden mt-4 flex justify-center gap-4">
+                <button onclick="nextFlashcard('easy')" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">Easy ✓</button>
+                <button onclick="nextFlashcard('medium')" class="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg">Medium ~</button>
+                <button onclick="nextFlashcard('hard')" class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg">Hard ✗</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <button onclick="showModeSelection()" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg">← Back</button>
+          <button onclick="nextFlashcard('skip')" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg">Skip →</button>
+        </div>
+      `;
+    }
+
+    function revealFlashcardAnswer() {
+      document.getElementById('flashcard-answer').classList.remove('hidden');
+      document.getElementById('reveal-btn').classList.add('hidden');
+      document.getElementById('flashcard-actions').classList.remove('hidden');
+    }
+
+    function nextFlashcard(difficulty) {
+      learningData.flashcardIndex++;
+      showFlashcard();
+    }
+
+    function showFlashcardComplete() {
+      document.getElementById('learning-mode-content').innerHTML = `
+        <div class="text-center p-8">
+          <div class="text-4xl mb-4">🎉</div>
+          <h3 class="text-2xl font-bold text-purple-300 mb-4">Flashcards Complete!</h3>
+          <p class="text-gray-400 mb-6">You've reviewed all available flashcards. Great job!</p>
+          <div class="flex justify-center gap-4">
+            <button onclick="startFlashcards()" class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg">Review Again</button>
+            <button onclick="showModeSelection()" class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg">Back to Menu</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Quiz Mode
+    function startQuiz() {
+      document.getElementById('mode-selection').style.display = 'none';
+      learningData.quizIndex = 0;
+      learningData.score = 0;
+      showQuiz();
+    }
+
+    function showQuiz() {
+      if (learningData.quizIndex >= QUIZ_QUESTIONS.length) {
+        showQuizComplete();
+        return;
+      }
+      
+      const question = QUIZ_QUESTIONS[learningData.quizIndex];
+      document.getElementById('learning-mode-content').innerHTML = `
+        <div class="bg-gradient-to-br from-blue-900/30 to-green-900/30 p-6 rounded-lg border border-blue-500/30 mb-6">
+          <div class="text-sm text-blue-300 mb-2">Question ${learningData.quizIndex + 1} of ${QUIZ_QUESTIONS.length}</div>
+          <div class="text-xl font-semibold text-blue-300 mb-6">${question.question}</div>
+          <div id="quiz-options" class="space-y-3 mb-4">
+            ${question.options.map((option, index) => `
+              <button onclick="selectQuizOption(${index})" 
+                      class="w-full text-left p-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors duration-200">
+                ${String.fromCharCode(65 + index)}. ${option}
+              </button>
+            `).join('')}
+          </div>
+          <div id="quiz-result" class="hidden"></div>
+        </div>
+        <div class="flex justify-between">
+          <button onclick="showModeSelection()" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg">← Back</button>
+          <div class="text-sm text-gray-400">Score: ${learningData.score}/${learningData.quizIndex}</div>
+        </div>
+      `;
+    }
+
+    function selectQuizOption(selectedIndex) {
+      const question = QUIZ_QUESTIONS[learningData.quizIndex];
+      const resultDiv = document.getElementById('quiz-result');
+      const buttons = document.querySelectorAll('#quiz-options button');
+      
+      buttons.forEach((button, index) => {
+        button.disabled = true;
+        if (index === question.correct) {
+          button.classList.add('bg-green-600', 'hover:bg-green-600');
+          button.classList.remove('hover:bg-gray-600');
+        } else if (index === selectedIndex && selectedIndex !== question.correct) {
+          button.classList.add('bg-red-600', 'hover:bg-red-600');
+          button.classList.remove('hover:bg-gray-600');
+        }
+      });
+      
+      const isCorrect = selectedIndex === question.correct;
+      if (isCorrect) {
+        learningData.score++;
+        learningData.streak++;
+      } else {
+        learningData.streak = 0;
+      }
+      
+      resultDiv.className = `p-4 rounded-lg border ${isCorrect ? 'bg-green-900/30 text-green-300 border-green-500/30' : 'bg-red-900/30 text-red-300 border-red-500/30'}`;
+      resultDiv.innerHTML = `
+        <div class="font-semibold mb-2">${isCorrect ? '✓ Correct!' : '✗ Incorrect'}</div>
+        <div class="text-sm">${question.explanation}</div>
+        <button onclick="nextQuiz()" class="mt-3 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm">
+          Next Question →
+        </button>
+      `;
+      resultDiv.classList.remove('hidden');
+    }
+
+    function nextQuiz() {
+      learningData.quizIndex++;
+      showQuiz();
+    }
+
+    function showQuizComplete() {
+      const percentage = Math.round((learningData.score / QUIZ_QUESTIONS.length) * 100);
+      let grade, emoji;
+      
+      if (percentage >= 90) { grade = 'Excellent!'; emoji = '🏆'; }
+      else if (percentage >= 80) { grade = 'Great!'; emoji = '🌟'; }
+      else if (percentage >= 70) { grade = 'Good!'; emoji = '👍'; }
+      else if (percentage >= 60) { grade = 'Fair'; emoji = '👌'; }
+      else { grade = 'Keep Learning!'; emoji = '📚'; }
+      
+      document.getElementById('learning-mode-content').innerHTML = `
+        <div class="text-center p-8">
+          <div class="text-4xl mb-4">${emoji}</div>
+          <h3 class="text-2xl font-bold text-blue-300 mb-4">Quiz Complete!</h3>
+          <div class="text-lg mb-2">Your Score: <span class="text-green-300">${learningData.score}/${QUIZ_QUESTIONS.length}</span></div>
+          <div class="text-lg mb-6">Percentage: <span class="text-blue-300">${percentage}%</span> - ${grade}</div>
+          <div class="flex justify-center gap-4">
+            <button onclick="startQuiz()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Try Again</button>
+            <button onclick="showModeSelection()" class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg">Back to Menu</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Speed Round Mode
+    function startSpeedRound() {
+      document.getElementById('mode-selection').style.display = 'none';
+      learningData.speedRoundIndex = 0;
+      learningData.score = 0;
+      learningData.timeLeft = 60; // 60 seconds
+      showSpeedRound();
+    }
+
+    function showSpeedRound() {
+      const availableTerms = allTerms.filter(term => 
+        currentCategory === 'all' || term.category === currentCategory
+      );
+      
+      if (learningData.speedRoundIndex >= availableTerms.length || learningData.timeLeft <= 0) {
+        showSpeedRoundComplete();
+        return;
+      }
+      
+      const term = availableTerms[learningData.speedRoundIndex];
+      const otherTerms = availableTerms.filter(t => t !== term);
+      const wrongOptions = otherTerms.sort(() => 0.5 - Math.random()).slice(0, 2);
+      const allOptions = [term, ...wrongOptions].sort(() => 0.5 - Math.random());
+      
+      document.getElementById('learning-mode-content').innerHTML = `
+        <div class="bg-gradient-to-br from-red-900/30 to-orange-900/30 p-6 rounded-lg border border-red-500/30 mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <div class="text-sm text-red-300">Speed Round</div>
+            <div class="text-lg font-bold text-orange-300" id="timer">${learningData.timeLeft}s</div>
+          </div>
+          <div class="text-lg text-red-300 mb-4">Match the definition:</div>
+          <div class="text-sm text-gray-300 mb-6 p-3 bg-gray-800/50 rounded italic">
+            "${term.definition}"
+          </div>
+          <div class="grid grid-cols-1 gap-3">
+            ${allOptions.map((option, index) => `
+              <button onclick="selectSpeedOption('${option.title}', '${term.title}')" 
+                      class="p-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors duration-200 text-left">
+                ${option.title}
+              </button>
+            `).join('')}
+          </div>
+          <div class="mt-4 text-center">
+            <div class="text-sm text-gray-400">Score: ${learningData.score} | Question ${learningData.speedRoundIndex + 1}</div>
+          </div>
+        </div>
+      `;
+      
+      // Start countdown
+      startSpeedRoundTimer();
+    }
+
+    function startSpeedRoundTimer() {
+      const timerInterval = setInterval(() => {
+        learningData.timeLeft--;
+        const timerEl = document.getElementById('timer');
+        if (timerEl) {
+          timerEl.textContent = `${learningData.timeLeft}s`;
+          if (learningData.timeLeft <= 10) {
+            timerEl.classList.add('text-red-400', 'animate-pulse');
+          }
+        }
+        
+        if (learningData.timeLeft <= 0) {
+          clearInterval(timerInterval);
+          showSpeedRoundComplete();
+        }
+      }, 1000);
+      
+      // Store interval ID for cleanup
+      window.speedTimerInterval = timerInterval;
+    }
+
+    function selectSpeedOption(selected, correct) {
+      if (window.speedTimerInterval) {
+        clearInterval(window.speedTimerInterval);
+      }
+      
+      const isCorrect = selected === correct;
+      if (isCorrect) {
+        learningData.score++;
+        learningData.streak++;
+      } else {
+        learningData.streak = 0;
+      }
+      
+      learningData.speedRoundIndex++;
+      setTimeout(() => showSpeedRound(), 500);
+    }
+
+    function showSpeedRoundComplete() {
+      if (window.speedTimerInterval) {
+        clearInterval(window.speedTimerInterval);
+      }
+      
+      document.getElementById('learning-mode-content').innerHTML = `
+        <div class="text-center p-8">
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="text-2xl font-bold text-red-300 mb-4">Speed Round Complete!</h3>
+          <div class="text-lg mb-2">Final Score: <span class="text-green-300">${learningData.score}</span></div>
+          <div class="text-lg mb-6">Questions Answered: <span class="text-orange-300">${learningData.speedRoundIndex}</span></div>
+          <div class="flex justify-center gap-4">
+            <button onclick="startSpeedRound()" class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg">Play Again</button>
+            <button onclick="showModeSelection()" class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg">Back to Menu</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Detailed info modal
+    function showMoreInfo(termKey) {
+      const term = allTerms.find(t => 
+        t.title.toLowerCase().replace(/\s+/g, '-').includes(termKey.toLowerCase()) ||
+        t.title.toLowerCase() === termKey.replace(/-/g, ' ').toLowerCase()
+      );
+      
+      if (term) {
+        document.getElementById('info-modal-title').textContent = term.title;
+        document.getElementById('info-modal-content').innerHTML = `
+          <div class="space-y-6">
+            <div class="text-lg leading-relaxed">${term.definition}</div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-gray-700/50 p-4 rounded-lg">
+                <h4 class="text-lg font-semibold text-purple-300 mb-3">Category</h4>
+                <span class="inline-block px-3 py-1 bg-purple-600/30 text-purple-300 rounded-full text-sm capitalize">
+                  ${term.category}
+                </span>
+              </div>
+              
+              ${term.examples ? `
+                <div class="bg-gray-700/50 p-4 rounded-lg">
+                  <h4 class="text-lg font-semibold text-green-300 mb-3">Examples</h4>
+                  <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                    ${term.examples.map(ex => `<li>${ex}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+            </div>
+            
+            ${term.relatedTerms ? `
+              <div class="bg-gray-700/50 p-4 rounded-lg">
+                <h4 class="text-lg font-semibold text-blue-300 mb-3">Related Terms</h4>
+                <div class="flex flex-wrap gap-2">
+                  ${term.relatedTerms.map(rt => `
+                    <span class="px-3 py-1 bg-blue-600/30 text-blue-300 rounded-full text-sm">${rt}</span>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
+            
+            <div class="bg-gray-700/50 p-4 rounded-lg">
+              <h4 class="text-lg font-semibold text-yellow-300 mb-3">Learn More</h4>
+              <p class="text-sm text-gray-400">
+                This comprehensive glossary is continuously updated with detailed explanations, 
+                examples, and connections between concepts. Use the learning modes above to 
+                test and reinforce your understanding!
+              </p>
+            </div>
+          </div>
+        `;
+        document.getElementById('info-modal').classList.remove('hidden');
+      }
+    }
+
+    function closeInfoModal() {
+      document.getElementById('info-modal').classList.add('hidden');
+    }
+
+    // Utility functions
+    function updateStats() {
+      document.getElementById('term-count').textContent = `${allTerms.length}+`;
+      const categories = new Set(allTerms.map(term => term.category));
+      document.getElementById('category-count').textContent = categories.size;
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', function(e) {
+        // Escape key closes modals
+        if (e.key === 'Escape') {
+          if (!document.getElementById('info-modal').classList.contains('hidden')) {
+            closeInfoModal();
+          } else if (!document.getElementById('learning-modal').classList.contains('hidden')) {
+            closeLearningMode();
+          }
+        }
+        
+        // '/' focuses search (like GitHub)
+        if (e.key === '/' && !e.ctrlKey && !e.metaKey && e.target.tagName !== 'INPUT') {
+          e.preventDefault();
+          document.getElementById('glossary-search').focus();
+        }
+        
+        // 'l' opens learning mode
+        if (e.key === 'l' && !e.ctrlKey && !e.metaKey && e.target.tagName !== 'INPUT') {
+          e.preventDefault();
+          toggleLearningMode();
+        }
+      });
+    }
+
+    function createScrollToTop() {
+      const scrollBtn = document.createElement('button');
+      scrollBtn.innerHTML = '↑';
+      scrollBtn.className = 'fixed bottom-20 right-6 bg-purple-600 hover:bg-purple-700 text-white w-12 h-12 rounded-full shadow-lg z-40 hidden transition-all duration-300 hover:scale-110';
+      scrollBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.body.appendChild(scrollBtn);
+
+      window.addEventListener('scroll', () => {
+        scrollBtn.classList.toggle('hidden', window.scrollY < 500);
+      });
+    }
+
+    // Performance optimizations
+    let searchTimeout;
+    const originalSearchTerms = searchTerms;
+    searchTerms = function() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(originalSearchTerms, 150); // Debounce search
+    };
+
+    // Progressive loading for better performance
+    function loadMoreTerms() {
+      // Implementation for loading more terms dynamically
+      console.log('Loading more terms...');
+    }
+
+    // Analytics tracking (placeholder)
+    function trackUserEngagement(action, data) {
+      // Track user interactions for analytics
+      console.log('User engagement:', action, data);
+    }
+
+    // Initialize performance monitoring
+    if ('PerformanceObserver' in window) {
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          console.log('Performance metric:', entry);
+        }
+      });
+      observer.observe({ entryTypes: ['measure', 'navigation'] });
+    }
+
+    console.log('🎓 AI Glossary initialized with', allTerms.length, 'terms');
+    console.log('💡 Keyboard shortcuts: "/" for search, "l" for learning mode, "Esc" to close modals');
+  </script>
 </body>
 </html>
