@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ATM Xperience - Ask The Model</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { inter: ['Inter','sans-serif'] } } } };
+  </script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-inter min-h-screen flex flex-col">
+  <!-- Header -->
+  <ask-the-model-header></ask-the-model-header>
+  <div class="flex flex-col lg:flex-row flex-1">
+    <!-- Sidebar -->
+    <ask-the-model-sidebar></ask-the-model-sidebar>
+    <!-- Main -->
+    <main class="flex-1 p-4 md:p-8 lg:p-12 max-w-6xl mx-auto">
+      <!-- Chapter Header -->
+      <div class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-purple-400 mb-2">ATM Xperience</h1>
+        <p class="text-lg text-gray-300">Play the platformer + quizzes directly on the site.</p>
+      </div>
+      <!-- Unity Container -->
+      <section class="bg-gray-800/60 border border-gray-700 rounded-xl p-4 md:p-6">
+        <div class="relative">
+          <!-- Canvas wrapper keeps aspect ratio responsive -->
+          <div class="w-full" style="aspect-ratio: 16 / 10;">
+            <canvas id="unity-canvas" class="w-full h-full rounded-lg bg-black"></canvas>
+          </div>
+          <!-- Overlay: loading + buttons -->
+          <div id="unity-overlay"
+               class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div id="unity-loading"
+                 class="px-4 py-2 bg-gray-900/80 border border-gray-700 rounded-lg text-sm">
+              Loading ATM Xperience…
+            </div>
+          </div>
+          <div class="flex items-center gap-2 mt-3">
+            <button id="btn-fullscreen"
+                    class="px-3 py-2 rounded-md bg-purple-600 hover:bg-purple-700 disabled:opacity-50"
+                    disabled>Enter Fullscreen</button>
+            <button id="btn-reload"
+                    class="px-3 py-2 rounded-md bg-gray-700 hover:bg-gray-600"
+                    title="Recreate the WebGL instance if needed">Reload</button>
+          </div>
+        </div>
+      </section>
+      <!-- Chapter nav -->
+      <ask-the-model-chapter-nav></ask-the-model-chapter-nav>
+    </main>
+  </div>
+  <!-- Footer + Mobile nav -->
+  <ask-the-model-footer></ask-the-model-footer>
+  <ask-the-model-mobile-nav></ask-the-model-mobile-nav>
+  <!-- Site web components -->
+  <script src="web-components.js"></script>
+  <!-- Unity loader from your build -->
+  <script src="ATM-Corp-Build/Build/ATM-Corp-Build.loader.js"></script>
+  <script>
+    const canvas = document.getElementById('unity-canvas');
+    const overlay = document.getElementById('unity-overlay');
+    const loading = document.getElementById('unity-loading');
+    const btnFS = document.getElementById('btn-fullscreen');
+    const btnReload = document.getElementById('btn-reload');
+    let unity = null;
+    async function boot() {
+      // Create the Unity instance using your existing build paths:
+      // (keep these names exactly as Unity generated them)
+      try {
+        unity = await createUnityInstance(canvas, {
+          dataUrl: "ATM-Corp-Build/Build/ATM-Corp-Build.data.br",
+          frameworkUrl: "ATM-Corp-Build/Build/ATM-Corp-Build.framework.js.br",
+          codeUrl: "ATM-Corp-Build/Build/ATM-Corp-Build.wasm.br",
+          streamingAssetsUrl: "ATM-Corp-Build/StreamingAssets",
+          companyName: "ATM Corp",
+          productName: "ATM Xperience",
+          productVersion: "1.0"
+        });
+        // Ready UI
+        overlay.style.display = 'none';
+        btnFS.disabled = false;
+      } catch (e) {
+        loading.textContent = "Failed to load WebGL build. Check server headers or enable Decompression Fallback in Unity.";
+        console.error(e);
+      }
+    }
+    btnFS.addEventListener('click', () => { if (unity) unity.SetFullscreen(1); });
+    btnReload.addEventListener('click', () => {
+      // tear down and rebuild
+      if (unity && unity.Quit) {
+        unity.Quit().then(() => { boot(); });
+      } else {
+        boot();
+      }
+    });
+    // Kick off
+    boot();
+  </script>
+</body>
+</html>
