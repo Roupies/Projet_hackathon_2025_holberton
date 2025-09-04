@@ -30,7 +30,7 @@ class AskTheModelHeader extends HTMLElement {
         <nav class="flex space-x-4 md:space-x-6">
           <a href="index.html" class="text-gray-300 hover:text-purple-400 transition-colors duration-200">Home</a>
           <a href="https://github.com/Roupies/Projet_hackathon_2025_holberton" target="_blank" class="text-gray-300 hover:text-purple-400 transition-colors duration-200">GitHub</a>
-          <a href="#contact" class="text-gray-300 hover:text-purple-400 transition-colors duration-200">Contact</a>
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="text-gray-300 hover:text-purple-400 transition-colors duration-200">Contact</a>
         </nav>
       </header>
     `;
@@ -106,7 +106,7 @@ class AskTheModelFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <footer id="contact" class="text-center py-8 text-gray-400 border-t border-gray-700 mt-12">
-        <p>Team: ATM Corp. | Ask The Model | Hackathon organized by Holberton 2025 | <a href="https://github.com/Roupies/Projet_hackathon_2025_holberton" target="_blank" class="text-purple-400 hover:text-purple-300">GitHub</a></p>
+        <p>Team: ATM Corp. | Ask The Model | Hackathon organized by Holberton 2025 | <a href="https://github.com/Roupies/Projet_hackathon_2025_holberton" target="_blank" class="text-purple-400 hover:text-purple-300">GitHub</a> | <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="text-purple-400 hover:text-purple-300">Contact</a></p>
       </footer>
     `;
   }
