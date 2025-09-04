@@ -13,7 +13,8 @@ const CHAPTERS_CONFIG = [
   { id: 'chapter8', url: 'chapter8.html', shortTitle: 'Prompt Engineering', fullTitle: 'Prompt Engineering: Your New Superpower' },
   { id: 'chapter9', url: 'chapter9.html', shortTitle: 'AI in IDE', fullTitle: 'AI in Action: LLMs Inside Your IDE' },
   { id: 'chapter10', url: 'chapter10.html', shortTitle: 'Memory Explained', fullTitle: 'Do LLMs Really Remember? Memory Explained' },
-  { id: 'chapter11', url: 'chapter11.html', shortTitle: 'AI Jargon', fullTitle: 'AI Jargon Demystified (Glossary)' }
+  { id: 'chapter11', url: 'chapter11.html', shortTitle: 'AI Jargon', fullTitle: 'AI Jargon Demystified (Glossary)' },
+  { id: 'atm-xperience', url: 'atm-xperience.html', shortTitle: 'ATM-Xperience', fullTitle: 'ATM-Xperience: Interactive Demos' }
 ];
 
 // Header Component
@@ -129,7 +130,7 @@ class AskTheModelMobileNav extends HTMLElement {
           </a>
           <a href="chapter1.html" class="flex flex-col items-center text-gray-300 hover:text-purple-400 transition-colors duration-200">
             <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 5.477 5.754 5 7.5 5s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 19 16.5 19c-1.746 0-3.332-.477-4.5-1.253"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 5.477 5.754 5 7.5 5s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253"></path>
             </svg>
             <span class="text-xs">Chapters</span>
           </a>
