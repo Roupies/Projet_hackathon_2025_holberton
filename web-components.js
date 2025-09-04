@@ -65,11 +65,11 @@ class AskTheModelSidebar extends HTMLElement {
     const currentPage = this.getCurrentPage();
     
     let sidebarHTML = `
-      <aside class="lg:w-64 bg-gray-800 border-r border-gray-700 flex flex-col min-h-full">
+      <aside class="lg:w-64 bg-gray-800 border-r border-gray-700 lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto">
         <div class="p-4 lg:p-6 flex-shrink-0">
           <h2 class="text-xl font-semibold text-purple-400 mb-6 text-center">Chapters</h2>
         </div>
-        <nav class="flex-1 px-4 lg:px-6 pb-6 space-y-2">
+        <nav class="px-4 lg:px-6 pb-6 space-y-2">
     `;
     
     this.chapters.forEach(chapter => {
